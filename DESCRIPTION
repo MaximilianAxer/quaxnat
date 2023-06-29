@@ -9,7 +9,7 @@ Authors@R:
            comment = c(ORCID = "0000-0003-1482-9613")),
     person(given = "Robert",
            family = "Schlicht",
-           email = "Robert.Schlicht@tu-dresden.de",
+           email = "robert.schlicht@tu-dresden.de",
            role = c("aut")))
 Description: Estimation of natural regeneration potential by quantile regression.
 License: Unlimited
