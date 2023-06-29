@@ -30,6 +30,47 @@ lognormal <- function(x, par) {
   return(result)
 }
 
+#' Clark2dt.log
+#'
+#' Clark2dt computes the value of the dispersal function from Clark et al. (1999) multiplied by \eqn{N}.
+#'
+#' @return Numeric vector of function values multiplied by \eqn{N}.
+#'
+#' @param par Numeric vector with three elements representing the log-transformed parameters \eqn{u} and \eqn{p} and the scaling \eqn{N}.
+#' @param x Numeric vector of distances the the nearest seed source.
+#'
+#' @details Mixture of Gaussian nuclei that produces tails that are not quite as long. Maximum at seed tree itself and cannot become 0 at x = 0.
+
+
+Clark2dt.log <- function(x, par){
+  a <- exp(par[1])
+  P <- exp(par[2])
+  N <- par[3]
+  result <- N * P / (pi*a^2 * (1+(x/a)^2) ^ (P+1))
+  return(result)
+}
+
+exponential.power.log <- function(x, par) {
+  a <- exp(par[1])
+  b <- exp(par[2])
+  N <- par[3]
+  N * b / (2*pi*a^2*gamma(2/b)) * exp(-(x/a)^b)
+}
+
+Weibull.log <- function(x, par) {
+  a <- exp(par[1])
+  b <- exp(par[2])
+  N <- par[3]
+  N * a^-b * b / (2*pi) * (x/a)^(b-2) * exp(-(x/a)^b)
+}
+
+geometric.log <- function(x, par) {
+  a <- exp(par[1])
+  b <- exp(par[2])
+  N <- par[3]
+  N * (b-2)*(b-1) / (2*pi*a) * (1+x/a)^-b
+}
+
 
 #'Function selection
 #' param x represents the distance to the nearest seed source. Must be numeric
