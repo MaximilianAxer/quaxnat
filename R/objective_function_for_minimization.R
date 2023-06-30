@@ -15,10 +15,10 @@
 
 
 
-S <- function(x, y, par, tau, fun) {
+S <- function(x, y, par, tau, w, fun) {
   res <- y - fun(x, par)
-  w <- tau - 0.5 + 0.5*sign(res)
-  result <- sum(x^0 * w * res, na.rm=TRUE)
+  s <- tau - 0.5 + 0.5*sign(res)
+  result <- sum(w * s * res, na.rm=TRUE)
   return(result)
 }
 

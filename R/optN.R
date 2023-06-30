@@ -5,17 +5,19 @@
 #' @inheritParams S
 #'
 #'
-optN <- function(x, y, tau, fun,par,
+optN <- function(x, y, tau, fun, par, w,
                  Nmax = 1000000) {
   s <- S(x = x,
          y = y,
          tau = tau,
          par = c(par, 0),
+         w = w,
          fun = fun)
   while (S(x = x,
            y = y,
            tau = tau,
            par = c(par, Nmax),
+           w = w,
            fun = fun) < s) { # muss ich jetzt hier den ganzen Bumms eintragen? (x, y, par, tau, fun)
     Nmax <- 100*Nmax
   }
@@ -23,6 +25,7 @@ optN <- function(x, y, tau, fun,par,
                          y = y,
                          tau = tau,
                          par = c(par, N),
+                         w = w,
                          fun = fun),
            c(0, Nmax),
            tol=1e-50) # muss ich jetzt hier den ganzen Bumms eintragen? (x, y, par, tau, fun)
@@ -33,10 +36,10 @@ optN <- function(x, y, tau, fun,par,
 #'SN
 #' @inheritParams optN
 #'
-SN <- function(x, y, tau, fun,par, Nmax = 1000000) { # Search for the minimum of the reduced objective
-  o <- optN(x, y, tau, fun,par, Nmax = 1000000)
-  cat("par =", par, "objective =", o$objective, "N =", o$minimum, "\n"); flush.console()
-  o$objective
+SN <- function(x, y, tau, fun, w, par, Nmax = 1000000) { # Search for the minimum of the reduced objective
+  oN <- optN(x=x, y=y, tau=tau, fun=fun, w=w, par=par, Nmax=Nmax)
+  cat("par =", par, "objective =", oN$objective, "N =", oN$minimum, "\n"); flush.console()
+  oN$objective
 }
 
 
@@ -45,16 +48,23 @@ SN <- function(x, y, tau, fun,par, Nmax = 1000000) { # Search for the minimum of
 #'@description The function for estimating the potential regeneration density.
 #'
 #'
-#' @param x numeric vector giving the distance to the nearest seed source for the inventory plot.
+#' @param x Numeric vector giving the distance to the nearest seed source for the inventory plot.
 #' @param y Observed regeneration density of the inventory plot.
-#' @param tau Represents the quantile, which is used for the quantile regression. {0;1}
-#' @param fun function assumed for the quantile regression of the regeneration potential.Values allowed are: "exponential", "weibull", "gamma", "Clark2dt", "lognormal", "half-normal". The default is to fit an lognormal model.
+#' @param tau Numeric between 0 and 1. Specifies the quantile used for the quantile regression. {0;1}
+#' @param fun Function assumed for the quantile regression of the regeneration potential. Values allowed are: "exponential", "weibull", "gamma", "Clark2dt", "lognormal", "half-normal". The default is to fit an lognormal model.
+#' @param w Numeric vector of weights of the observations in the estimation procedure.
+#' @param par Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter `N`.
+#' @param ... Further arguments passed to `optim`.
 #' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function.
 #'
-#' @return  The parameter values are given. In the next step the N optimization is done.
+#' @return The estimated function, including an attribute `o` containing the results of `optim`.
 
-quax <-  function(x, y, tau, fun=lognormal) {
-  optim(c(8, 1), SN, x = x, y = y, tau = tau, fun = fun, control=list(reltol=0))
+quax <-  function(x, y, tau, fun=lognormal, w=1, par=c(a=8, b=1), ...) {
+  o <- optim(par, SN, x = x, y = y, tau = tau, fun = fun, w = w, ...)
+  oN <- optN(x=x, y=y, tau=tau, fun=fun, w=w, par=o$par, Nmax = 1000000)
+  formals(fun)$par <- c(o$par, N=oN$minimum)
+  attr(fun,"o") <- o
+  fun
 }
 
 #the function assumed for the dispersal distance distribution.
