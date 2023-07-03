@@ -5,42 +5,28 @@
 #' @inheritParams S
 #'
 #'
-optN <- function(x, y, tau, fun, par, w,
-                 Nmax = 1000000) {
-  s <- S(x = x,
-         y = y,
-         tau = tau,
-         par = c(par, 0),
-         w = w,
-         fun = fun)
-  while (S(x = x,
-           y = y,
-           tau = tau,
-           par = c(par, Nmax),
-           w = w,
-           fun = fun) < s) { # muss ich jetzt hier den ganzen Bumms eintragen? (x, y, par, tau, fun)
-    Nmax <- 100*Nmax
+optN <- function(par, nframe, tol, ...) {
+  Nmax <- get("Nmax", sys.frame(nframe))
+  s <- S(c(par, N=0), ...)
+  while (S(c(par, Nmax), ...) < s) {
+    Nmax <- 2*Nmax
   }
-  optimize(function(N) S(x = x,
-                         y = y,
-                         tau = tau,
-                         par = c(par, N),
-                         w = w,
-                         fun = fun),
-           c(0, Nmax),
-           tol=1e-50) # muss ich jetzt hier den ganzen Bumms eintragen? (x, y, par, tau, fun)
+  oN <- optimize(function(N) S(c(par, N), ...),
+    c(0, Nmax), tol=tol)
+  assign("Nmax", (Nmax+oN$minimum)/2, sys.frame(nframe))
+  attr(oN$objective,"N") <- oN$minimum
+  oN$objective
 }
 #optN(par = 1:3, x = 1, y = 1, tau = 0.9, fun = "Clark2dt") # dauert sehr lange???
 
-
-#'SN
-#' @inheritParams optN
-#'
-SN <- function(x, y, tau, fun, w, par, Nmax = 1000000) { # Search for the minimum of the reduced objective
-  oN <- optN(x=x, y=y, tau=tau, fun=fun, w=w, par=par, Nmax=Nmax)
-  cat("par =", par, "objective =", oN$objective, "N =", oN$minimum, "\n"); flush.console()
-  oN$objective
-}
+##'SN
+##' @inheritParams optN
+##'
+#SN <- function(x, y, tau, fun, w, par, Nmax = 1000000) { # Search for the minimum of the reduced objective
+#  oN <- optN(x=x, y=y, tau=tau, fun=fun, w=w, par=par, Nmax=Nmax)
+#  cat("par =", par, "objective =", oN$objective, "N =", oN$minimum, "\n"); flush.console()
+#  oN$objective
+#}
 
 
 #'quax
@@ -55,17 +41,23 @@ SN <- function(x, y, tau, fun, w, par, Nmax = 1000000) { # Search for the minimu
 #' @param weights Numeric vector of weights of the observations in the estimation procedure.
 #' @param par Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter `N`.
 #' @param ... Further arguments passed to `optim`.
-#' @param subset, weights, na.action, offset For the formula interface: Further arguments passed to `model.frame` (along with `weights`).
+#' @param formula A formula of the form `y ~ x`.
+#' @param data,subset,weights,na.action,offset For the formula interface: Further arguments passed to `model.frame` (along with `weights`).
+#' @param tol The desired accuracy for the inner optimization, see `optimize`.
 #' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function.
 #'
 #' @return The estimated function, including an attribute `o` containing the results of `optim`.
 
 quax <- function(...) UseMethod("quax")
 
-quax.default <- function(x, y, tau, fun=lognormal, weights=1, par=c(a=8, b=1), ...) {
-  o <- optim(par, SN, x = x, y = y, tau = tau, fun = fun, w = weights, ...)
-  oN <- optN(x=x, y=y, tau=tau, fun=fun, w=weights, par=o$par, Nmax = 1000000)
-  formals(fun)$par <- c(o$par, N=oN$minimum)
+quax.default <- function(x, y, tau, fun=lognormal, weights=1, par=c(a=8, b=1), ..., tol=1e-50) {
+  Nmax <- 2*sum(y)        # This number will be read and modified by the 
+  nframe <- sys.nframe()  #   inner opimization (referenced via nframe).
+  o <- optim(par, optN, nframe=nframe, tol=tol,
+    x=x, y=y, tau=tau, fun=fun, w=weights, ...)
+  obj <- optN(par=o$par, nframe=nframe, tol=tol,
+    x=x, y=y, tau=tau, fun=fun, w=weights)
+  formals(fun)$par <- c(o$par, N=attr(obj,"N"))
   attr(fun,"o") <- o
   fun
 }
