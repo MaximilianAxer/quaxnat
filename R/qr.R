@@ -50,6 +50,12 @@ Clark2dt.log <- function(x, par){
   return(result)
 }
 
+#' exponential.power.log-Function
+#' @param par parameters a, b, N estimated within the exponential.power.log function, with a and b representing the scale and the shape parameter of the function, respectively.
+#' @param x represents the distance to the nearest seed source. Must be numeric.
+#'
+#' @details The equation means a fat-tailed distributions with the maximum at zero. As a result of its flexible shape, the exponential power distribution has been applied in a number of theoretical studies that address dispersal.
+
 exponential.power.log <- function(x, par) {
   a <- exp(par[1])
   b <- exp(par[2])
@@ -57,12 +63,25 @@ exponential.power.log <- function(x, par) {
   N * b / (2*pi*a^2*gamma(2/b)) * exp(-(x/a)^b)
 }
 
+
+#' Weibull.log-Function
+#' @param par parameters a, b, N estimated within the Weibull.log function with a and b representing the scale and the shape parameter of the function, respectively.
+#' @param x represents the distance to the nearest seed source. Must be numeric.
+#'
+#' @details The distribution is fat-tailed when b ≤ 1 and thin-tailed otherwise. As for the exponential power function, when b = 2, the Weibull degenerates to the normal distribution, but when b = 1, it does not degenerate to the exponential distribution.
+
 Weibull.log <- function(x, par) {
   a <- exp(par[1])
   b <- exp(par[2])
   N <- par[3]
   N * a^-b * b / (2*pi) * (x/a)^(b-2) * exp(-(x/a)^b)
 }
+
+#' Geometric.log-Function
+#' @param par parameters a, b, N estimated within the geometric.log function with a and b representing the scale and the shape parameter of the function, respectively.
+#' @param x represents the distance to the nearest seed source. Must be numeric.
+#'
+#' @details The function will behave quite differently from the exponential and Weibull distributions. They show a fat tail, whatever the value of the shape parameter (b), and the distributions become increasingly fat-tailed ?as b declines toward ‘1’.
 
 geometric.log <- function(x, par) {
   a <- exp(par[1])

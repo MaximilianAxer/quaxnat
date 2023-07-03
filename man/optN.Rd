@@ -4,7 +4,7 @@
 \alias{optN}
 \title{optN}
 \usage{
-optN(x, y, tau, fun, par, Nmax = 1e+06)
+optN(x, y, tau, fun, par, w, Nmax = 1e+06)
 }
 \arguments{
 \item{x}{represents the distance to the nearest seed source. Must be numeric}

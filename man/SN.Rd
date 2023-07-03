@@ -4,7 +4,7 @@
 \alias{SN}
 \title{SN}
 \usage{
-SN(x, y, tau, fun, par, Nmax = 1e+06)
+SN(x, y, tau, fun, w, par, Nmax = 1e+06)
 }
 \arguments{
 \item{x}{represents the distance to the nearest seed source. Must be numeric}

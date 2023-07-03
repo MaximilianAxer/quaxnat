@@ -4,22 +4,30 @@
 \alias{quax}
 \title{quax}
 \usage{
-quax(x, y, tau, fun = lognormal)
+quax(...)
 }
 \arguments{
-\item{x}{numeric vector giving the distance to the nearest seed source for the inventory plot.}
+\item{...}{Further arguments passed to \code{optim}.}
+
+\item{x}{Numeric vector giving the distance to the nearest seed source for the inventory plot.}
 
 \item{y}{Observed regeneration density of the inventory plot.}
 
-\item{tau}{Represents the quantile, which is used for the quantile regression. {0;1}}
+\item{tau}{Numeric between 0 and 1. Specifies the quantile used for the quantile regression. {0;1}}
 
-\item{fun}{function assumed for the quantile regression of the regeneration potential.Values allowed are: "exponential", "weibull", "gamma", "Clark2dt", "lognormal", "half-normal". The default is to fit an lognormal model.}
+\item{fun}{Function assumed for the quantile regression of the regeneration potential. Values allowed are: "exponential.power.log", "weibull.log", "gamma", "Clark2dt.log", "lognormal", "geometric.log". The default is to fit an lognormal model.}
+
+\item{weights}{Numeric vector of weights of the observations in the estimation procedure. Default is 0.}
+
+\item{par}{Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter \code{N}.}
+
+\item{subset, }{weights, na.action, offset For the formula interface: Further arguments passed to \code{model.frame} (along with \code{weights}).}
 }
 \value{
-The parameter values are given. In the next step the N optimization is done.
+The estimated function, including an attribute \code{o} containing the results of \code{optim}.
 }
 \description{
-The function for estimating the potential regeneration density.
+The dispersal function for estimating the potential regeneration density in the 2-dimensional space.
 }
 \details{
 The function return a list including the estimated parameters for the quantile regression for the specific distribution function.
