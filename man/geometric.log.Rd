@@ -15,5 +15,5 @@ geometric.log(x, par)
 Geometric.log-Function
 }
 \details{
-The function will behave quite differently from the exponential and Weibull distributions. They show a fat tail, whatever the value of the shape parameter (b), and the distributions become increasingly fat-tailed as b declines toward ‘1’..
+The function will behave quite differently from the exponential and Weibull distributions. They show a fat tail, whatever the value of the shape parameter (b), and the distributions become increasingly fat-tailed ?as b declines toward ‘1’.
 }

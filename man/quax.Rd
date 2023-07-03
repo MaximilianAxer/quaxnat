@@ -15,9 +15,9 @@ quax(...)
 
 \item{tau}{Numeric between 0 and 1. Specifies the quantile used for the quantile regression. {0;1}}
 
-\item{fun}{Function assumed for the quantile regression of the regeneration potential. Values allowed are: "exponential", "weibull", "gamma", "Clark2dt", "lognormal", "half-normal". The default is to fit an lognormal model.}
+\item{fun}{Function assumed for the quantile regression of the regeneration potential. Values allowed are: "exponential.power.log", "weibull.log", "gamma", "Clark2dt.log", "lognormal", "geometric.log". The default is to fit an lognormal model.}
 
-\item{weights}{Numeric vector of weights of the observations in the estimation procedure.}
+\item{weights}{Numeric vector of weights of the observations in the estimation procedure. Default is 0.}
 
 \item{par}{Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter \code{N}.}
 
@@ -27,7 +27,7 @@ quax(...)
 The estimated function, including an attribute \code{o} containing the results of \code{optim}.
 }
 \description{
-The function for estimating the potential regeneration density.
+The dispersal function for estimating the potential regeneration density in the 2-dimensional space.
 }
 \details{
 The function return a list including the estimated parameters for the quantile regression for the specific distribution function.

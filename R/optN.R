@@ -45,14 +45,14 @@ SN <- function(x, y, tau, fun, w, par, Nmax = 1000000) { # Search for the minimu
 
 #'quax
 #'
-#'@description The function for estimating the potential regeneration density.
+#'@description The dispersal function for estimating the potential regeneration density in the 2-dimensional space.
 #'
 #'
 #' @param x Numeric vector giving the distance to the nearest seed source for the inventory plot.
 #' @param y Observed regeneration density of the inventory plot.
 #' @param tau Numeric between 0 and 1. Specifies the quantile used for the quantile regression. {0;1}
-#' @param fun Function assumed for the quantile regression of the regeneration potential. Values allowed are: "exponential", "weibull", "gamma", "Clark2dt", "lognormal", "half-normal". The default is to fit an lognormal model.
-#' @param weights Numeric vector of weights of the observations in the estimation procedure.
+#' @param fun Function assumed for the quantile regression of the regeneration potential. Values allowed are: "exponential.power.log", "weibull.log", "gamma", "Clark2dt.log", "lognormal", "geometric.log". The default is to fit an lognormal model.
+#' @param weights Numeric vector of weights of the observations in the estimation procedure. Default is 0.
 #' @param par Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter `N`.
 #' @param ... Further arguments passed to `optim`.
 #' @param subset, weights, na.action, offset For the formula interface: Further arguments passed to `model.frame` (along with `weights`).
