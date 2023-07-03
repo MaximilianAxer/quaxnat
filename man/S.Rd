@@ -4,7 +4,7 @@
 \alias{S}
 \title{objective function for minimization}
 \usage{
-S(x, y, par, tau, fun)
+S(x, y, par, tau, w, fun)
 }
 \arguments{
 \item{x}{represents the distance to the nearest seed source. Must be numeric}
