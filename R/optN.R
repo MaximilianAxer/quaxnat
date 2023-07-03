@@ -14,8 +14,9 @@ optN <- function(par, nframe, tol, ...) {
   oN <- optimize(function(N) S(c(par, N), ...),
     c(0, Nmax), tol=tol)
   assign("Nmax", (Nmax+oN$minimum)/2, sys.frame(nframe))
-  attr(oN$objective,"N") <- oN$minimum
-  oN$objective
+  obj <- oN$objective
+  attr(obj,"N") <- oN$minimum
+  obj
 }
 #optN(par = 1:3, x = 1, y = 1, tau = 0.9, fun = "Clark2dt") # dauert sehr lange???
 
@@ -52,7 +53,7 @@ quax <- function(...) UseMethod("quax")
 
 quax.default <- function(x, y, tau, fun=lognormal, weights=1, par=c(a=8, b=1), ..., tol=1e-50) {
   Nmax <- 2*sum(y)        # This number will be read and modified by the 
-  nframe <- sys.nframe()  #   inner opimization (referenced via nframe).
+  nframe <- sys.nframe()  #   inner optimization (referenced via nframe).
   o <- optim(par, optN, nframe=nframe, tol=tol,
     x=x, y=y, tau=tau, fun=fun, w=weights, ...)
   obj <- optN(par=o$par, nframe=nframe, tol=tol,
