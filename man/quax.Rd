@@ -2,7 +2,7 @@
 % Please edit documentation in R/optN.R
 \name{quax}
 \alias{quax}
-\title{quax}
+\title{SN}
 \usage{
 quax(...)
 }
@@ -21,7 +21,11 @@ quax(...)
 
 \item{par}{Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter \code{N}.}
 
-\item{subset, }{weights, na.action, offset For the formula interface: Further arguments passed to \code{model.frame} (along with \code{weights}).}
+\item{formula}{A formula of the form \code{y ~ x}.}
+
+\item{data, subset, weights, na.action, offset}{For the formula interface: Further arguments passed to \code{model.frame} (along with \code{weights}).}
+
+\item{tol}{The desired accuracy for the inner optimization, see \code{optimize}.}
 }
 \value{
 The estimated function, including an attribute \code{o} containing the results of \code{optim}.

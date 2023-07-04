@@ -4,14 +4,14 @@
 \alias{S}
 \title{objective function for minimization}
 \usage{
-S(x, y, par, tau, w, fun)
+S(par, x, y, tau, w, fun)
 }
 \arguments{
+\item{par}{are parameters to be estimated}
+
 \item{x}{represents the distance to the nearest seed source. Must be numeric}
 
 \item{y}{response: regeneration density in corresponding unit (per ha)}
-
-\item{par}{are parameters to be estimated}
 
 \item{tau}{determines the quantile}
 

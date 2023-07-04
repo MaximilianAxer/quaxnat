@@ -2,18 +2,32 @@
 % Please edit documentation in R/qr.R
 \name{exponential.power.log}
 \alias{exponential.power.log}
-\title{exponential.power.log-Function}
+\title{exponential.power.log}
 \usage{
 exponential.power.log(x, par)
 }
 \arguments{
-\item{x}{represents the distance to the nearest seed source. Must be numeric.}
+\item{x}{represents the distance to the nearest seed source. Must be
+numeric.}
 
-\item{par}{parameters a, b, N estimated within the exponential.power.log function, with a and b representing the scale and the shape parameter of the function, respectively.}
+\item{par}{Numeric vector with three elements representing the log-
+transformed scale and shape parameters \eqn{a} and \eqn{b} of the dispersal
+density, and a the scaling \eqn{N}.}
 }
 \description{
-exponential.power.log-Function
+exponential.power.log
 }
 \details{
-The equation means a fat-tailed distributions with the maximum at zero. As a result of its flexible shape, the exponential power distribution has been applied in a number of theoretical studies that address dispersal.
+The dispersal density function is given by
+\deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
+see Austerlitz et al. (2004). This represents a fat-tailed distribution,
+and the function has its maximum at zero. As a result of its flexible shape,
+the exponential power distribution has been applied in a number of
+theoretical studies that address dispersal.
+}
+\references{
+Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
+Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
+pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
+\doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 }

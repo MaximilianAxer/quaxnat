@@ -4,17 +4,9 @@
 \alias{optN}
 \title{optN}
 \usage{
-optN(x, y, tau, fun, par, w, Nmax = 1e+06)
+optN(par, nframe, tol, ...)
 }
 \arguments{
-\item{x}{represents the distance to the nearest seed source. Must be numeric}
-
-\item{y}{response: regeneration density in corresponding unit (per ha)}
-
-\item{tau}{determines the quantile}
-
-\item{fun}{dispersal function, which is used}
-
 \item{par}{are parameters to be estimated}
 }
 \description{
