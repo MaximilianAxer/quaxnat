@@ -2,7 +2,7 @@
 % Please edit documentation in R/qr.R
 \name{exponential.power.log}
 \alias{exponential.power.log}
-\title{exponential.power.log}
+\title{Dispersal Densities From Exponential Power Family}
 \usage{
 exponential.power.log(x, par)
 }
@@ -14,15 +14,22 @@ numeric.}
 transformed scale and shape parameters \eqn{a} and \eqn{b} of the dispersal
 density, and a the scaling \eqn{N}.}
 }
+\value{
+Numeric vector of function values multiplied by \eqn{N}.
+}
 \description{
-exponential.power.log
+\code{exponential.power.log} computes the value, multiplied by \eqn{N}, of
+dispersal function from an exponential power family including, as special
+cases, distance distributions based normal and exponential distributions.
 }
 \details{
-The dispersal density function is given by
+The spatial dispersal density, representing the probability
+density function, divided by \eqn{2\pi x}, of the distance of a seed from
+its source, is here given by
 \deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
 see Austerlitz et al. (2004). This represents a fat-tailed distribution,
-and the function has its maximum at zero. As a result of its flexible shape,
-the exponential power distribution has been applied in a number of
+and the function has its maximum at zero. As a result of its flexible
+shape, the exponential power distribution has been applied in a number of
 theoretical studies that address dispersal.
 }
 \references{

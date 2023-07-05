@@ -2,18 +2,39 @@
 % Please edit documentation in R/qr.R
 \name{Weibull.log}
 \alias{Weibull.log}
-\title{Weibull.log-Function}
+\title{Dispersal Densities From Weibull Family}
 \usage{
 Weibull.log(x, par)
 }
 \arguments{
-\item{x}{represents the distance to the nearest seed source. Must be numeric.}
+\item{x}{Numeric vector of distances to the nearest seed source.}
 
-\item{par}{parameters a, b, N estimated within the Weibull.log function with a and b representing the scale and the shape parameter of the function, respectively.}
+\item{par}{Numeric vector with three elements representing the log-
+transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.}
+}
+\value{
+Numeric vector of function values multiplied by \eqn{N}.
 }
 \description{
-Weibull.log-Function
+\code{Weibull.log} computes the value of the dispersal function from ???
+multiplied by \eqn{N}.
 }
 \details{
-The distribution is fat-tailed when b ≤ 1 and thin-tailed otherwise. As for the exponential power function, when b = 2, the Weibull degenerates to the normal distribution, but when b = 1, it does not degenerate to the exponential distribution.
+The spatial dispersal density, representing the probability
+density function, divided by \eqn{2\pi x}, of the distance of a seed from
+its source, is here given by
+\deqn{f(x) = \frac{a^{-b}b}{2\pi} (\frac{x}{a})^{b-2} e^{-(x/a)^b},}
+see Austerlitz et al. (2004). (???Das Folgende prüfen, ggf. ändern oder
+sonst als wörtliches Zitat kennzeichnen:) The distribution is fat-tailed
+when b ≤ 1 and thin-tailed otherwise. As for the exponential power
+function, when b = 2, the Weibull degenerates to the normal distribution,
+but when b = 1, it does not degenerate to the exponential distribution.
+}
+\references{
+(???find and add original reference)
+
+Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
+Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
+pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
+\doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 }

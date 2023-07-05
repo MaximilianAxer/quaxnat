@@ -2,12 +2,12 @@
 % Please edit documentation in R/qr.R
 \name{Clark2dt.log}
 \alias{Clark2dt.log}
-\title{Clark2dt.log}
+\title{Dispersal Densities From 2-Dimensional t Distribution}
 \usage{
 Clark2dt.log(x, par)
 }
 \arguments{
-\item{x}{Numeric vector of distances the the nearest seed source.}
+\item{x}{Numeric vector of distances to the nearest seed source.}
 
 \item{par}{Numeric vector with three elements representing the log-
 transformed parameters \eqn{u} and \eqn{p} and the scaling \eqn{N}.}
@@ -16,11 +16,13 @@ transformed parameters \eqn{u} and \eqn{p} and the scaling \eqn{N}.}
 Numeric vector of function values multiplied by \eqn{N}.
 }
 \description{
-Clark2dt computes the value of the dispersal function from Clark et al.
-(1999) multiplied by \eqn{N}.
+\code{Clark2dt.log} computes the value of the dispersal function from Clark et
+al. (1999) multiplied by \eqn{N}.
 }
 \details{
-The dispersal density function is given by
+The spatial dispersal density, representing the probability
+density function, divided by \eqn{2\pi x}, of the distance of a seed from
+its source, is here given by
 \deqn{f(x) = \frac{p}{\pi u (1+x^2/u)^{p+1}},}
 see Clark et al. (1999), and Austerlitz et al. (2004) with a different
 parameterization (\eqn{b=p+1}). This represents a mixture of Gaussian

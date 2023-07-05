@@ -1,5 +1,12 @@
 ##############################################################################
-#' lognormal.log
+#' Dispersal Densities For Log-Normal Distance Distributions
+#'
+#' `lognormal.log` computes the value, multiplied by \eqn{N} of a dispersal 
+#' function based on seeds having a distance with a log-normal distribution 
+#' from the their source.
+#'
+#' @return Numeric vector of function values multiplied by \eqn{N}.
+#'
 #' @param par Numeric vector with three elements representing log-transformed 
 #' scale and shape parameters, given by the mean \eqn{a} and standard 
 #' deviation \eqn{\sigma} of the underlying normal distribution, and the 
@@ -9,7 +16,7 @@
 #'
 #' @details The spatial dispersal density, representing the probability 
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
-#' its source is here given by
+#' its source, is here given by
 #' \deqn{f(x) = \frac{1}{2\pi x^2 \sqrt{2\pi\sigma^2}} 
 #'   e^{-\frac{1}{2\sigma^2}(\log(x/a))^2},}
 #' see Greene and Johnson (1989), Stoyan and Wagner (2001). Thus, the 
@@ -37,20 +44,20 @@ lognormal.log <- function(x, par) {
 
 
 ##############################################################################
-#' Clark2dt.log
+#' Dispersal Densities From 2-Dimensional t Distribution 
 #'
-#' Clark2dt computes the value of the dispersal function from Clark et al. 
-#' (1999) multiplied by \eqn{N}.
+#' `Clark2dt.log` computes the value of the dispersal function from Clark et 
+#' al. (1999) multiplied by \eqn{N}.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
 #'
 #' @param par Numeric vector with three elements representing the log-
 #' transformed parameters \eqn{u} and \eqn{p} and the scaling \eqn{N}.
-#' @param x Numeric vector of distances the the nearest seed source.
+#' @param x Numeric vector of distances to the nearest seed source.
 #'
 #' @details The spatial dispersal density, representing the probability 
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
-#' its source is here given by
+#' its source, is here given by
 #' \deqn{f(x) = \frac{p}{\pi u (1+x^2/u)^{p+1}},}
 #' see Clark et al. (1999), and Austerlitz et al. (2004) with a different 
 #' parameterization (\eqn{b=p+1}). This represents a mixture of Gaussian 
@@ -79,7 +86,14 @@ Clark2dt.log <- function(x, par){
 
 
 ##############################################################################
-#' exponential.power.log
+#' Dispersal Densities From Exponential Power Family
+#'
+#' `exponential.power.log` computes the value, multiplied by \eqn{N}, of 
+#' dispersal function from an exponential power family including, as special 
+#' cases, distance distributions based normal and exponential distributions.
+#'
+#' @return Numeric vector of function values multiplied by \eqn{N}.
+#'
 #' @param par Numeric vector with three elements representing the log-
 #' transformed scale and shape parameters \eqn{a} and \eqn{b} of the dispersal 
 #' density, and a the scaling \eqn{N}.
@@ -88,7 +102,7 @@ Clark2dt.log <- function(x, par){
 #'
 #' @details The spatial dispersal density, representing the probability 
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
-#' its source is here given by
+#' its source, is here given by
 #' \deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
 #' see Austerlitz et al. (2004). This represents a fat-tailed distribution, 
 #' and the function has its maximum at zero. As a result of its flexible 
@@ -110,11 +124,34 @@ exponential.power.log <- function(x, par) {
 
 
 ##############################################################################
-#' Weibull.log-Function
-#' @param par parameters a, b, N estimated within the Weibull.log function with a and b representing the scale and the shape parameter of the function, respectively.
-#' @param x represents the distance to the nearest seed source. Must be numeric.
+#' Dispersal Densities From Weibull Family
 #'
-#' @details The distribution is fat-tailed when b ≤ 1 and thin-tailed otherwise. As for the exponential power function, when b = 2, the Weibull degenerates to the normal distribution, but when b = 1, it does not degenerate to the exponential distribution.
+#' `Weibull.log` computes the value of the dispersal function from ??? 
+#' multiplied by \eqn{N}.
+#'
+#' @return Numeric vector of function values multiplied by \eqn{N}.
+#'
+#' @param par Numeric vector with three elements representing the log-
+#' transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.
+#' @param x Numeric vector of distances to the nearest seed source.
+#'
+#' @details The spatial dispersal density, representing the probability 
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' its source, is here given by
+#' \deqn{f(x) = \frac{a^{-b}b}{2\pi} (\frac{x}{a})^{b-2} e^{-(x/a)^b},}
+#' see Austerlitz et al. (2004). (???Das Folgende prüfen, ggf. ändern oder 
+#' sonst als wörtliches Zitat kennzeichnen:) The distribution is fat-tailed 
+#' when b ≤ 1 and thin-tailed otherwise. As for the exponential power 
+#' function, when b = 2, the Weibull degenerates to the normal distribution, 
+#' but when b = 1, it does not degenerate to the exponential distribution.
+#'
+#' @references
+#' (???find and add original reference)
+#'
+#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S., 
+#' Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the 
+#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
+#' \doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 
 Weibull.log <- function(x, par) {
   a <- exp(par[1])
@@ -125,11 +162,35 @@ Weibull.log <- function(x, par) {
 
 
 ##############################################################################
-#' Geometric.log-Function
-#' @param par parameters a, b, N estimated within the geometric.log function with a and b representing the scale and the shape parameter of the function, respectively.
-#' @param x represents the distance to the nearest seed source. Must be numeric.
+#' Dispersal Densities From Geometric Family
 #'
-#' @details The function will behave quite differently from the exponential and Weibull distributions. They show a fat tail, whatever the value of the shape parameter (b), and the distributions become increasingly fat-tailed ?as b declines toward ‘1’.
+#' `geometric.log` computes the value of the dispersal function from ??? 
+#' multiplied by \eqn{N}.
+#'
+#' @return Numeric vector of function values multiplied by \eqn{N}.
+#'
+#' @param par Numeric vector with three elements representing the log-
+#' transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.
+#' @param x represents the distance to the nearest seed source. Must be 
+#' numeric.
+#'
+#' @details The spatial dispersal density, representing the probability 
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' its source, is here given by
+#' \deqn{f(x) = \frac{b-1}{\pi a^2} (1+\frac{x^2}{a^2})^{-b},}
+#' see Austerlitz et al. (2004). (???Das Folgende prüfen, ggf. ändern oder 
+#' sonst als wörtliches Zitat kennzeichnen:) The function will behave quite 
+#' differently from the exponential and Weibull distributions. They show a 
+#' fat tail, whatever the value of the shape parameter (b), and the 
+#' distributions become increasingly fat-tailed ?as b declines toward ‘1’.
+#'
+#' @references
+#' (???find and add original reference)
+#'
+#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S., 
+#' Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the 
+#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
+#' \doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 
 geometric.log <- function(x, par) {
   a <- exp(par[1])

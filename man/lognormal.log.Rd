@@ -2,7 +2,7 @@
 % Please edit documentation in R/qr.R
 \name{lognormal.log}
 \alias{lognormal.log}
-\title{lognormal.log}
+\title{Dispersal Densities For Log-Normal Distance Distributions}
 \usage{
 lognormal.log(x, par)
 }
@@ -15,13 +15,18 @@ scale and shape parameters, given by the mean \eqn{a} and standard
 deviation \eqn{\sigma} of the underlying normal distribution, and the
 scaling \eqn{N}.}
 }
+\value{
+Numeric vector of function values multiplied by \eqn{N}.
+}
 \description{
-lognormal.log
+\code{lognormal.log} computes the value, multiplied by \eqn{N} of a dispersal
+function based on seeds having a distance with a log-normal distribution
+from the their source.
 }
 \details{
 The spatial dispersal density, representing the probability
-density function of the distance of a seed from its source divided by
-\eqn{2\pi x}, is here given by
+density function, divided by \eqn{2\pi x}, of the distance of a seed from
+its source, is here given by
 \deqn{f(x) = \frac{1}{2\pi x^2 \sqrt{2\pi\sigma^2}} 
   e^{-\frac{1}{2\sigma^2}(\log(x/a))^2},}
 see Greene and Johnson (1989), Stoyan and Wagner (2001). Thus, the
