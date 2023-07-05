@@ -1,21 +1,4 @@
-#' Clark2DT-Function
-#'
-#' @details
-#'
-#' @return what is returned by the function?
-#'
-#' @param par parameters U, P, N estimated within the Clark2DT function
-#' @param x represents the distance to the nearest seed source. Must be numeric
-#'
-#' @details Mixture of Gaussian nuclei that produces tails that are not quite as long. Maximum at seed tree itself and cannot become 0 at x = 0.
-Clark2dt <- function(x, par){
-  U <- par[1]
-  P <- par[2]
-  N <- par[3]
-  result <- N * ((P)/ (pi*U * ((1+((x^ 2) / U)) ^ (P + 1))))
-  return(result)
-}
-
+##############################################################################
 #' lognormal.log
 #' @param par Numeric vector with three elements representing log-transformed 
 #' scale and shape parameters, given by the mean \eqn{a} and standard 
@@ -25,8 +8,8 @@ Clark2dt <- function(x, par){
 #' numeric.
 #'
 #' @details The spatial dispersal density, representing the probability 
-#' density function of the distance of a seed from its source divided by 
-#' \eqn{2\pi x}, is here given by
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' its source is here given by
 #' \deqn{f(x) = \frac{1}{2\pi x^2 \sqrt{2\pi\sigma^2}} 
 #'   e^{-\frac{1}{2\sigma^2}(\log(x/a))^2},}
 #' see Greene and Johnson (1989), Stoyan and Wagner (2001). Thus, the 
@@ -52,6 +35,8 @@ lognormal.log <- function(x, par) {
   return(result)
 }
 
+
+##############################################################################
 #' Clark2dt.log
 #'
 #' Clark2dt computes the value of the dispersal function from Clark et al. 
@@ -63,7 +48,9 @@ lognormal.log <- function(x, par) {
 #' transformed parameters \eqn{u} and \eqn{p} and the scaling \eqn{N}.
 #' @param x Numeric vector of distances the the nearest seed source.
 #'
-#' @details The dispersal density function is given by
+#' @details The spatial dispersal density, representing the probability 
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' its source is here given by
 #' \deqn{f(x) = \frac{p}{\pi u (1+x^2/u)^{p+1}},}
 #' see Clark et al. (1999), and Austerlitz et al. (2004) with a different 
 #' parameterization (\eqn{b=p+1}). This represents a mixture of Gaussian 
@@ -82,7 +69,6 @@ lognormal.log <- function(x, par) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
 #' \doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 
-
 Clark2dt.log <- function(x, par){
   a <- exp(par[1])
   P <- exp(par[2])
@@ -91,6 +77,8 @@ Clark2dt.log <- function(x, par){
   return(result)
 }
 
+
+##############################################################################
 #' exponential.power.log
 #' @param par Numeric vector with three elements representing the log-
 #' transformed scale and shape parameters \eqn{a} and \eqn{b} of the dispersal 
@@ -98,11 +86,13 @@ Clark2dt.log <- function(x, par){
 #' @param x represents the distance to the nearest seed source. Must be 
 #' numeric.
 #'
-#' @details The dispersal density function is given by
+#' @details The spatial dispersal density, representing the probability 
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' its source is here given by
 #' \deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
 #' see Austerlitz et al. (2004). This represents a fat-tailed distribution, 
-#' and the function has its maximum at zero. As a result of its flexible shape, 
-#' the exponential power distribution has been applied in a number of 
+#' and the function has its maximum at zero. As a result of its flexible 
+#' shape, the exponential power distribution has been applied in a number of 
 #' theoretical studies that address dispersal.
 #'
 #' @references
@@ -119,6 +109,7 @@ exponential.power.log <- function(x, par) {
 }
 
 
+##############################################################################
 #' Weibull.log-Function
 #' @param par parameters a, b, N estimated within the Weibull.log function with a and b representing the scale and the shape parameter of the function, respectively.
 #' @param x represents the distance to the nearest seed source. Must be numeric.
@@ -132,6 +123,8 @@ Weibull.log <- function(x, par) {
   N * a^-b * b / (2*pi) * (x/a)^(b-2) * exp(-(x/a)^b)
 }
 
+
+##############################################################################
 #' Geometric.log-Function
 #' @param par parameters a, b, N estimated within the geometric.log function with a and b representing the scale and the shape parameter of the function, respectively.
 #' @param x represents the distance to the nearest seed source. Must be numeric.
@@ -146,10 +139,29 @@ geometric.log <- function(x, par) {
 }
 
 
-#'Function selection
-#' param x represents the distance to the nearest seed source. Must be numeric
-#' param par are parameters to be estimated
-
+##############################################################################
+##' Clark2DT-Function
+##'
+##' @details
+##'
+##' @return what is returned by the function?
+##'
+##' @param par parameters U, P, N estimated within the Clark2DT function
+##' @param x represents the distance to the nearest seed source. Must be numeric
+##'
+##' @details Mixture of Gaussian nuclei that produces tails that are not quite as long. Maximum at seed tree itself and cannot become 0 at x = 0.
+#Clark2dt <- function(x, par){
+#  U <- par[1]
+#  P <- par[2]
+#  N <- par[3]
+#  result <- N * ((P)/ (pi*U * ((1+((x^ 2) / U)) ^ (P + 1))))
+#  return(result)
+#}
+#
+##'Function selection
+##' param x represents the distance to the nearest seed source. Must be numeric
+##' param par are parameters to be estimated
+#
 #S.functions <- function(x, par, fun){
 #  fun <- match.arg(fun,
 #                   c("Clark2dt",
@@ -158,6 +170,5 @@ geometric.log <- function(x, par) {
 #  result <- f(x, par)
 #  return(result)
 #}
-
 
 
