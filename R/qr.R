@@ -1,7 +1,7 @@
 ##############################################################################
 #' Dispersal Densities For Log-Normal Distance Distributions
 #'
-#' `lognormal.log` computes the value, multiplied by \eqn{N} of a dispersal 
+#' `lognormal` computes the value, multiplied by \eqn{N} of a dispersal 
 #' function based on seeds having a distance with a log-normal distribution 
 #' from the their source.
 #'
@@ -26,19 +26,19 @@
 #' \eqn{\log x} with a maximum at \eqn{\log a-2\sigma^2}.
 #'
 #' @references
-#' Greene, D.F., Johnson, E.A., 1989. A model of wind dispersal of winged or 
+#' Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or 
 #' plumed seeds. *Ecology* **70**(2), 339–347.
 #' \doi{10.2307/1937538}
 #'
-#' Stoyan, D., Wagner, S., 2001. Estimating the fruit dispersion of 
+#' Stoyan, D., Wagner, S. (2001). Estimating the fruit dispersion of 
 #' anemochorous forest trees. *Ecol. Modell.* **145**, 35–47.
 #' \doi{10.1016/S0304-3800(01)00385-4}
 
-lognormal.log <- function(x, par) {
+lognormal <- function(x, par) {
   log.a <- par[1]
   σ <- exp(par[2])
   N <- par[3]
-  result <- N * exp(-(log(x)-log.a)^2 / (2*σ^2)) / (x^2 * 2*pi * sqrt(2*pi*σ^2))
+  result <- N * exp(-(log(x)-log.a)^2/(2*σ^2)) / (x^2 * 2*pi * sqrt(2*pi*σ^2))
   return(result)
 }
 
@@ -46,8 +46,8 @@ lognormal.log <- function(x, par) {
 ##############################################################################
 #' Dispersal Densities From 2-Dimensional t Distribution 
 #'
-#' `Clark2dt.log` computes the value of the dispersal function from Clark et 
-#' al. (1999) multiplied by \eqn{N}.
+#' `Clark2dt` computes the value of the dispersal function from Clark et al.
+#' (1999) multiplied by \eqn{N}.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
 #'
@@ -76,7 +76,7 @@ lognormal.log <- function(x, par) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
 #' \doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 
-Clark2dt.log <- function(x, par){
+Clark2dt <- function(x, par){
   a <- exp(par[1])
   P <- exp(par[2])
   N <- par[3]
@@ -88,7 +88,7 @@ Clark2dt.log <- function(x, par){
 ##############################################################################
 #' Dispersal Densities From Exponential Power Family
 #'
-#' `exponential.power.log` computes the value, multiplied by \eqn{N}, of 
+#' `exponential.power` computes the value, multiplied by \eqn{N}, of 
 #' dispersal function from an exponential power family including, as special 
 #' cases, distance distributions based normal and exponential distributions.
 #'
@@ -115,7 +115,7 @@ Clark2dt.log <- function(x, par){
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
 #' \doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 
-exponential.power.log <- function(x, par) {
+exponential.power <- function(x, par) {
   a <- exp(par[1])
   b <- exp(par[2])
   N <- par[3]
@@ -126,8 +126,8 @@ exponential.power.log <- function(x, par) {
 ##############################################################################
 #' Dispersal Densities From Weibull Family
 #'
-#' `Weibull.log` computes the value of the dispersal function from ??? 
-#' multiplied by \eqn{N}.
+#' `Weibull` computes the value of the dispersal function from ??? multiplied 
+#' by \eqn{N}.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
 #'
@@ -153,7 +153,7 @@ exponential.power.log <- function(x, par) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
 #' \doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 
-Weibull.log <- function(x, par) {
+Weibull <- function(x, par) {
   a <- exp(par[1])
   b <- exp(par[2])
   N <- par[3]
@@ -164,7 +164,7 @@ Weibull.log <- function(x, par) {
 ##############################################################################
 #' Dispersal Densities From Geometric Family
 #'
-#' `geometric.log` computes the value of the dispersal function from ??? 
+#' `geometric` computes the value of the dispersal function from ??? 
 #' multiplied by \eqn{N}.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
@@ -192,7 +192,7 @@ Weibull.log <- function(x, par) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
 #' \doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 
-geometric.log <- function(x, par) {
+geometric <- function(x, par) {
   a <- exp(par[1])
   b <- exp(par[2])
   N <- par[3]
@@ -208,9 +208,11 @@ geometric.log <- function(x, par) {
 ##' @return what is returned by the function?
 ##'
 ##' @param par parameters U, P, N estimated within the Clark2DT function
-##' @param x represents the distance to the nearest seed source. Must be numeric
+##' @param x represents the distance to the nearest seed source. Must be 
+##' numeric
 ##'
-##' @details Mixture of Gaussian nuclei that produces tails that are not quite as long. Maximum at seed tree itself and cannot become 0 at x = 0.
+##' @details Mixture of Gaussian nuclei that produces tails that are not 
+##' quite as long. Maximum at seed tree itself and cannot become 0 at x = 0.
 #Clark2dt <- function(x, par){
 #  U <- par[1]
 #  P <- par[2]
@@ -220,7 +222,8 @@ geometric.log <- function(x, par) {
 #}
 #
 ##'Function selection
-##' param x represents the distance to the nearest seed source. Must be numeric
+##' param x represents the distance to the nearest seed source. Must be 
+##' numeric
 ##' param par are parameters to be estimated
 #
 #S.functions <- function(x, par, fun){
