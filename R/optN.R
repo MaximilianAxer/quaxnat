@@ -60,6 +60,7 @@ quax.default <- function(x, y, tau, fun=lognormal, weights=1, par=c(a=8, b=1), .
     x=x, y=y, tau=tau, fun=fun, w=weights)
   formals(fun)$par <- c(o$par, N=attr(obj,"N"))
   attr(fun,"o") <- o
+  class(fun) <- "quax"
   fun
 }
 
@@ -81,6 +82,8 @@ quax.formula <- function(formula, data, tau, fun=lognormal,
     tau=tau, fun=fun, weights=if (is.null(w)) 1 else w, par=par, ...)
 }
 
+summary.quax <- function(f)
+  list(coef=formals(f)$par, value=attr(f,"o")$value)
 
 #the function assumed for the dispersal distance distribution.
 ###        Values allowed are: "exponential", "weibull", "gamma", "pearson",
