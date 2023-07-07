@@ -19,7 +19,7 @@ scaling \eqn{N}.}
 Numeric vector of function values multiplied by \eqn{N}.
 }
 \description{
-\code{lognormal} computes the value, multiplied by \eqn{N} of a dispersal
+\code{lognormal} computes the value, multiplied by \eqn{N}, of a dispersal
 function based on seeds having a distance with a log-normal distribution
 from the their source.
 }

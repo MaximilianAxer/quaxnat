@@ -1,7 +1,7 @@
 ##############################################################################
 #' Dispersal Densities For Log-Normal Distance Distributions
 #'
-#' `lognormal` computes the value, multiplied by \eqn{N} of a dispersal 
+#' `lognormal` computes the value, multiplied by \eqn{N}, of a dispersal 
 #' function based on seeds having a distance with a log-normal distribution 
 #' from the their source.
 #'
@@ -61,9 +61,7 @@ lognormal <- function(x, par) {
 #' \deqn{f(x) = \frac{p}{\pi u (1+x^2/u)^{p+1}},}
 #' see Clark et al. (1999), and Austerlitz et al. (2004) with a different 
 #' parameterization (\eqn{b=p+1}). This represents a mixture of Gaussian 
-#' densities that produces tails that are not quite as long ???longer???. It 
-#' has its maximum at the seed tree itself and cannot become \eqn{0} at 
-#' \eqn{x=0}.
+#' densities that exhibits heavier tails. It has its maximum at zero.
 #'
 #' @references
 #' Clark, J.S., Silman, M., Kern, R., Macklin, E. and HilleRisLambers, J. 
@@ -89,14 +87,15 @@ Clark2dt <- function(x, par){
 #' Dispersal Densities From Exponential Power Family
 #'
 #' `exponential.power` computes the value, multiplied by \eqn{N}, of 
-#' dispersal function from an exponential power family including, as special 
-#' cases, distance distributions based normal and exponential distributions.
+#' dispersal function from the exponential power family introduced by Clark 
+#' et al. (1998), which includes, as special cases, distance distributions 
+#' based on normal and exponential distributions.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
 #'
-#' @param par Numeric vector with three elements representing the log-
-#' transformed scale and shape parameters \eqn{a} and \eqn{b} of the dispersal 
-#' density, and a the scaling \eqn{N}.
+#' @param par Numeric vector with three elements representing the
+#' log-transformed scale and shape parameters \eqn{a} and \eqn{b} of the 
+#' dispersal density, and a the scaling \eqn{N}.
 #' @param x represents the distance to the nearest seed source. Must be 
 #' numeric.
 #'
@@ -104,15 +103,28 @@ Clark2dt <- function(x, par){
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
 #' its source, is here given by
 #' \deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
-#' see Austerlitz et al. (2004). This represents a fat-tailed distribution, 
-#' and the function has its maximum at zero. As a result of its flexible 
-#' shape, the exponential power distribution has been applied in a number of 
-#' theoretical studies that address dispersal.
+#' see Clark et al. (1998), Austerlitz et al. (2004). This function has its 
+#' maximum at zero, but represents a rather flexible family of distributions 
+#' including Gassian kernels, the kernels representing an exponential 
+#' distribution of distances, and, for \eqn{b<1}, fat-tailed 
+#' distributions (CHECK; SHOULD WE SAY HEAVY-TAILED?). It has conseqently been 
+#' applied in a number of theoretical studies that address dispersal (DO WE 
+#' HAVE A REFERENCE?).
 #'
 #' @references
+#' Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of 
+#' recruitment limitation in southern Appalachian forests. *Ecological 
+#' Monographs* **68**(2), 213–235.
+#' \doi{10.2307/2657201}
+#'
+#' Clark, J.S. (1998). Why trees migrate so fast: confronting theory with 
+#' dispersal biology and the paleorecord. *The American Naturalist* 
+#' **152**(2), 204–224.
+#' \doi{10.1086/286162}
+#'
 #' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S., 
 #' Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the 
-#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
+#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
 
 exponential.power <- function(x, par) {

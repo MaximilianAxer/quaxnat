@@ -10,29 +10,43 @@ exponential.power(x, par)
 \item{x}{represents the distance to the nearest seed source. Must be
 numeric.}
 
-\item{par}{Numeric vector with three elements representing the log-
-transformed scale and shape parameters \eqn{a} and \eqn{b} of the dispersal
-density, and a the scaling \eqn{N}.}
+\item{par}{Numeric vector with three elements representing the
+log-transformed scale and shape parameters \eqn{a} and \eqn{b} of the
+dispersal density, and a the scaling \eqn{N}.}
 }
 \value{
 Numeric vector of function values multiplied by \eqn{N}.
 }
 \description{
 \code{exponential.power} computes the value, multiplied by \eqn{N}, of
-dispersal function from an exponential power family including, as special
-cases, distance distributions based normal and exponential distributions.
+dispersal function from the exponential power family introduced by Clark
+et al. (1998), which includes, as special cases, distance distributions
+based on normal and exponential distributions.
 }
 \details{
 The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by
 \deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
-see Austerlitz et al. (2004). This represents a fat-tailed distribution,
-and the function has its maximum at zero. As a result of its flexible
-shape, the exponential power distribution has been applied in a number of
-theoretical studies that address dispersal.
+see Clark et al. (1998), Austerlitz et al. (2004). This function has its
+maximum at zero, but represents a rather flexible family of distributions
+including Gassian kernels, the kernels representing an exponential
+distribution of distances, and, for \eqn{b<1}, fat-tailed
+distributions (CHECK; SHOULD WE SAY HEAVY-TAILED?). It has conseqently been
+applied in a number of theoretical studies that address dispersal (DO WE
+HAVE A REFERENCE?).
 }
 \references{
+Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of
+recruitment limitation in southern Appalachian forests. \emph{Ecological
+Monographs} \strong{68}(2), 213–235.
+\doi{10.2307/2657201}
+
+Clark, J.S. (1998). Why trees migrate so fast: confronting theory with
+dispersal biology and the paleorecord. \emph{The American Naturalist}
+\strong{152}(2), 204–224.
+\doi{10.1086/286162}
+
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
 Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.

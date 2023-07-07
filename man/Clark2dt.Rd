@@ -26,9 +26,7 @@ its source, is here given by
 \deqn{f(x) = \frac{p}{\pi u (1+x^2/u)^{p+1}},}
 see Clark et al. (1999), and Austerlitz et al. (2004) with a different
 parameterization (\eqn{b=p+1}). This represents a mixture of Gaussian
-densities that produces tails that are not quite as long ???longer???. It
-has its maximum at the seed tree itself and cannot become \eqn{0} at
-\eqn{x=0}.
+densities that exhibits heavier tails. It has its maximum at zero.
 }
 \references{
 Clark, J.S., Silman, M., Kern, R., Macklin, E. and HilleRisLambers, J.
