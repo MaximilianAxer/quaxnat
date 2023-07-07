@@ -52,7 +52,7 @@ dispersal biology and the paleorecord. \emph{The American Naturalist}
 \doi{10.1086/286162}
 
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
-Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
+Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 \doi{doi.org/10.1111/j.1365-294X.2004.02100.x}
 }

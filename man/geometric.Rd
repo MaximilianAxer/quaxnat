@@ -10,32 +10,33 @@ geometric(x, par)
 \item{x}{represents the distance to the nearest seed source. Must be
 numeric.}
 
-\item{par}{Numeric vector with three elements representing the log-
-transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.}
+\item{par}{Numeric vector with three elements representing the
+log-transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.}
 }
 \value{
 Numeric vector of function values multiplied by \eqn{N}.
 }
 \description{
-\code{geometric} computes the value of the dispersal function from ???
+\code{geometric} computes the value of the dispersal function from (WHERE?)
 multiplied by \eqn{N}.
 }
 \details{
 The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by
-\deqn{f(x) = \frac{b-1}{\pi a^2} (1+\frac{x^2}{a^2})^{-b},}
-see Austerlitz et al. (2004). (???Das Folgende prüfen, ggf. ändern oder
-sonst als wörtliches Zitat kennzeichnen:) The function will behave quite
-differently from the exponential and Weibull distributions. They show a
-fat tail, whatever the value of the shape parameter (b), and the
-distributions become increasingly fat-tailed ?as b declines toward ‘1’.
+\deqn{f(x) = \frac{(b-2)(b-1)}{2\pi a} (1+\frac{x}{a})^{-b},}
+see Austerlitz et al. (2004). (CHANGE THE FOLLOWING, SHOULD BE OUR OWN
+CHARACTERIZATION:) Austerlitz et al. (2004) characterize it as follows:
+The geometric and 2dt families “will behave quite differently from the
+exponential and Weibull distributions. They show a fat tail, whatever the
+value of the shape parameter (\eqn{b}), and the distributions become
+increasingly fat-tailed as \eqn{b} declines toward ‘1’.”
 }
 \references{
-(???find and add original reference)
+(FIND AND ADD ORIGINAL REFERENCE)
 
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
-Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
+Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 \doi{doi.org/10.1111/j.1365-294X.2004.02100.x}
 }

@@ -9,8 +9,8 @@ Clark2dt(x, par)
 \arguments{
 \item{x}{Numeric vector of distances to the nearest seed source.}
 
-\item{par}{Numeric vector with three elements representing the log-
-transformed parameters \eqn{u} and \eqn{p} and the scaling \eqn{N}.}
+\item{par}{Numeric vector with three elements representing the
+log-transformed parameters \eqn{a} and \eqn{p} and the scaling \eqn{N}.}
 }
 \value{
 Numeric vector of function values multiplied by \eqn{N}.
@@ -23,19 +23,20 @@ Numeric vector of function values multiplied by \eqn{N}.
 The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by
-\deqn{f(x) = \frac{p}{\pi u (1+x^2/u)^{p+1}},}
-see Clark et al. (1999), and Austerlitz et al. (2004) with a different
-parameterization (\eqn{b=p+1}). This represents a mixture of Gaussian
-densities that exhibits heavier tails. It has its maximum at zero.
+\deqn{f(x) = \frac{p}{\pi a^2 (1+(x/a)^2)^{p+1}},}
+see Clark et al. (1999) and Austerlitz et al. (2004) (with
+parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-1}, respectively). This
+represents a mixture of Gaussian densities that exhibits heavier tails. It
+has its maximum at zero.
 }
 \references{
-Clark, J.S., Silman, M., Kern, R., Macklin, E. and HilleRisLambers, J.
+Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.
 (1999). Seed dispersal near and far: patterns across temperate and tropical
 forests. \emph{Ecology} \strong{80}, 1475–1494.
 \doi{10.1890/0012-9658(1999)080[1475:SDNAFP]2.0.CO;2}
 
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
-Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
+Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 \doi{10.1111/j.1365-294X.2004.02100.x}
 }

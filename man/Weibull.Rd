@@ -9,8 +9,8 @@ Weibull(x, par)
 \arguments{
 \item{x}{Numeric vector of distances to the nearest seed source.}
 
-\item{par}{Numeric vector with three elements representing the log-
-transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.}
+\item{par}{Numeric vector with three elements representing the
+log-transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.}
 }
 \value{
 Numeric vector of function values multiplied by \eqn{N}.
@@ -24,11 +24,12 @@ The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by
 \deqn{f(x) = \frac{a^{-b}b}{2\pi} (\frac{x}{a})^{b-2} e^{-(x/a)^b},}
-see Austerlitz et al. (2004). (???Das Folgende prüfen, ggf. ändern oder
-sonst als wörtliches Zitat kennzeichnen:) The distribution is fat-tailed
-when b ≤ 1 and thin-tailed otherwise. As for the exponential power
-function, when b = 2, the Weibull degenerates to the normal distribution,
-but when b = 1, it does not degenerate to the exponential distribution.
+see Tufto et al. (1997), Austerlitz et al. (2004). (CHANGE THE FOLLOWING,
+SHOULD BE OUR OWN CHARACTERIZATION:) Austerlitz et al. (2004) characterize
+it as follows: “The distribution is fat-tailed when \eqn{b\leq 1} and
+thin-tailed otherwise. As for the exponential power function, when
+\eqn{b = 2}, the Weibull degenerates to the normal distribution, but when
+\eqn{b = 1}, it does not degenerate to the exponential distribution.”
 }
 \references{
 Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in
@@ -36,7 +37,7 @@ plant populations, \emph{Theoretical Population Biology} \strong{52}(1), 16–26
 \doi{10.1006/tpbi.1997.1306}
 
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
-Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
+Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 \doi{10.1111/j.1365-294X.2004.02100.x}
 }
