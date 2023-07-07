@@ -37,5 +37,5 @@ forests. \emph{Ecology} \strong{80}, 1475–1494.
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
 Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
-\doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
+\doi{10.1111/j.1365-294X.2004.02100.x}
 }

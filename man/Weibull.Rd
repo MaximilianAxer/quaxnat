@@ -16,8 +16,8 @@ transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.}
 Numeric vector of function values multiplied by \eqn{N}.
 }
 \description{
-\code{Weibull} computes the value of the dispersal function from ??? multiplied
-by \eqn{N}.
+\code{Weibull} computes the value of the dispersal function from Tufto et al.
+(1997) multiplied by \eqn{N}.
 }
 \details{
 The spatial dispersal density, representing the probability
@@ -31,10 +31,12 @@ function, when b = 2, the Weibull degenerates to the normal distribution,
 but when b = 1, it does not degenerate to the exponential distribution.
 }
 \references{
-(???find and add original reference)
+Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in
+plant populations, \emph{Theoretical Population Biology} \strong{52}(1), 16–26.
+\doi{10.1006/tpbi.1997.1306}
 
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
 Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
-\doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
+\doi{10.1111/j.1365-294X.2004.02100.x}
 }

@@ -19,24 +19,28 @@ Numeric vector of function values multiplied by \eqn{N}.
 }
 \description{
 \code{exponential.power} computes the value, multiplied by \eqn{N}, of
-dispersal function from the exponential power family introduced by Clark
-et al. (1998), which includes, as special cases, distance distributions
-based on normal and exponential distributions.
+dispersal function from the exponential power family, which includes, as
+special cases, distance distributions based on normal and exponential
+distributions.
 }
 \details{
 The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by
 \deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
-see Clark et al. (1998), Austerlitz et al. (2004). This function has its
-maximum at zero, but represents a rather flexible family of distributions
-including Gassian kernels, the kernels representing an exponential
-distribution of distances, and, for \eqn{b<1}, fat-tailed
-distributions (CHECK; SHOULD WE SAY HEAVY-TAILED?). It has conseqently been
-applied in a number of theoretical studies that address dispersal (DO WE
-HAVE A REFERENCE?).
+see Bateman (1947), Clark et al. (1998), Austerlitz et al. (2004). This
+function has its maximum at zero and represents a rather flexible family
+of distributions including the classical bivariate Gaussian kernels, the
+kernels based on an exponential distribution of distances, and, for
+\eqn{b<1}, fat-tailed distributions (CHECK; SHOULD WE SAY "HEAVY-TAILED"?).
+It has consequently been applied in a number of theoretical studies that
+address dispersal (DO WE HAVE A REFERENCE?).
 }
 \references{
+Bateman, A. (1947). Contamination in seed crops: III. relation with
+isolation distance. \emph{Heredity} \strong{1}, 303–336.
+\doi{10.1038/hdy.1947.20}
+
 Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of
 recruitment limitation in southern Appalachian forests. \emph{Ecological
 Monographs} \strong{68}(2), 213–235.
@@ -50,5 +54,5 @@ dispersal biology and the paleorecord. \emph{The American Naturalist}
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
 Smouse, P.E. and Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
-\doi{https://doi.org/10.1111/j.1365-294X.2004.02100.x}
+\doi{doi.org/10.1111/j.1365-294X.2004.02100.x}
 }
