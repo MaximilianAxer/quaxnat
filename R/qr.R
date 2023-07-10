@@ -1,38 +1,46 @@
 ##############################################################################
 #' Dispersal Densities For Log-Normal Distance Distributions
 #'
-#' `lognormal` computes the value, multiplied by \eqn{N}, of a dispersal 
-#' function based on seeds having a distance with a log-normal distribution 
+#' `lognormal` computes the value, multiplied by \eqn{N}, of a dispersal
+#' function based on seeds having a distance with a log-normal distribution
 #' from the their source.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
 #'
-#' @param par Numeric vector with three elements representing log-transformed 
-#' scale and shape parameters, given by the mean \eqn{a} and standard 
-#' deviation \eqn{\sigma} of the underlying normal distribution, and the 
+#' @param par Numeric vector with three elements representing log-transformed
+#' scale and shape parameters, given by the mean \eqn{a} and standard
+#' deviation \eqn{\sigma} of the underlying normal distribution, and the
 #' scaling \eqn{N}.
-#' @param x represents the distance to the nearest seed source. Must be 
+#' @param x represents the distance to the nearest seed source. Must be
 #' numeric.
 #'
-#' @details The spatial dispersal density, representing the probability 
-#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' @details The spatial dispersal density, representing the probability
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
-#' \deqn{f(x) = \frac{1}{2\pi x^2 \sqrt{2\pi\sigma^2}} 
+#' \deqn{f(x) = \frac{1}{2\pi x^2 \sqrt{2\pi\sigma^2}}
 #'   e^{-\frac{1}{2\sigma^2}(\log(x/a))^2},}
-#' see Greene and Johnson (1989), Stoyan and Wagner (2001). Thus, the 
-#' distance is assumed to have the log-normal distribution such that the 
-#' log-distance has a normal distribution with mean \eqn{a} and variance 
+#' see Greene and Johnson (1989), Stoyan and Wagner (2001). Thus, the
+#' distance is assumed to have the log-normal distribution such that the
+#' log-distance has a normal distribution with mean \eqn{a} and variance
 #' \eqn{\sigma^2}. Note that \eqn{\log f(x)} is a quadratic function of
 #' \eqn{\log x} with a maximum at \eqn{\log a-2\sigma^2}.
 #'
+#' Particularly suitable if the maximum regeneration density is not
+#' directly at the seed source (e.g. Janzen-Conell effect)(Nathan et al. 2012)
+#'
 #' @references
-#' Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or 
+#' Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or
 #' plumed seeds. *Ecology* **70**(2), 339–347.
 #' \doi{10.2307/1937538}
 #'
-#' Stoyan, D., Wagner, S. (2001). Estimating the fruit dispersion of 
+#' Stoyan, D., Wagner, S. (2001). Estimating the fruit dispersion of
 #' anemochorous forest trees. *Ecol. Modell.* **145**, 35–47.
 #' \doi{10.1016/S0304-3800(01)00385-4}
+#'
+#' Nathan, R., Klein, E., Robledo‐Arnuncio, J. J., & Revilla, E. (2012)
+#' Dispersal kernels:
+#' Review In Colbert J., Baguette M., Benton TG & Bullock JM (Eds.),
+#' *Dispersal ecology and evolution* 186–210.
 
 lognormal <- function(x, par) {
   log.a <- par[1]
@@ -44,7 +52,7 @@ lognormal <- function(x, par) {
 
 
 ##############################################################################
-#' Dispersal Densities From 2-Dimensional t Distribution 
+#' Dispersal Densities From 2-Dimensional t Distribution
 #'
 #' `Clark2dt` computes the value of the dispersal function from Clark et al.
 #' (1999) multiplied by \eqn{N}.
@@ -55,24 +63,24 @@ lognormal <- function(x, par) {
 #' log-transformed parameters \eqn{a} and \eqn{p} and the scaling \eqn{N}.
 #' @param x Numeric vector of distances to the nearest seed source.
 #'
-#' @details The spatial dispersal density, representing the probability 
-#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' @details The spatial dispersal density, representing the probability
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
 #' \deqn{f(x) = \frac{p}{\pi a^2 (1+(x/a)^2)^{p+1}},}
-#' see Clark et al. (1999) and Austerlitz et al. (2004) (with 
-#' parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-1}, respectively). This 
-#' represents a mixture of Gaussian densities that exhibits heavier tails. It 
+#' see Clark et al. (1999) and Austerlitz et al. (2004) (with
+#' parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-1}, respectively). This
+#' represents a mixture of Gaussian densities that exhibits heavier tails. It
 #' has its maximum at zero.
 #'
 #' @references
-#' Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J. 
-#' (1999). Seed dispersal near and far: patterns across temperate and tropical 
-#' forests. *Ecology* **80**, 1475–1494. 
+#' Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.
+#' (1999). Seed dispersal near and far: patterns across temperate and tropical
+#' forests. *Ecology* **80**, 1475–1494.
 #' \doi{10.1890/0012-9658(1999)080[1475:SDNAFP]2.0.CO;2}
 #'
-#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S., 
-#' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the 
-#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
+#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
+#' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
+#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 
 Clark2dt <- function(x, par){
@@ -87,50 +95,60 @@ Clark2dt <- function(x, par){
 ##############################################################################
 #' Dispersal Densities From Exponential Power Family
 #'
-#' `exponential.power` computes the value, multiplied by \eqn{N}, of 
-#' dispersal function from the exponential power family, which includes, as 
-#' special cases, distance distributions based on normal and exponential 
+#' `exponential.power` computes the value, multiplied by \eqn{N}, of
+#' dispersal function from the exponential power family, which includes, as
+#' special cases, distance distributions based on normal and exponential
 #' distributions.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
 #'
 #' @param par Numeric vector with three elements representing the
-#' log-transformed scale and shape parameters \eqn{a} and \eqn{b} of the 
+#' log-transformed scale and shape parameters \eqn{a} and \eqn{b} of the
 #' dispersal density, and a the scaling \eqn{N}.
-#' @param x represents the distance to the nearest seed source. Must be 
+#' @param x represents the distance to the nearest seed source. Must be
 #' numeric.
 #'
-#' @details The spatial dispersal density, representing the probability 
-#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' @details The spatial dispersal density, representing the probability
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
 #' \deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
-#' see Bateman (1947), Clark et al. (1998), Austerlitz et al. (2004). This 
-#' function has its maximum at zero and represents a rather flexible family 
-#' of distributions including the classical bivariate Gaussian kernels, the 
-#' kernels based on an exponential distribution of distances, and, for 
-#' \eqn{b<1}, fat-tailed distributions (CHECK; SHOULD WE SAY "HEAVY-TAILED"?).
-#' It has consequently been applied in a number of theoretical studies that 
-#' address dispersal (DO WE HAVE A REFERENCE?).
+#' see Bateman (1947), Clark et al. (1998), Austerlitz et al. (2004). This
+#' function has its maximum at zero and represents a rather flexible family
+#' of distributions including the classical bivariate Gaussian kernels, the
+#' kernels based on an exponential distribution of distances, and, for
+#' \eqn{b<1}, fat-tailed distributions. For \eqn{b>1}, it shows thin-tailed distributions.
+#' It has consequently been applied in a number of theoretical studies that
+#' address dispersal (Ribbens et al. 1994; Bullock et al. 2017).
 #'
 #' @references
-#' Bateman, A. (1947). Contamination in seed crops: III. relation with 
+#' Bateman, A. (1947). Contamination in seed crops: III. relation with
 #' isolation distance. *Heredity* **1**, 303–336.
 #' \doi{10.1038/hdy.1947.20}
 #'
-#' Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of 
-#' recruitment limitation in southern Appalachian forests. *Ecological 
+#' Ribbens, E., Silander Jr, J. A., & Pacala, S. W.  (1994). CSeedling recruitment in forests:
+#'  calibrating models to predict patterns of tree seedling dispersion. *Ecology* **75**, 1794-1806.
+#' \doi{10.2307/1939638}
+#'
+#' Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of
+#' recruitment limitation in southern Appalachian forests. *Ecological
 #' Monographs* **68**(2), 213–235.
 #' \doi{10.2307/2657201}
 #'
-#' Clark, J.S. (1998). Why trees migrate so fast: confronting theory with 
-#' dispersal biology and the paleorecord. *The American Naturalist* 
+#' Clark, J.S. (1998). Why trees migrate so fast: confronting theory with
+#' dispersal biology and the paleorecord. *The American Naturalist*
 #' **152**(2), 204–224.
 #' \doi{10.1086/286162}
 #'
-#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S., 
-#' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the 
+#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
+#' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{doi.org/10.1111/j.1365-294X.2004.02100.x}
+#'
+#' #'Bullock, J. M., Mallada González, L., Tamme, R., Götzenberger, L., White, S. M., Pärtel, M., Hooftman, D. A.
+#' (2017).  A synthesis of empirical plant dispersal kernels.
+#' *Journal of Ecology* **105**, 6-19.
+#' \doi{doi.org/10.1111/1365-2745.12666}
+#'
 
 exponential.power <- function(x, par) {
   a <- exp(par[1])
@@ -143,7 +161,7 @@ exponential.power <- function(x, par) {
 ##############################################################################
 #' Dispersal Densities From Weibull Family
 #'
-#' `Weibull` computes the value of the dispersal function from Tufto et al. 
+#' `Weibull` computes the value of the dispersal function from Tufto et al.
 #' (1997) multiplied by \eqn{N}.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
@@ -152,26 +170,29 @@ exponential.power <- function(x, par) {
 #' log-transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.
 #' @param x Numeric vector of distances to the nearest seed source.
 #'
-#' @details The spatial dispersal density, representing the probability 
-#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' @details The spatial dispersal density, representing the probability
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
 #' \deqn{f(x) = \frac{a^{-b}b}{2\pi} (\frac{x}{a})^{b-2} e^{-(x/a)^b},}
-#' see Tufto et al. (1997), Austerlitz et al. (2004). (CHANGE THE FOLLOWING, 
-#' SHOULD BE OUR OWN CHARACTERIZATION:) Austerlitz et al. (2004) characterize 
-#' it as follows: “The distribution is fat-tailed when \eqn{b\leq 1} and 
-#' thin-tailed otherwise. As for the exponential power function, when 
-#' \eqn{b = 2}, the Weibull degenerates to the normal distribution, but when 
-#' \eqn{b = 1}, it does not degenerate to the exponential distribution.”
+#' see Tufto et al. (1997), Austerlitz et al. (2004).
+#' The distribution is fat-tailed when \eqn{b<1} and
+#' thin-tailed otherwise (Nathan et al. 2012).
+#' For \eqn{b>1}, the mode of the function is at \eqn{x>1}. In this way, the function approaches the normal distribution.
 #'
 #' @references
-#' Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in 
+#' Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in
 #' plant populations, *Theoretical Population Biology* **52**(1), 16–26.
 #' \doi{10.1006/tpbi.1997.1306}
 #'
-#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S., 
-#' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the 
-#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
+#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
+#' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
+#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
+#'
+#' #' Nathan, R., Klein, E., Robledo‐Arnuncio, J. J., & Revilla, E. (2012)
+#' Dispersal kernels:
+#' Review In Colbert J., Baguette M., Benton TG & Bullock JM (Eds.),
+#' *Dispersal ecology and evolution* 186–210.
 
 Weibull <- function(x, par) {
   a <- exp(par[1])
@@ -184,33 +205,33 @@ Weibull <- function(x, par) {
 ##############################################################################
 #' Dispersal Densities From Geometric Family
 #'
-#' `geometric` computes the value of the dispersal function from (WHERE?) 
+#' `geometric` computes the value of the dispersal function from (WHERE?)
 #' multiplied by \eqn{N}.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
 #'
-#' @param par Numeric vector with three elements representing the 
+#' @param par Numeric vector with three elements representing the
 #' log-transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.
-#' @param x represents the distance to the nearest seed source. Must be 
+#' @param x represents the distance to the nearest seed source. Must be
 #' numeric.
 #'
-#' @details The spatial dispersal density, representing the probability 
-#' density function, divided by \eqn{2\pi x}, of the distance of a seed from 
+#' @details The spatial dispersal density, representing the probability
+#' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
 #' \deqn{f(x) = \frac{(b-2)(b-1)}{2\pi a} (1+\frac{x}{a})^{-b},}
-#' see Austerlitz et al. (2004). (CHANGE THE FOLLOWING, SHOULD BE OUR OWN 
-#' CHARACTERIZATION:) Austerlitz et al. (2004) characterize it as follows: 
-#' The geometric and 2dt families “will behave quite differently from the 
-#' exponential and Weibull distributions. They show a fat tail, whatever the 
-#' value of the shape parameter (\eqn{b}), and the distributions become 
+#' see Austerlitz et al. (2004). (CHANGE THE FOLLOWING, SHOULD BE OUR OWN
+#' CHARACTERIZATION:) Austerlitz et al. (2004) characterize it as follows:
+#' The geometric and 2dt families “will behave quite differently from the
+#' exponential and Weibull distributions. They show a fat tail, whatever the
+#' value of the shape parameter (\eqn{b}), and the distributions become
 #' increasingly fat-tailed as \eqn{b} declines toward ‘1’.”
 #'
 #' @references
 #' (FIND AND ADD ORIGINAL REFERENCE)
 #'
-#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S., 
-#' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the 
-#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954. 
+#' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
+#' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
+#' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{doi.org/10.1111/j.1365-294X.2004.02100.x}
 
 geometric <- function(x, par) {
@@ -229,10 +250,10 @@ geometric <- function(x, par) {
 ##' @return what is returned by the function?
 ##'
 ##' @param par parameters U, P, N estimated within the Clark2DT function
-##' @param x represents the distance to the nearest seed source. Must be 
+##' @param x represents the distance to the nearest seed source. Must be
 ##' numeric
 ##'
-##' @details Mixture of Gaussian nuclei that produces tails that are not 
+##' @details Mixture of Gaussian nuclei that produces tails that are not
 ##' quite as long. Maximum at seed tree itself and cannot become 0 at x = 0.
 #Clark2dt <- function(x, par){
 #  U <- par[1]
@@ -243,7 +264,7 @@ geometric <- function(x, par) {
 #}
 #
 ##'Function selection
-##' param x represents the distance to the nearest seed source. Must be 
+##' param x represents the distance to the nearest seed source. Must be
 ##' numeric
 ##' param par are parameters to be estimated
 #

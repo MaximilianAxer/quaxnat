@@ -27,13 +27,16 @@ from the their source.
 The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by
-\deqn{f(x) = \frac{1}{2\pi x^2 \sqrt{2\pi\sigma^2}} 
+\deqn{f(x) = \frac{1}{2\pi x^2 \sqrt{2\pi\sigma^2}}
   e^{-\frac{1}{2\sigma^2}(\log(x/a))^2},}
 see Greene and Johnson (1989), Stoyan and Wagner (2001). Thus, the
 distance is assumed to have the log-normal distribution such that the
 log-distance has a normal distribution with mean \eqn{a} and variance
 \eqn{\sigma^2}. Note that \eqn{\log f(x)} is a quadratic function of
 \eqn{\log x} with a maximum at \eqn{\log a-2\sigma^2}.
+
+Particularly suitable if the maximum regeneration density is not
+directly at the seed source (e.g. Janzen-Conell effect)(Nathan et al. 2012)
 }
 \references{
 Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or
@@ -43,4 +46,9 @@ plumed seeds. \emph{Ecology} \strong{70}(2), 339–347.
 Stoyan, D., Wagner, S. (2001). Estimating the fruit dispersion of
 anemochorous forest trees. \emph{Ecol. Modell.} \strong{145}, 35–47.
 \doi{10.1016/S0304-3800(01)00385-4}
+
+Nathan, R., Klein, E., Robledo‐Arnuncio, J. J., & Revilla, E. (2012)
+Dispersal kernels:
+Review In Colbert J., Baguette M., Benton TG & Bullock JM (Eds.),
+\emph{Dispersal ecology and evolution} 186–210.
 }

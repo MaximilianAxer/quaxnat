@@ -24,12 +24,10 @@ The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by
 \deqn{f(x) = \frac{a^{-b}b}{2\pi} (\frac{x}{a})^{b-2} e^{-(x/a)^b},}
-see Tufto et al. (1997), Austerlitz et al. (2004). (CHANGE THE FOLLOWING,
-SHOULD BE OUR OWN CHARACTERIZATION:) Austerlitz et al. (2004) characterize
-it as follows: “The distribution is fat-tailed when \eqn{b\leq 1} and
-thin-tailed otherwise. As for the exponential power function, when
-\eqn{b = 2}, the Weibull degenerates to the normal distribution, but when
-\eqn{b = 1}, it does not degenerate to the exponential distribution.”
+see Tufto et al. (1997), Austerlitz et al. (2004).
+The distribution is fat-tailed when \eqn{b<1} and
+thin-tailed otherwise (Nathan et al. 2012).
+For \eqn{b>1}, the mode of the function is at \eqn{x>1}. In this way, the function approaches the normal distribution.
 }
 \references{
 Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in
@@ -40,4 +38,9 @@ Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
 Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 \doi{10.1111/j.1365-294X.2004.02100.x}
+
+#' Nathan, R., Klein, E., Robledo‐Arnuncio, J. J., & Revilla, E. (2012)
+Dispersal kernels:
+Review In Colbert J., Baguette M., Benton TG & Bullock JM (Eds.),
+\emph{Dispersal ecology and evolution} 186–210.
 }

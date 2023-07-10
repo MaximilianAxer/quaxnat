@@ -32,14 +32,18 @@ see Bateman (1947), Clark et al. (1998), Austerlitz et al. (2004). This
 function has its maximum at zero and represents a rather flexible family
 of distributions including the classical bivariate Gaussian kernels, the
 kernels based on an exponential distribution of distances, and, for
-\eqn{b<1}, fat-tailed distributions (CHECK; SHOULD WE SAY "HEAVY-TAILED"?).
+\eqn{b<1}, fat-tailed distributions. For \eqn{b>1}, it shows thin-tailed distributions.
 It has consequently been applied in a number of theoretical studies that
-address dispersal (DO WE HAVE A REFERENCE?).
+address dispersal (Ribbens et al. 1994; Bullock et al. 2017).
 }
 \references{
 Bateman, A. (1947). Contamination in seed crops: III. relation with
 isolation distance. \emph{Heredity} \strong{1}, 303–336.
 \doi{10.1038/hdy.1947.20}
+
+Ribbens, E., Silander Jr, J. A., & Pacala, S. W.  (1994). CSeedling recruitment in forests:
+calibrating models to predict patterns of tree seedling dispersion. \emph{Ecology} \strong{75}, 1794-1806.
+\doi{10.2307/1939638}
 
 Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of
 recruitment limitation in southern Appalachian forests. \emph{Ecological
@@ -55,4 +59,9 @@ Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
 Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 \doi{doi.org/10.1111/j.1365-294X.2004.02100.x}
+
+#'Bullock, J. M., Mallada González, L., Tamme, R., Götzenberger, L., White, S. M., Pärtel, M., Hooftman, D. A.
+(2017).  A synthesis of empirical plant dispersal kernels.
+\emph{Journal of Ecology} \strong{105}, 6-19.
+\doi{doi.org/10.1111/1365-2745.12666}
 }
