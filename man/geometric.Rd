@@ -33,10 +33,16 @@ value of the shape parameter (\eqn{b}), and the distributions become
 increasingly fat-tailed as \eqn{b} declines toward ‘1’.”
 }
 \references{
-(FIND AND ADD ORIGINAL REFERENCE)
+Waser, P.M. (1985). Does competition drive dispersal? \emph{Ecology} \strong{66}(4),
+1170–1175.
+\doi{10.2307/1939169}
+
+Buechner, M. (1987). A geometric model of vertebrate dispersal: tests and
+implications. \emph{Ecology} \strong{68}(2), 310–318.
+\doi{10.2307/1939262}
 
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
 Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
-\doi{doi.org/10.1111/j.1365-294X.2004.02100.x}
+\doi{10.1111/j.1365-294X.2004.02100.x}
 }
