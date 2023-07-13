@@ -2,7 +2,7 @@
 % Please edit documentation in R/qr.R
 \name{Weibull}
 \alias{Weibull}
-\title{Dispersal Densities From Weibull Family}
+\title{Dispersal Kernels From Weibull Family}
 \usage{
 Weibull(x, par)
 }
@@ -39,8 +39,8 @@ Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 \doi{10.1111/j.1365-294X.2004.02100.x}
 
-#' Nathan, R., Klein, E., Robledo‐Arnuncio, J. J., & Revilla, E. (2012)
-Dispersal kernels:
-Review In Colbert J., Baguette M., Benton TG & Bullock JM (Eds.),
-\emph{Dispersal ecology and evolution} 186–210.
+#' Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G.,
+Bullock, J.M. (eds.), \emph{Dispersal ecology and evolution}, 186–210.
+\doi{10.1093/acprof:oso/9780199608898.003.0015}
 }

@@ -1,5 +1,5 @@
 ##############################################################################
-#' Dispersal Densities For Log-Normal Distance Distributions
+#' Dispersal Kernels For Log-Normal Distance Distributions
 #'
 #' `lognormal` computes the value, multiplied by \eqn{N}, of a dispersal
 #' function based on seeds having a distance with a log-normal distribution
@@ -26,7 +26,8 @@
 #' \eqn{\log x} with a maximum at \eqn{\log a-2\sigma^2}.
 #'
 #' Particularly suitable if the maximum regeneration density is not
-#' directly at the seed source (e.g. Janzen-Conell effect)(Nathan et al. 2012)
+#' directly at the seed source (e.g. Janzen-Conell effect)(Nathan et al. 
+#' 2012)
 #'
 #' @references
 #' Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or
@@ -37,10 +38,10 @@
 #' anemochorous forest trees. *Ecol. Modell.* **145**, 35–47.
 #' \doi{10.1016/S0304-3800(01)00385-4}
 #'
-#' Nathan, R., Klein, E., Robledo‐Arnuncio, J. J., & Revilla, E. (2012)
-#' Dispersal kernels:
-#' Review In Colbert J., Baguette M., Benton TG & Bullock JM (Eds.),
-#' *Dispersal ecology and evolution* 186–210.
+#' Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+#' Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G., 
+#' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
+#' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 
 lognormal <- function(x, par) {
   log.a <- par[1]
@@ -52,7 +53,7 @@ lognormal <- function(x, par) {
 
 
 ##############################################################################
-#' Dispersal Densities From 2-Dimensional t Distribution
+#' Dispersal Kernels From 2-Dimensional t Distribution
 #'
 #' `Clark2dt` computes the value of the dispersal function from Clark et al.
 #' (1999) multiplied by \eqn{N}.
@@ -93,7 +94,7 @@ Clark2dt <- function(x, par){
 
 
 ##############################################################################
-#' Dispersal Densities From Exponential Power Family
+#' Dispersal Kernels From Exponential Power Family
 #'
 #' `exponential.power` computes the value, multiplied by \eqn{N}, of
 #' dispersal function from the exponential power family, which includes, as
@@ -125,8 +126,9 @@ Clark2dt <- function(x, par){
 #' isolation distance. *Heredity* **1**, 303–336.
 #' \doi{10.1038/hdy.1947.20}
 #'
-#' Ribbens, E., Silander Jr, J. A., & Pacala, S. W.  (1994). CSeedling recruitment in forests:
-#'  calibrating models to predict patterns of tree seedling dispersion. *Ecology* **75**, 1794-1806.
+#' Ribbens, E., Silander Jr, J. A., & Pacala, S. W.  (1994). Seedling 
+#' recruitment in forests: calibrating models to predict patterns of tree 
+#' seedling dispersion. *Ecology* **75**, 1794-1806.
 #' \doi{10.2307/1939638}
 #'
 #' Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of
@@ -159,7 +161,7 @@ exponential.power <- function(x, par) {
 
 
 ##############################################################################
-#' Dispersal Densities From Weibull Family
+#' Dispersal Kernels From Weibull Family
 #'
 #' `Weibull` computes the value of the dispersal function from Tufto et al.
 #' (1997) multiplied by \eqn{N}.
@@ -189,10 +191,10 @@ exponential.power <- function(x, par) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 #'
-#' #' Nathan, R., Klein, E., Robledo‐Arnuncio, J. J., & Revilla, E. (2012)
-#' Dispersal kernels:
-#' Review In Colbert J., Baguette M., Benton TG & Bullock JM (Eds.),
-#' *Dispersal ecology and evolution* 186–210.
+#' #' Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+#' Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G., 
+#' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
+#' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 
 Weibull <- function(x, par) {
   a <- exp(par[1])
@@ -203,9 +205,9 @@ Weibull <- function(x, par) {
 
 
 ##############################################################################
-#' Dispersal Densities From Geometric Family
+#' Power-Law Dispersal Kernels
 #'
-#' `geometric` computes the value of the dispersal function from (WHERE?)
+#' `power` computes the value of the dispersal function from (WHERE?)
 #' multiplied by \eqn{N}.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
@@ -218,33 +220,31 @@ Weibull <- function(x, par) {
 #' @details The spatial dispersal density, representing the probability
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
-#' \deqn{f(x) = \frac{(b-2)(b-1)}{2\pi a} (1+\frac{x}{a})^{-b},}
-#' see Austerlitz et al. (2004). (CHANGE THE FOLLOWING, SHOULD BE OUR OWN
-#' CHARACTERIZATION:) Austerlitz et al. (2004) characterize it as follows:
-#' The geometric and 2dt families “will behave quite differently from the
-#' exponential and Weibull distributions. They show a fat tail, whatever the
-#' value of the shape parameter (\eqn{b}), and the distributions become
-#' increasingly fat-tailed as \eqn{b} declines toward ‘1’.”
+#' \deqn{f(x) = \frac{(b-2)(b-1)}{2\pi a^2} (1+\frac{x}{a})^{-b},}
+#' see Nathan et al. (2012), Austerlitz et al. (2004). 
+#' (CHANGE THE FOLLOWING, SHOULD BE OUR OWN CHARACTERIZATION:) Austerlitz 
+#' et al. (2004) characterize it as follows: The geometric and 2dt families 
+#' “will behave quite differently from the exponential and Weibull 
+#' distributions. They show a fat tail, whatever the value of the shape 
+#' parameter (\eqn{b}), and the distributions become increasingly fat-tailed 
+#' as \eqn{b} declines toward ‘1’.”
 #'
 #' @references
-#' Waser, P.M. (1985). Does competition drive dispersal? *Ecology* **66**(4),
-#' 1170–1175.
-#' \doi{10.2307/1939169}
-#'
-#' Buechner, M. (1987). A geometric model of vertebrate dispersal: tests and 
-#' implications. *Ecology* **68**(2), 310–318.
-#' \doi{10.2307/1939262}
+#' Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+#' Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G., 
+#' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
+#' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 #'
 #' Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
 #' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 
-geometric <- function(x, par) {
+power <- function(x, par) {
   a <- exp(par[1])
   b <- exp(par[2])
   N <- par[3]
-  N * (b-2)*(b-1) / (2*pi*a) * (1+x/a)^-b
+  N * (b-2)*(b-1) / (2*pi*a^2) * (1+x/a)^-b
 }
 
 

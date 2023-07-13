@@ -2,7 +2,7 @@
 % Please edit documentation in R/qr.R
 \name{lognormal}
 \alias{lognormal}
-\title{Dispersal Densities For Log-Normal Distance Distributions}
+\title{Dispersal Kernels For Log-Normal Distance Distributions}
 \usage{
 lognormal(x, par)
 }
@@ -36,7 +36,8 @@ log-distance has a normal distribution with mean \eqn{a} and variance
 \eqn{\log x} with a maximum at \eqn{\log a-2\sigma^2}.
 
 Particularly suitable if the maximum regeneration density is not
-directly at the seed source (e.g. Janzen-Conell effect)(Nathan et al. 2012)
+directly at the seed source (e.g. Janzen-Conell effect)(Nathan et al.
+2012)
 }
 \references{
 Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or
@@ -47,8 +48,8 @@ Stoyan, D., Wagner, S. (2001). Estimating the fruit dispersion of
 anemochorous forest trees. \emph{Ecol. Modell.} \strong{145}, 35–47.
 \doi{10.1016/S0304-3800(01)00385-4}
 
-Nathan, R., Klein, E., Robledo‐Arnuncio, J. J., & Revilla, E. (2012)
-Dispersal kernels:
-Review In Colbert J., Baguette M., Benton TG & Bullock JM (Eds.),
-\emph{Dispersal ecology and evolution} 186–210.
+Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G.,
+Bullock, J.M. (eds.), \emph{Dispersal ecology and evolution}, 186–210.
+\doi{10.1093/acprof:oso/9780199608898.003.0015}
 }

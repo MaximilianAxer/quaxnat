@@ -2,7 +2,7 @@
 % Please edit documentation in R/qr.R
 \name{Clark2dt}
 \alias{Clark2dt}
-\title{Dispersal Densities From 2-Dimensional t Distribution}
+\title{Dispersal Kernels From 2-Dimensional t Distribution}
 \usage{
 Clark2dt(x, par)
 }
