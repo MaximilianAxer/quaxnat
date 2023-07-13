@@ -2,7 +2,7 @@
 % Please edit documentation in R/qr.R
 \name{exponential.power}
 \alias{exponential.power}
-\title{Dispersal Densities From Exponential Power Family}
+\title{Dispersal Kernels From Exponential Power Family}
 \usage{
 exponential.power(x, par)
 }
@@ -41,8 +41,9 @@ Bateman, A. (1947). Contamination in seed crops: III. relation with
 isolation distance. \emph{Heredity} \strong{1}, 303–336.
 \doi{10.1038/hdy.1947.20}
 
-Ribbens, E., Silander Jr, J. A., & Pacala, S. W.  (1994). CSeedling recruitment in forests:
-calibrating models to predict patterns of tree seedling dispersion. \emph{Ecology} \strong{75}, 1794-1806.
+Ribbens, E., Silander Jr, J. A., & Pacala, S. W.  (1994). Seedling
+recruitment in forests: calibrating models to predict patterns of tree
+seedling dispersion. \emph{Ecology} \strong{75}, 1794-1806.
 \doi{10.2307/1939638}
 
 Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of
