@@ -28,12 +28,11 @@ special cases, distance distributions based on normal and exponential
 distributions.
 }
 \details{
-The dispersal kernel \eqn{k}, i.e. spatial probability density
-of the location \eqn{\mathsf{x}} of a seed relative to its source, and the
-corresponding probability density \eqn{p} of the distance
-\eqn{\mathsf{r}=\left\|{\mathsf{x}}\right\|} are given by
+The dispersal kernel, i.e. spatial probability density
+of the location of a seed relative to its source, is here given by
 \deqn{k(x)={b\Gamma (d/2) \over 2\pi ^{d/2}a^{d}\Gamma (d/b)}
    e^{-(\left\|{x}\right\|/a)^{b}},}
+which corresponds to a probability density of the distance given by
 \deqn{p(r)={b \over a^{d}\Gamma (d/b)}r^{d-1}e^{-(r/a)^{b}},}
 where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm; see Bateman (1947), Clark et al. (1998),

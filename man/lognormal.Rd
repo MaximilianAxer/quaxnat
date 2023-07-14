@@ -24,6 +24,22 @@ function based on seeds having a distance with a log-normal distribution
 from the their source.
 }
 \details{
+The dispersal kernel, i.e. spatial probability density
+of the location of a seed relative to its source, is here given by
+\deqn{k(x)={\Gamma (d/2) \over 
+  2\pi ^{d/2}\left\|{x}\right\|^{d}\sqrt{2\pi \sigma ^{2}}}
+  e^{-{1 \over 2\sigma ^{2}}(\log (\left\|{x}\right\|/a))^{2}},}
+which corresponds to a probability density of the distance given by
+\deqn{p(r)={1 \over r\sqrt{2\pi \sigma ^{2}}}
+  e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},}
+where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
+denotes the Euclidean norm; see Greene and Johnson (1989), Stoyan and
+Wagner (2001) for the planar case. Thus, the distance is assumed to have
+the log-normal distribution such that the log-distance has a normal
+distribution with mean \eqn{a} and variance \eqn{\sigma^2}. Note that
+\eqn{\log k(x)} is a quadratic function of \eqn{\left\|{x}\right\|} with
+a maximum at \eqn{\log a-d\sigma^2}.
+
 The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by

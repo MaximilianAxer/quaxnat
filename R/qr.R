@@ -14,6 +14,22 @@
 #' @param x represents the distance to the nearest seed source. Must be
 #' numeric.
 #'
+#' @details The dispersal kernel, i.e. spatial probability density 
+#' of the location of a seed relative to its source, is here given by
+#' \deqn{k(x)={\Gamma (d/2) \over 
+#'   2\pi ^{d/2}\left\|{x}\right\|^{d}\sqrt{2\pi \sigma ^{2}}}
+#'   e^{-{1 \over 2\sigma ^{2}}(\log (\left\|{x}\right\|/a))^{2}},}
+#' which corresponds to a probability density of the distance given by
+#' \deqn{p(r)={1 \over r\sqrt{2\pi \sigma ^{2}}}
+#'   e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},}
+#' where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|} 
+#' denotes the Euclidean norm; see Greene and Johnson (1989), Stoyan and 
+#' Wagner (2001) for the planar case. Thus, the distance is assumed to have 
+#' the log-normal distribution such that the log-distance has a normal 
+#' distribution with mean \eqn{a} and variance \eqn{\sigma^2}. Note that 
+#' \eqn{\log k(x)} is a quadratic function of \eqn{\left\|{x}\right\|} with 
+#' a maximum at \eqn{\log a-d\sigma^2}.
+#'
 #' @details The spatial dispersal density, representing the probability
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
@@ -113,12 +129,11 @@ Clark2dt <- function(x, par){
 #' @param x represents the distance to the nearest seed source. Must be
 #' numeric.
 #'
-#' @details The dispersal kernel \eqn{k}, i.e. spatial probability density 
-#' of the location \eqn{\mathsf{x}} of a seed relative to its source, and the 
-#' corresponding probability density \eqn{p} of the distance 
-#' \eqn{\mathsf{r}=\left\|{\mathsf{x}}\right\|} are given by
+#' @details The dispersal kernel, i.e. spatial probability density 
+#' of the location of a seed relative to its source, is here given by
 #' \deqn{k(x)={b\Gamma (d/2) \over 2\pi ^{d/2}a^{d}\Gamma (d/b)}
 #'    e^{-(\left\|{x}\right\|/a)^{b}},}
+#' which corresponds to a probability density of the distance given by
 #' \deqn{p(r)={b \over a^{d}\Gamma (d/b)}r^{d-1}e^{-(r/a)^{b}},}
 #' where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm; see Bateman (1947), Clark et al. (1998), 
@@ -181,7 +196,7 @@ exponential.power <- function(x, par) {
 
 quax_exponential.power <- function(
     r = sqrt(.colSums(x^2,nrow(x),d)),
-    x, par, N, d = if (missing(x)) 2 else ncol(x)) {
+    x, par, N = 1, d = if (missing(x)) 2 else ncol(x)) {
   a <- exp(par[1])
   b <- exp(par[2])
   N * b * gamma(d/2) / (2*pi^(d/2)*a^d*gamma(d/b)) * exp(-(r/a)^b)
