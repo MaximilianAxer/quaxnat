@@ -96,8 +96,12 @@ Clark2dt <- function(x, par){
 ##############################################################################
 #' Dispersal Kernels From Exponential Power Family
 #'
-#' `exponential.power` computes the value, multiplied by \eqn{N}, of
-#' dispersal function from the exponential power family, which includes, as
+#' `exponential.power` computes the value, multiplied by \eqn{N}, of a 
+#' dispersal kernel from the exponential power family, which includes, as
+#' special cases, distance distributions based on normal and exponential
+#' distributions.
+#' `quax_exponential.power` computes the value, multiplied by \eqn{N}, of a 
+#' dispersal kernel from an exponential power family, which includes, as
 #' special cases, distance distributions based on normal and exponential
 #' distributions.
 #'
@@ -109,7 +113,18 @@ Clark2dt <- function(x, par){
 #' @param x represents the distance to the nearest seed source. Must be
 #' numeric.
 #'
-#' @details The spatial dispersal density, representing the probability
+#' @details The dispersal kernel \eqn{k}, i.e. spatial probability density 
+#' of the location \eqn{\mathsf{x}} of a seed relative to its source, and the 
+#' corresponding probability density \eqn{p} of the distance 
+#' \eqn{\mathsf{r}=\left\|{\mathsf{x}}\right\|} are given by
+#' \deqn{k(x)={b\Gamma (d/2) \over 2\pi ^{d/2}a^{d}\Gamma (d/b)}
+#'    e^{-(\left\|{x}\right\|/a)^{b}},}
+#' \deqn{p(r)={b \over a^{d}\Gamma (d/b)}r^{d-1}e^{-(r/a)^{b}},}
+#' where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|} 
+#' denotes the Euclidean norm; see Bateman (1947), Clark et al. (1998), 
+#' Austerlitz et al. (2004), Nathan et al. (2012) for the planar case.
+#' 
+#' The spatial dispersal density, representing the probability
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
 #' \deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
@@ -151,12 +166,25 @@ Clark2dt <- function(x, par){
 #' *Journal of Ecology* **105**, 6-19.
 #' \doi{10.1111/1365-2745.12666}
 #'
+#' Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+#' Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G., 
+#' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
+#' \doi{10.1093/acprof:oso/9780199608898.003.0015}
+#'
 
 exponential.power <- function(x, par) {
   a <- exp(par[1])
   b <- exp(par[2])
   N <- par[3]
   N * b / (2*pi*a^2*gamma(2/b)) * exp(-(x/a)^b)
+}
+
+quax_exponential.power <- function(
+    r = sqrt(.colSums(x^2,nrow(x),d)),
+    x, par, N, d = if (missing(x)) 2 else ncol(x)) {
+  a <- exp(par[1])
+  b <- exp(par[2])
+  N * b * gamma(d/2) / (2*pi^(d/2)*a^d*gamma(d/b)) * exp(-(r/a)^b)
 }
 
 
@@ -221,7 +249,7 @@ Weibull <- function(x, par) {
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
 #' \deqn{f(x) = \frac{(b-2)(b-1)}{2\pi a^2} (1+\frac{x}{a})^{-b},}
-#' see Nathan et al. (2012), Austerlitz et al. (2004). 
+#' see Nathan et al. (2012).
 #' (CHANGE THE FOLLOWING, SHOULD BE OUR OWN CHARACTERIZATION:) Austerlitz 
 #' et al. (2004) characterize it as follows: The geometric and 2dt families 
 #' “will behave quite differently from the exponential and Weibull 

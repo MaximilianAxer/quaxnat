@@ -18,12 +18,27 @@ dispersal density, and a the scaling \eqn{N}.}
 Numeric vector of function values multiplied by \eqn{N}.
 }
 \description{
-\code{exponential.power} computes the value, multiplied by \eqn{N}, of
-dispersal function from the exponential power family, which includes, as
+\code{exponential.power} computes the value, multiplied by \eqn{N}, of a
+dispersal kernel from the exponential power family, which includes, as
+special cases, distance distributions based on normal and exponential
+distributions.
+\code{quax_exponential.power} computes the value, multiplied by \eqn{N}, of a
+dispersal kernel from an exponential power family, which includes, as
 special cases, distance distributions based on normal and exponential
 distributions.
 }
 \details{
+The dispersal kernel \eqn{k}, i.e. spatial probability density
+of the location \eqn{\mathsf{x}} of a seed relative to its source, and the
+corresponding probability density \eqn{p} of the distance
+\eqn{\mathsf{r}=\left\|{\mathsf{x}}\right\|} are given by
+\deqn{k(x)={b\Gamma (d/2) \over 2\pi ^{d/2}a^{d}\Gamma (d/b)}
+   e^{-(\left\|{x}\right\|/a)^{b}},}
+\deqn{p(r)={b \over a^{d}\Gamma (d/b)}r^{d-1}e^{-(r/a)^{b}},}
+where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
+denotes the Euclidean norm; see Bateman (1947), Clark et al. (1998),
+Austerlitz et al. (2004), Nathan et al. (2012) for the planar case.
+
 The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by
@@ -65,4 +80,9 @@ pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 (2017).  A synthesis of empirical plant dispersal kernels.
 \emph{Journal of Ecology} \strong{105}, 6-19.
 \doi{10.1111/1365-2745.12666}
+
+Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G.,
+Bullock, J.M. (eds.), \emph{Dispersal ecology and evolution}, 186–210.
+\doi{10.1093/acprof:oso/9780199608898.003.0015}
 }

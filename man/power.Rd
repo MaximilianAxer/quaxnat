@@ -25,7 +25,7 @@ The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by
 \deqn{f(x) = \frac{(b-2)(b-1)}{2\pi a^2} (1+\frac{x}{a})^{-b},}
-see Nathan et al. (2012), Austerlitz et al. (2004).
+see Nathan et al. (2012).
 (CHANGE THE FOLLOWING, SHOULD BE OUR OWN CHARACTERIZATION:) Austerlitz
 et al. (2004) characterize it as follows: The geometric and 2dt families
 “will behave quite differently from the exponential and Weibull
