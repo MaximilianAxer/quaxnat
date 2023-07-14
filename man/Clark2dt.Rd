@@ -2,7 +2,7 @@
 % Please edit documentation in R/qr.R
 \name{Clark2dt}
 \alias{Clark2dt}
-\title{Dispersal Kernels From 2-Dimensional t Distribution}
+\title{Dispersal Kernels From Spatial t Distribution}
 \usage{
 Clark2dt(x, par)
 }
@@ -20,6 +20,18 @@ Numeric vector of function values multiplied by \eqn{N}.
 (1999) multiplied by \eqn{N}.
 }
 \details{
+The dispersal kernel, i.e. spatial probability density
+of the location of a seed relative to its source, is here given by
+\deqn{k(x)={\Gamma (d/2) \over \pi ^{d/2}a^{d}\Beta (p,d/2)}
+  (1+{\left\|{x}\right\| \over a})^{-(p+d/2)},}
+which corresponds to a probability density of the distance given by
+\deqn{p(r)={2 \over a^{d}\Beta (p,d/2)}r^{d-1}(1+{r \over a})^{-(p+d/2)},}
+where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
+denotes the Euclidean norm; see Clark et al. (1999) and Austerlitz et al.
+(2004) for the planar case (with parameterizations \eqn{a=\sqrt{u}} and
+\eqn{p=b-1}, respectively). This represents a mixture of Gaussian
+densities that exhibits heavier tails. It has its maximum at zero.
+
 The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by

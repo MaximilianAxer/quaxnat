@@ -69,7 +69,7 @@ lognormal <- function(x, par) {
 
 
 ##############################################################################
-#' Dispersal Kernels From 2-Dimensional t Distribution
+#' Dispersal Kernels From Spatial t Distribution
 #'
 #' `Clark2dt` computes the value of the dispersal function from Clark et al.
 #' (1999) multiplied by \eqn{N}.
@@ -79,6 +79,18 @@ lognormal <- function(x, par) {
 #' @param par Numeric vector with three elements representing the
 #' log-transformed parameters \eqn{a} and \eqn{p} and the scaling \eqn{N}.
 #' @param x Numeric vector of distances to the nearest seed source.
+#'
+#' @details The dispersal kernel, i.e. spatial probability density 
+#' of the location of a seed relative to its source, is here given by
+#' \deqn{k(x)={\Gamma (d/2) \over \pi ^{d/2}a^{d}\Beta (p,d/2)}
+#'   (1+{\left\|{x}\right\| \over a})^{-(p+d/2)},}
+#' which corresponds to a probability density of the distance given by
+#' \deqn{p(r)={2 \over a^{d}\Beta (p,d/2)}r^{d-1}(1+{r \over a})^{-(p+d/2)},}
+#' where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|} 
+#' denotes the Euclidean norm; see Clark et al. (1999) and Austerlitz et al. 
+#' (2004) for the planar case (with parameterizations \eqn{a=\sqrt{u}} and 
+#' \eqn{p=b-1}, respectively). This represents a mixture of Gaussian 
+#' densities that exhibits heavier tails. It has its maximum at zero.
 #'
 #' @details The spatial dispersal density, representing the probability
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from
@@ -278,7 +290,8 @@ Weibull <- function(x, par) {
 #' which corresponds to a probability density of the distance given by
 #' \deqn{p(x)={1 \over a^{d}\Beta(d,b-d)}r^{d-1}(1+{r \over a})^{-b},}
 #' where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|} 
-#' denotes the Euclidean norm; see Nathan et al. (2012) for the planar case.
+#' denotes the Euclidean norm; see Nathan et al. (2012) for the planar case
+#' (DOUBLE CHECK EQUATIONS).
 #'
 #' @details The spatial dispersal density, representing the probability
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from
