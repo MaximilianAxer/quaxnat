@@ -20,6 +20,17 @@ Numeric vector of function values multiplied by \eqn{N}.
 (1997) multiplied by \eqn{N}.
 }
 \details{
+The dispersal kernel, i.e. spatial probability density
+of the location of a seed relative to its source, is here given by
+\deqn{k(x)={b\Gamma (d/2) \over 2\pi ^{d/2}a^{b}}\left\|{x}\right\|^{b-d}
+  e^{-(\left\|{x}\right\|/a)^{b}},}
+which corresponds to a probability density of the distance given by
+\deqn{p(r)={b \over a^{b}}r^{b-1}e^{-(r/a)^{b}},}
+where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
+denotes the Euclidean norm; see Tufto et al. (1997) for the planar case.
+Thus, the distance is assumed to have the Weibull distribution with scale
+parameter \eqn{a} and shape parameter \eqn{b}.
+
 The spatial dispersal density, representing the probability
 density function, divided by \eqn{2\pi x}, of the distance of a seed from
 its source, is here given by

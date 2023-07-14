@@ -139,7 +139,7 @@ Clark2dt <- function(x, par){
 #' denotes the Euclidean norm; see Bateman (1947), Clark et al. (1998), 
 #' Austerlitz et al. (2004), Nathan et al. (2012) for the planar case.
 #' 
-#' The spatial dispersal density, representing the probability
+#' @details The spatial dispersal density, representing the probability
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
 #' \deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
@@ -215,6 +215,17 @@ quax_exponential.power <- function(
 #' log-transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.
 #' @param x Numeric vector of distances to the nearest seed source.
 #'
+#' @details The dispersal kernel, i.e. spatial probability density 
+#' of the location of a seed relative to its source, is here given by
+#' \deqn{k(x)={b\Gamma (d/2) \over 2\pi ^{d/2}a^{b}}\left\|{x}\right\|^{b-d}
+#'   e^{-(\left\|{x}\right\|/a)^{b}},}
+#' which corresponds to a probability density of the distance given by
+#' \deqn{p(r)={b \over a^{b}}r^{b-1}e^{-(r/a)^{b}},}
+#' where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|} 
+#' denotes the Euclidean norm; see Tufto et al. (1997) for the planar case.
+#' Thus, the distance is assumed to have the Weibull distribution with scale 
+#' parameter \eqn{a} and shape parameter \eqn{b}.
+#' 
 #' @details The spatial dispersal density, representing the probability
 #' density function, divided by \eqn{2\pi x}, of the distance of a seed from
 #' its source, is here given by
