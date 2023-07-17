@@ -85,12 +85,12 @@ lognormal <- function(x, par) {
 #' \deqn{k(x)={\Gamma (d/2) \over \pi ^{d/2}a^{d}\Beta (d/2,p)}
 #'   (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(p+d/2)},}
 #' which corresponds to a probability density of the distance given by
-#' \deqn{p(r)={2 \over a^{d}\Beta (p,d/2)}r^{d-1}
+#' \deqn{p(r)={2 \over a^{d}\Beta (d/2,p)}r^{d-1}
 #'   (1+{r^{2} \over a^{2}})^{-(p+d/2)},}
 #' where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm; see Clark et al. (1999) and Austerlitz et al. 
 #' (2004) for the planar case (with parameterizations \eqn{a=\sqrt{u}} and 
-#' \eqn{p=b-1}, respectively). This represents a mixture of Gaussian 
+#' \eqn{p=b-d/2}, respectively). This represents a mixture of Gaussian 
 #' densities that exhibits heavier tails. It has its maximum at zero.
 #'
 #' @details The spatial dispersal density, representing the probability
