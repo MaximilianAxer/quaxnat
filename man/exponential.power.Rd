@@ -34,21 +34,18 @@ of the location of a seed relative to its source, is here given by
    e^{-(\left\|{x}\right\|/a)^{b}},}
 which corresponds to a probability density of the distance given by
 \deqn{p(r)={b \over a^{d}\Gamma (d/b)}r^{d-1}e^{-(r/a)^{b}},}
-where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
-denotes the Euclidean norm; see Bateman (1947), Clark et al. (1998),
+where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
+denotes the Euclidean norm and the normalizing constants involve the
+\link[base:beta]{gamma} function; see Bateman (1947), Clark et al. (1998),
 Austerlitz et al. (2004), Nathan et al. (2012) for the planar case.
 
-The spatial dispersal density, representing the probability
-density function, divided by \eqn{2\pi x}, of the distance of a seed from
-its source, is here given by
-\deqn{f(x) = \frac{b}{2\pi a^2\Gamma(2/b)} e^{-(x/a)^b},}
-see Bateman (1947), Clark et al. (1998), Austerlitz et al. (2004). This
-function has its maximum at zero and represents a rather flexible family
-of distributions including the classical bivariate Gaussian kernels, the
-kernels based on an exponential distribution of distances, and, for
-\eqn{b<1}, fat-tailed distributions. For \eqn{b>1}, it shows thin-tailed distributions.
-It has consequently been applied in a number of theoretical studies that
-address dispersal (Ribbens et al. 1994; Bullock et al. 2017).
+This function has its maximum at zero and represents a rather flexible
+family of distributions including the classical bivariate Gaussian
+kernels, the kernels based on an exponential distribution of distances,
+and, for \eqn{b<1}, fat-tailed distributions. For \eqn{b>1}, it shows
+thin-tailed distributions. It has consequently been applied in a number of
+theoretical studies that address dispersal (Ribbens et al. 1994;
+Bullock et al. 2017).
 }
 \references{
 Bateman, A. (1947). Contamination in seed crops: III. relation with

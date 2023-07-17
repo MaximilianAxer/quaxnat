@@ -26,16 +26,14 @@ of the location of a seed relative to its source, is here given by
   e^{-(\left\|{x}\right\|/a)^{b}},}
 which corresponds to a probability density of the distance given by
 \deqn{p(r)={b \over a^{b}}r^{b-1}e^{-(r/a)^{b}},}
-where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
-denotes the Euclidean norm; see Tufto et al. (1997) for the planar case.
-Thus, the distance is assumed to have the Weibull distribution with scale
-parameter \eqn{a} and shape parameter \eqn{b}.
+where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
+denotes the Euclidean norm and the normalizing constants involve the
+\link[base:beta]{gamma} function; see Tufto et al. (1997) for the planar
+case. Thus, the distance is assumed to have the
+\link[stats:Weibull]{Weibull distribution} with scale parameter \eqn{a}
+and shape parameter \eqn{b}. Equivalently, the \eqn{b}th power of the
+distance has an exponential distribution with scale parameter \eqn{a}.
 
-The spatial dispersal density, representing the probability
-density function, divided by \eqn{2\pi x}, of the distance of a seed from
-its source, is here given by
-\deqn{f(x) = \frac{a^{-b}b}{2\pi} (\frac{x}{a})^{b-2} e^{-(x/a)^b},}
-see Tufto et al. (1997), Austerlitz et al. (2004).
 The distribution is fat-tailed when \eqn{b<1} and
 thin-tailed otherwise (Nathan et al. 2012).
 For \eqn{b>1}, the mode of the function is at \eqn{x>1}. In this way, the function approaches the normal distribution.

@@ -13,7 +13,7 @@ Clark2dt(x, par)
 log-transformed parameters \eqn{a} and \eqn{p} and the scaling \eqn{N}.}
 }
 \value{
-Numeric vector of function values multiplied by \eqn{N}.
+Numeric vector of function values of multiplied by \eqn{N}.
 }
 \description{
 \code{Clark2dt} computes the value of the dispersal function from Clark et al.
@@ -27,20 +27,18 @@ of the location of a seed relative to its source, is here given by
 which corresponds to a probability density of the distance given by
 \deqn{p(r)={2 \over a^{d}\Beta (d/2,p)}r^{d-1}
   (1+{r^{2} \over a^{2}})^{-(p+d/2)},}
-where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
-denotes the Euclidean norm; see Clark et al. (1999) and Austerlitz et al.
-(2004) for the planar case (with parameterizations \eqn{a=\sqrt{u}} and
-\eqn{p=b-d/2}, respectively). This represents a mixture of Gaussian
-densities that exhibits heavier tails. It has its maximum at zero.
+where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
+denotes the Euclidean norm and the normalizing constants involve the
+\link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Clark
+et al. (1999) and Austerlitz et al. (2004) for the planar case (with
+parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-d/2}, respectively). This
+means the squared distance is \eqn{da^{2} \over 2p} times a random
+variable having an \link[stats:FDist]{F distribution} with \eqn{d} and
+\eqn{2p} degrees of freedom.
 
-The spatial dispersal density, representing the probability
-density function, divided by \eqn{2\pi x}, of the distance of a seed from
-its source, is here given by
-\deqn{f(x) = \frac{p}{\pi a^2 (1+(x/a)^2)^{p+1}},}
-see Clark et al. (1999) and Austerlitz et al. (2004) (with
-parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-1}, respectively). This
-represents a mixture of Gaussian densities that exhibits heavier tails. It
-has its maximum at zero.
+This dispersal kernel represents a mixture of Gaussian densities (with
+inverse variance following a gamma distribution with shape parameter
+\eqn{p}) that exhibits heavier tails. It has its maximum at zero.
 }
 \references{
 Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.

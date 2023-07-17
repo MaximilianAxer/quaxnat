@@ -27,16 +27,14 @@ of the location of a seed relative to its source, is here given by
   (1+{\left\|{x}\right\| \over a})^{-b},}
 which corresponds to a probability density of the distance given by
 \deqn{p(x)={1 \over a^{d}\Beta(d,b-d)}r^{d-1}(1+{r \over a})^{-b},}
-where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
-denotes the Euclidean norm; see Nathan et al. (2012) for the planar case
-(DOUBLE CHECK EQUATIONS).
-
-The spatial dispersal density, representing the probability
-density function, divided by \eqn{2\pi x}, of the distance of a seed from
-its source, is here given by
-\deqn{f(x) = \frac{(b-2)(b-1)}{2\pi a^2} (1+\frac{x}{a})^{-b},}
-see Nathan et al. (2012).
-(CHANGE THE FOLLOWING, SHOULD BE OUR OWN CHARACTERIZATION:) Austerlitz
+where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
+denotes the Euclidean norm and the normalizing constants involve the
+\link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Nathan
+et al. (2012) for the planar case. This means the distance is
+\eqn{da \over b-d} times a random variable having an
+\link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2(b-d)} degrees
+of freedom.
+Austerlitz
 et al. (2004) characterize it as follows: The geometric and 2dt families
 “will behave quite differently from the exponential and Weibull
 distributions. They show a fat tail, whatever the value of the shape

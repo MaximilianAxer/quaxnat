@@ -32,24 +32,14 @@ of the location of a seed relative to its source, is here given by
 which corresponds to a probability density of the distance given by
 \deqn{p(r)={1 \over r\sqrt{2\pi \sigma ^{2}}}
   e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},}
-where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|}
-denotes the Euclidean norm; see Greene and Johnson (1989), Stoyan and
-Wagner (2001) for the planar case. Thus, the distance is assumed to have
-the log-normal distribution such that the log-distance has a normal
-distribution with mean \eqn{a} and variance \eqn{\sigma^2}. Note that
-\eqn{\log k(x)} is a quadratic function of \eqn{\left\|{x}\right\|} with
-a maximum at \eqn{\log a-d\sigma^2}.
-
-The spatial dispersal density, representing the probability
-density function, divided by \eqn{2\pi x}, of the distance of a seed from
-its source, is here given by
-\deqn{f(x) = \frac{1}{2\pi x^2 \sqrt{2\pi\sigma^2}}
-  e^{-\frac{1}{2\sigma^2}(\log(x/a))^2},}
-see Greene and Johnson (1989), Stoyan and Wagner (2001). Thus, the
-distance is assumed to have the log-normal distribution such that the
+where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
+denotes the Euclidean norm and the first normalizing constant involves the
+\link[base:beta]{gamma} function; see Greene and Johnson (1989), Stoyan
+and Wagner (2001) for the planar case. Thus, the distance is assumed to
+have the \link[stats:Lognormal]{log-normal distribution} such that the
 log-distance has a normal distribution with mean \eqn{a} and variance
-\eqn{\sigma^2}. Note that \eqn{\log f(x)} is a quadratic function of
-\eqn{\log x} with a maximum at \eqn{\log a-2\sigma^2}.
+\eqn{\sigma^2}. Note that \eqn{\log k(x)} is a quadratic function of
+\eqn{\left\|{x}\right\|} with a maximum at \eqn{\log a-d\sigma^2}.
 
 Particularly suitable if the maximum regeneration density is not
 directly at the seed source (e.g. Janzen-Conell effect)(Nathan et al.
