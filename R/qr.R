@@ -82,10 +82,11 @@ lognormal <- function(x, par) {
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
-#' \deqn{k(x)={\Gamma (d/2) \over \pi ^{d/2}a^{d}\Beta (p,d/2)}
-#'   (1+{\left\|{x}\right\| \over a})^{-(p+d/2)},}
+#' \deqn{k(x)={\Gamma (d/2) \over \pi ^{d/2}a^{d}\Beta (d/2,p)}
+#'   (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(p+d/2)},}
 #' which corresponds to a probability density of the distance given by
-#' \deqn{p(r)={2 \over a^{d}\Beta (p,d/2)}r^{d-1}(1+{r \over a})^{-(p+d/2)},}
+#' \deqn{p(r)={2 \over a^{d}\Beta (p,d/2)}r^{d-1}
+#'   (1+{r^{2} \over a^{2}})^{-(p+d/2)},}
 #' where \eqn{d} is the spatial dimension and \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm; see Clark et al. (1999) and Austerlitz et al. 
 #' (2004) for the planar case (with parameterizations \eqn{a=\sqrt{u}} and 
