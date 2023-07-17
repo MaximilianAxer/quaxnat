@@ -37,7 +37,9 @@ which corresponds to a probability density of the distance given by
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constants involve the
 \link[base:beta]{gamma} function; see Bateman (1947), Clark et al. (1998),
-Austerlitz et al. (2004), Nathan et al. (2012) for the planar case.
+Austerlitz et al. (2004), Nathan et al. (2012) for the planar case. This
+means the \eqn{b}th power of the distance has a gamma distribution with
+shape parameter \eqn{d/b} and scale parameter \eqn{a^{b}}.
 
 This function has its maximum at zero and represents a rather flexible
 family of distributions including the classical bivariate Gaussian

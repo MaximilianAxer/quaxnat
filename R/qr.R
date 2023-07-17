@@ -139,7 +139,9 @@ Clark2dt <- function(x, par){
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
 #' \link[base:beta]{gamma} function; see Bateman (1947), Clark et al. (1998), 
-#' Austerlitz et al. (2004), Nathan et al. (2012) for the planar case.
+#' Austerlitz et al. (2004), Nathan et al. (2012) for the planar case. This 
+#' means the \eqn{b}th power of the distance has a gamma distribution with 
+#' shape parameter \eqn{d/b} and scale parameter \eqn{a^{b}}.
 #' 
 #' This function has its maximum at zero and represents a rather flexible 
 #' family of distributions including the classical bivariate Gaussian 
@@ -225,7 +227,7 @@ quax_exponential.power <- function(
 #' case. Thus, the distance is assumed to have the 
 #' \link[stats:Weibull]{Weibull distribution} with scale parameter \eqn{a} 
 #' and shape parameter \eqn{b}. Equivalently, the \eqn{b}th power of the 
-#' distance has an exponential distribution with scale parameter \eqn{a}.
+#' distance has an exponential distribution with scale parameter \eqn{a^{b}}.
 #' 
 #' The distribution is fat-tailed when \eqn{b<1} and
 #' thin-tailed otherwise (Nathan et al. 2012).

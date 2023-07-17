@@ -32,7 +32,7 @@ denotes the Euclidean norm and the normalizing constants involve the
 case. Thus, the distance is assumed to have the
 \link[stats:Weibull]{Weibull distribution} with scale parameter \eqn{a}
 and shape parameter \eqn{b}. Equivalently, the \eqn{b}th power of the
-distance has an exponential distribution with scale parameter \eqn{a}.
+distance has an exponential distribution with scale parameter \eqn{a^{b}}.
 
 The distribution is fat-tailed when \eqn{b<1} and
 thin-tailed otherwise (Nathan et al. 2012).
