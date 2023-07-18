@@ -15,8 +15,8 @@
 
 
 
-S <- function(par, x, y, tau, w, fun) {
-  res <- y - fun(x, par)
+S <- function(N, par, y, tau, w, fun, ...) {
+  res <- y - fun(..., par=par, N=N)
   s <- tau - 0.5 + 0.5*sign(res)
   result <- sum(w * s * res, na.rm=TRUE)
   return(result)

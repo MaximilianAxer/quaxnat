@@ -1,7 +1,15 @@
+# Internal functions:
+# `rownorms` returns the Euclidean norms of the rows of a matrix x:
+rownorms <- function(x,...) if (length(d<-dim(x))>1L && d[2L]>1)
+  sqrt(.rowSums(x^2,d[1],d[2],...)) else abs(x)
+# `surface` returns the volume (area, length) of the surface of a ball with 
+# radius r in d-dimensional space:
+surface <- function(r,d) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
+
 ##############################################################################
 #' Dispersal Kernels For Log-Normal Distance Distributions
 #'
-#' `lognormal` computes the value, multiplied by \eqn{N}, of a dispersal
+#' `k_lognormal` computes the value, multiplied by \eqn{N}, of a dispersal
 #' function based on seeds having a distance with a log-normal distribution
 #' from the their source.
 #'
@@ -23,12 +31,12 @@
 #' \deqn{p(r)={1 \over r\sqrt{2\pi \sigma ^{2}}}
 #'   e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
-#' denotes the Euclidean norm and the first normalizing constant involves the 
-#' \link[base:beta]{gamma} function; see Greene and Johnson (1989), Stoyan 
-#' and Wagner (2001) for the planar case. Thus, the distance is assumed to 
-#' have the \link[stats:Lognormal]{log-normal distribution} such that the 
-#' log-distance has a normal distribution with mean \eqn{a} and variance 
-#' \eqn{\sigma^2}. Note that \eqn{\log k(x)} is a quadratic function of 
+#' denotes the Euclidean norm and the normalizing constant of the kernel 
+#' involves the \link[base:beta]{gamma} function; see Greene and Johnson 
+#' (1989), Stoyan and Wagner (2001) for the planar case. Thus, the distance 
+#' is assumed to have the \link[stats:Lognormal]{log-normal distribution} 
+#' such that the log-distance has a normal distribution with mean \eqn{a} and 
+#' variance \eqn{\sigma^2}. Here \eqn{\log k(x)} is a quadratic function of 
 #' \eqn{\left\|{x}\right\|} with a maximum at \eqn{\log a-d\sigma^2}.
 #'
 #' Particularly suitable if the maximum regeneration density is not
@@ -49,19 +57,18 @@
 #' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
 #' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 
-lognormal <- function(x, par) {
+k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
+  r <- rownorms(x)
   log.a <- par[1]
   σ <- exp(par[2])
-  N <- par[3]
-  result <- N * exp(-(log(x)-log.a)^2/(2*σ^2)) / (2*pi * sqrt(2*pi*σ^2) * x^2)
-  return(result)
+  N * exp(-(log(r)-log.a)^2/(2*σ^2)) / (2*pi * sqrt(2*pi*σ^2) * r^2)
 }
-
+# dlnorm(x,log.a,σ) / (2*pi*x)
 
 ##############################################################################
 #' Dispersal Kernels From Spatial t Distribution
 #'
-#' `Clark2dt` computes the value of the dispersal function from Clark et al.
+#' `k_t` computes the value of the dispersal function from Clark et al.
 #' (1999) multiplied by \eqn{N}.
 #'
 #' @return Numeric vector of function values of multiplied by \eqn{N}.
@@ -101,10 +108,10 @@ lognormal <- function(x, par) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 
-Clark2dt <- function(x, par){
+k_t <- function(x, par, N=1, d=NCOL(x)) {
+  r <- rownorms(x)
   a <- exp(par[1])
   p <- exp(par[2])
-  N <- par[3]
   result <- N * p / (pi*a^2 * (1+(x/a)^2) ^ (p+1))
   return(result)
 }
@@ -113,13 +120,9 @@ Clark2dt <- function(x, par){
 ##############################################################################
 #' Dispersal Kernels From Exponential Power Family
 #'
-#' `exponential.power` computes the value, multiplied by \eqn{N}, of a 
-#' dispersal kernel from the exponential power family, which includes, as
-#' special cases, distance distributions based on normal and exponential
-#' distributions.
-#' `quax_exponential.power` computes the value, multiplied by \eqn{N}, of a 
-#' dispersal kernel from an exponential power family, which includes, as
-#' special cases, distance distributions based on normal and exponential
+#' `k_exponential.power` computes the value, multiplied by \eqn{N}, of a 
+#' dispersal kernel from the exponential power family, which includes, as 
+#' special cases, distance distributions based on normal and exponential 
 #' distributions.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
@@ -187,26 +190,18 @@ Clark2dt <- function(x, par){
 #' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 #'
 
-exponential.power <- function(x, par) {
+k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
+  r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
-  N <- par[3]
   N * b / (2*pi*a^2*gamma(2/b)) * exp(-(x/a)^b)
-}
-
-quax_exponential.power <- function(
-    r = sqrt(.colSums(x^2,nrow(x),d)),
-    x, par, N = 1, d = if (missing(x)) 2 else ncol(x)) {
-  a <- exp(par[1])
-  b <- exp(par[2])
-  N * b * gamma(d/2) / (2*pi^(d/2)*a^d*gamma(d/b)) * exp(-(r/a)^b)
 }
 
 
 ##############################################################################
 #' Dispersal Kernels From Weibull Family
 #'
-#' `Weibull` computes the value of the dispersal function from Tufto et al.
+#' `k_weibull` computes the value of the dispersal function from Tufto et al.
 #' (1997) multiplied by \eqn{N}.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
@@ -248,7 +243,8 @@ quax_exponential.power <- function(
 #' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
 #' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 
-Weibull <- function(x, par) {
+k_weibull <- function(x, par, N=1, d=NCOL(x)) {
+  r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
   N <- par[3]
@@ -259,7 +255,7 @@ Weibull <- function(x, par) {
 ##############################################################################
 #' Power-Law Dispersal Kernels
 #'
-#' `power` computes the value of the dispersal function from (WHERE?)
+#' `k_power` computes the value of the dispersal function from (WHERE?)
 #' multiplied by \eqn{N}.
 #'
 #' @return Numeric vector of function values multiplied by \eqn{N}.
@@ -301,10 +297,10 @@ Weibull <- function(x, par) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 
-power <- function(x, par) {
+k_power <- function(x, par, N=1, d=NCOL(x)) {
+  r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
-  N <- par[3]
   N * (b-2)*(b-1) / (2*pi*a^2) * (1+x/a)^-b
 }
 
@@ -343,5 +339,3 @@ power <- function(x, par) {
 #  result <- f(x, par)
 #  return(result)
 #}
-
-

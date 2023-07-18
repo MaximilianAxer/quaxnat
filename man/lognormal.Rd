@@ -33,12 +33,12 @@ which corresponds to a probability density of the distance given by
 \deqn{p(r)={1 \over r\sqrt{2\pi \sigma ^{2}}}
   e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},}
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
-denotes the Euclidean norm and the first normalizing constant involves the
-\link[base:beta]{gamma} function; see Greene and Johnson (1989), Stoyan
-and Wagner (2001) for the planar case. Thus, the distance is assumed to
-have the \link[stats:Lognormal]{log-normal distribution} such that the
-log-distance has a normal distribution with mean \eqn{a} and variance
-\eqn{\sigma^2}. Note that \eqn{\log k(x)} is a quadratic function of
+denotes the Euclidean norm and the normalizing constant of the kernel
+involves the \link[base:beta]{gamma} function; see Greene and Johnson
+(1989), Stoyan and Wagner (2001) for the planar case. Thus, the distance
+is assumed to have the \link[stats:Lognormal]{log-normal distribution}
+such that the log-distance has a normal distribution with mean \eqn{a} and
+variance \eqn{\sigma^2}. Here \eqn{\log k(x)} is a quadratic function of
 \eqn{\left\|{x}\right\|} with a maximum at \eqn{\log a-d\sigma^2}.
 
 Particularly suitable if the maximum regeneration density is not

@@ -7,12 +7,11 @@
 #'
 optN <- function(par, nframe, tol, ...) {
   Nmax <- get("Nmax", sys.frame(nframe))
-  s <- S(c(par, N=0), ...)
-  while (S(c(par, Nmax), ...) < s) {
+  s <- S(N=0, par=par, ...)
+  while (S(N=Nmax, par=par, ...) < s) {
     Nmax <- 2*Nmax
   }
-  oN <- optimize(function(N) S(c(par, N), ...),
-    c(0, Nmax), tol=tol)
+  oN <- optimize(S, c(0, Nmax), par=par, ..., tol=tol)
   assign("Nmax", (Nmax+oN$minimum)/2, sys.frame(nframe))
   obj <- oN$objective
   attr(obj,"N") <- oN$minimum
@@ -51,15 +50,16 @@ optN <- function(par, nframe, tol, ...) {
 
 quax <- function(...) UseMethod("quax")
 
-quax.default <- function(x, y, tau, fun=lognormal,
-    weights=1, par=c(log.a=8, log.b=1), ..., tol=1e-50) {
+quax.default <- function(..., y, tau, fun=k_lognormal,
+    weights=1, par=c(log.a=8, log.b=1), tol=1e-50) {
   Nmax <- 2*sum(y)        # This number will be read and modified by the 
   nframe <- sys.nframe()  #   inner optimization (referenced via nframe).
   o <- optim(par, optN, nframe=nframe, tol=tol,
-    x=x, y=y, tau=tau, fun=fun, w=weights, ...)
+    y=y, tau=tau, fun=fun, w=weights, ...)
   obj <- optN(par=o$par, nframe=nframe, tol=tol,
-    x=x, y=y, tau=tau, fun=fun, w=weights)
-  formals(fun)$par <- c(o$par, N=attr(obj,"N"))
+    y=y, tau=tau, fun=fun, w=weights, ...)
+  formals(fun)$par <- o$par
+  formals(fun)$N <- attr(obj,"N")
   attr(fun,"o") <- o
   class(fun) <- "quax"
   fun
