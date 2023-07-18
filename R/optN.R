@@ -66,7 +66,7 @@ quax.default <- function(..., y, tau, fun=k_lognormal,
 }
 
 quax.formula <- function(formula, data, tau, fun=lognormal,
-    subset, weights, na.action, offset, ...) {
+    d=2, subset, weights, na.action, offset, ...) {
   cl <- match.call(expand.dots=FALSE)
   cl <- cl[c(1L, match(c("formula","data","subset","weights",
     "na.action","offset"), names(cl), 0L))]

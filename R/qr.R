@@ -3,8 +3,8 @@
 rownorms <- function(x,...) if (length(d<-dim(x))>1L && d[2L]>1)
   sqrt(.rowSums(x^2,d[1],d[2],...)) else abs(x)
 # `surface` returns the volume (area, length) of the surface of a ball with 
-# radius r in d-dimensional space:
-surface <- function(r,d) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
+# radius 1 in d-dimensional space:
+surface <- function(d) 2*pi^(d/2)/gamma(d/2)
 
 ##############################################################################
 #' Dispersal Kernels For Log-Normal Distance Distributions
@@ -61,9 +61,9 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   log.a <- par[1]
   σ <- exp(par[2])
-  N * exp(-(log(r)-log.a)^2/(2*σ^2)) / (2*pi * sqrt(2*pi*σ^2) * r^2)
+  N / (surface(d)*sqrt(2*pi*σ^2)) * exp(-(log(r)-log.a)^2/(2*σ^2)) / r^d
+  # N / (surface(d)*r^(d-1)) * dlnorm(r,log.a,σ)
 }
-# dlnorm(x,log.a,σ) / (2*pi*x)
 
 ##############################################################################
 #' Dispersal Kernels From Spatial t Distribution
@@ -112,8 +112,7 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   p <- exp(par[2])
-  result <- N * p / (pi*a^2 * (1+(x/a)^2) ^ (p+1))
-  return(result)
+  N * 2 / (surface(d) * a^d * beta(d/2, p)) / (1+(r/a)^2)^(p+d/2)
 }
 
 
@@ -194,7 +193,7 @@ k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
-  N * b / (2*pi*a^2*gamma(2/b)) * exp(-(x/a)^b)
+  N * b / (surface(d) * a^d * gamma(d/b)) * exp(-(r/a)^b)
 }
 
 
@@ -247,8 +246,7 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
-  N <- par[3]
-  N * a^-b * b / (2*pi) * (x/a)^(b-2) * exp(-(x/a)^b)
+  N * b / (surface(d) * a^-b) * r^(b-d) * exp(-(r/a)^b)
 }
 
 
@@ -301,7 +299,7 @@ k_power <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
-  N * (b-2)*(b-1) / (2*pi*a^2) * (1+x/a)^-b
+  N / (surface(d) * a^d * beta(d,b-d)) * (1+r/a)^-b
 }
 
 
