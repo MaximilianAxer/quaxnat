@@ -20,8 +20,9 @@ function processMathHTML() {
 
 <h3>Description</h3>
 
-<p><code>k_t</code> computes the value of the dispersal function from Clark et al.
-(1999) multiplied by <code class="reqn">N</code>.
+<p><code>k_t</code> computes the value, multiplied by <code class="reqn">N</code>, of the dispersal kernel
+from Clark et al. (1999) that represents a scaled multivariate t
+distribution.
 </p>
 
 
@@ -41,8 +42,8 @@ or vector of distances <code class="reqn">\left\|{x}\right\|</code> to the seed 
 </td></tr>
 <tr><td><code id="k_t_:_par">par</code></td>
 <td>
-<p>Numeric vector with two elements representing log-transformed
-parameters <code class="reqn">a</code> and <code class="reqn">p</code>.</p>
+<p>Numeric vector with two elements representing the
+log-transformed parameters <code class="reqn">a</code> and <code class="reqn">p</code>.</p>
 </td></tr>
 <tr><td><code id="k_t_:_N">N</code></td>
 <td>
@@ -75,13 +76,22 @@ denotes the Euclidean norm and the normalizing constants involve the
 beta and gamma functions; see Clark
 et al. (1999) and Austerlitz et al. (2004) for the planar case (with
 parameterizations <code class="reqn">a=\sqrt{u}</code> and <code class="reqn">p=b-d/2</code>, respectively). This
-means the squared distance is <code class="reqn">da^{2} \over 2p</code> times a random
-variable having an F distribution with <code class="reqn">d</code> and
-<code class="reqn">2p</code> degrees of freedom.
+means the position is <code class="reqn">a</code> times a random variable having a
+<code class="reqn">d</code>-variate t distribution with <code class="reqn">2p</code> degrees of freedom, and the
+squared distance is <code class="reqn">da^{2} \over 2p</code> times a random variable having
+an F distribution with <code class="reqn">d</code> and <code class="reqn">2p</code> degrees
+of freedom.
 </p>
-<p>This dispersal kernel represents a mixture of Gaussian densities (with
-inverse variance following a gamma distribution with shape parameter
-<code class="reqn">p</code>) that exhibits heavier tails. It has its maximum at zero.
+<p>This results from the kernel being defined as a mixture of Gaussian
+kernels with an inverse variance (or represents the distribution of a
+standard Gaussian vector divided the square root of an independent random
+variable) having a gamma distribution with shape parameter <code class="reqn">p</code> and
+scale parameter <code class="reqn">2/a^{2}</code>, which for <code class="reqn">a=1</code> is a
+chi-squared distribution with <code class="reqn">2p</code> degrees of
+freedom.
+</p>
+<p>The dispersal kernel always has its maximum at zero, and the distance has
+a fat-tailed distribution for all choices of <code class="reqn">p</code>.
 </p>
 
 
@@ -94,8 +104,8 @@ inverse variance following a gamma distribution with shape parameter
 <h3>References</h3>
 
 <p>Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.
-(1999). Seed dispersal near and far: patterns across temperate and tropical
-forests. <em>Ecology</em> <strong>80</strong>, 1475–1494.
+(1999). Seed dispersal near and far: patterns across temperate and
+tropical forests. <em>Ecology</em> <strong>80</strong>, 1475–1494.
 <a href="https://doi.org/10.1890/0012-9658%281999%29080%5B1475%3ASDNAFP%5D2.0.CO%3B2">doi:10.1890/0012-9658(1999)080[1475:SDNAFP]2.0.CO;2</a>
 </p>
 <p>Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,

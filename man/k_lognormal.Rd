@@ -44,9 +44,9 @@ such that the log-distance has a normal distribution with mean \eqn{a} and
 variance \eqn{\sigma^2}. Here \eqn{\log k(x)} is a quadratic function of
 \eqn{\left\|{x}\right\|} with a maximum at \eqn{\log a-d\sigma^2}.
 
-Particularly suitable if the maximum regeneration density is not
-directly at the seed source (e.g. Janzen-Conell effect)(Nathan et al.
-2012)
+This kernel is particularly suitable if the maximum regeneration density
+is not directly at the seed source (e.g. Janzen–Connell effect), cf.
+Nathan et al. (2012).
 }
 \references{
 Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or

@@ -22,9 +22,9 @@ Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 }
 \description{
 \code{k_exponential.power} computes the value, multiplied by \eqn{N}, of a
-dispersal kernel from the exponential power family, which includes, as
-special cases, distance distributions based on normal and exponential
-distributions.
+dispersal kernel from the exponential power family that includes, as
+special cases, Gaussian kernels and kernels that follow an exponential
+function of the distance.
 }
 \details{
 The dispersal kernel, i.e. spatial probability density
@@ -40,22 +40,26 @@ Austerlitz et al. (2004), Nathan et al. (2012) for the planar case. This
 means the \eqn{b}th power of the distance has a gamma distribution with
 shape parameter \eqn{d/b} and scale parameter \eqn{a^{b}}.
 
-This function has its maximum at zero and represents a rather flexible
-family of distributions including the classical bivariate Gaussian
-kernels, the kernels based on an exponential distribution of distances,
-and, for \eqn{b<1}, fat-tailed distributions. For \eqn{b>1}, it shows
-thin-tailed distributions. It has consequently been applied in a number of
-theoretical studies that address dispersal (Ribbens et al. 1994;
-Bullock et al. 2017).
+The kernel has its maximum at zero and represents a rather flexible family
+that includes, for \eqn{b=2} the classical Gaussian kernels and for
+\eqn{b=1}, kernels decreasing exponentially with the distance. For
+\eqn{b<1} the distance distribution is fat-tailed in the sense of Kot et
+al. (1996). Such kernels have consequently been applied in a number of
+theoretical studies that address dispersal (Ribbens et al. 1994, Bullock
+et al. 2017).
 }
 \references{
 Bateman, A. (1947). Contamination in seed crops: III. relation with
 isolation distance. \emph{Heredity} \strong{1}, 303–336.
 \doi{10.1038/hdy.1947.20}
 
-Ribbens, E., Silander Jr, J. A., & Pacala, S. W.  (1994). Seedling
-recruitment in forests: calibrating models to predict patterns of tree
-seedling dispersion. \emph{Ecology} \strong{75}, 1794-1806.
+Kot, M., Lewis, M.A., van den Driessche, P. (1996). Dispersal Data and the
+Spread of Invading Organisms. \emph{Ecology} \strong{77(7)}, 2027–2042.
+\doi{10.2307/2265698}
+
+Ribbens, E., Silander Jr, J.A., Pacala, S.W. (1994). Seedling recruitment
+in forests: calibrating models to predict patterns of tree seedling
+dispersion. \emph{Ecology} \strong{75}, 1794–1806.
 \doi{10.2307/1939638}
 
 Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of
@@ -73,10 +77,9 @@ Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 \doi{10.1111/j.1365-294X.2004.02100.x}
 
-#'Bullock, J. M., Mallada González, L., Tamme, R., Götzenberger, L., White,
-#'S. M., Pärtel, M., Hooftman, D. A.
-(2017).  A synthesis of empirical plant dispersal kernels.
-\emph{Journal of Ecology} \strong{105}, 6-19.
+Bullock, J. M., Mallada González, L., Tamme, R., Götzenberger, L., White,
+S.M., Pärtel, M., Hooftman, D.A. (2017).  A synthesis of empirical plant
+dispersal kernels. \emph{Journal of Ecology} \strong{105}, 6–19.
 \doi{10.1111/1365-2745.12666}
 
 Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).

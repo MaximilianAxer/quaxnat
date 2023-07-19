@@ -11,8 +11,7 @@ k_power(x, par, N = 1, d = NCOL(x))
 or vector of distances \eqn{\left\|{x}\right\|} to the seed source.}
 
 \item{par}{Numeric vector with two elements representing the
-log-transformed parameters \eqn{a} and \eqn{p} of the distance
-distribution.}
+log-transformed parameters \eqn{a} and \eqn{p}.}
 
 \item{N}{The multiplier \eqn{N}.}
 
@@ -22,8 +21,8 @@ distribution.}
 Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 }
 \description{
-\code{k_power} computes the value of the dispersal function from (WHERE?)
-multiplied by \eqn{N}.
+\code{k_power} computes the value, multiplied by \eqn{N}, of a dispersal kernel
+that follows a power law of a constant \eqn{a} plus the distance.
 }
 \details{
 The dispersal kernel, i.e. spatial probability density
@@ -31,20 +30,15 @@ of the location of a seed relative to its source, is here given by
 \deqn{k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}\Beta(d,p)}
   (1+{\left\|{x}\right\| \over a})^{-(p+d)},}
 which corresponds to a probability density of the distance given by
-\deqn{p(x)={1 \over a^{d}\Beta(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},}
+\deqn{p(r)={1 \over a^{d}\Beta(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},}
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constants involve the
 \link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Nathan
 et al. (2012) for the planar case (with the parameterization \eqn{p=b-d}).
-This means the distance is \eqn{da \over p} times a random variable
-having an \link[stats:FDist]{F distribution} with \eqn{2d} and
-\eqn{2p} degrees of freedom.
-Austerlitz
-et al. (2004) characterize it as follows: The geometric and 2dt families
-“will behave quite differently from the exponential and Weibull
-distributions. They show a fat tail, whatever the value of the shape
-parameter (\eqn{b}), and the distributions become increasingly fat-tailed
-as \eqn{b} declines toward ‘1’.”
+This means the distance is \eqn{da \over p} times a random variable having
+an \link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2p} degrees
+of freedom. This is a fat-tailed distribution for all choices of the
+parameter \eqn{p}.
 }
 \references{
 Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).

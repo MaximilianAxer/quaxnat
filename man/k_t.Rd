@@ -10,8 +10,8 @@ k_t(x, par, N = 1, d = NCOL(x))
 \item{x}{Numeric matrix of positions \eqn{x} relative to the seed source,
 or vector of distances \eqn{\left\|{x}\right\|} to the seed source.}
 
-\item{par}{Numeric vector with two elements representing log-transformed
-parameters \eqn{a} and \eqn{p}.}
+\item{par}{Numeric vector with two elements representing the
+log-transformed parameters \eqn{a} and \eqn{p}.}
 
 \item{N}{The multiplier \eqn{N}.}
 
@@ -21,8 +21,9 @@ parameters \eqn{a} and \eqn{p}.}
 Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 }
 \description{
-\code{k_t} computes the value of the dispersal function from Clark et al.
-(1999) multiplied by \eqn{N}.
+\code{k_t} computes the value, multiplied by \eqn{N}, of the dispersal kernel
+from Clark et al. (1999) that represents a scaled multivariate t
+distribution.
 }
 \details{
 The dispersal kernel, i.e. spatial probability density
@@ -37,18 +38,27 @@ denotes the Euclidean norm and the normalizing constants involve the
 \link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Clark
 et al. (1999) and Austerlitz et al. (2004) for the planar case (with
 parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-d/2}, respectively). This
-means the squared distance is \eqn{da^{2} \over 2p} times a random
-variable having an \link[stats:FDist]{F distribution} with \eqn{d} and
-\eqn{2p} degrees of freedom.
+means the position is \eqn{a} times a random variable having a
+\eqn{d}-variate t distribution with \eqn{2p} degrees of freedom, and the
+squared distance is \eqn{da^{2} \over 2p} times a random variable having
+an \link[stats:FDist]{F distribution} with \eqn{d} and \eqn{2p} degrees
+of freedom.
 
-This dispersal kernel represents a mixture of Gaussian densities (with
-inverse variance following a gamma distribution with shape parameter
-\eqn{p}) that exhibits heavier tails. It has its maximum at zero.
+This results from the kernel being defined as a mixture of Gaussian
+kernels with an inverse variance (or represents the distribution of a
+standard Gaussian vector divided the square root of an independent random
+variable) having a gamma distribution with shape parameter \eqn{p} and
+scale parameter \eqn{2/a^{2}}, which for \eqn{a=1} is a
+\link[stats:Chisquare]{chi-squared distribution} with \eqn{2p} degrees of
+freedom.
+
+The dispersal kernel always has its maximum at zero, and the distance has
+a fat-tailed distribution for all choices of \eqn{p}.
 }
 \references{
 Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.
-(1999). Seed dispersal near and far: patterns across temperate and tropical
-forests. \emph{Ecology} \strong{80}, 1475–1494.
+(1999). Seed dispersal near and far: patterns across temperate and
+tropical forests. \emph{Ecology} \strong{80}, 1475–1494.
 \doi{10.1890/0012-9658(1999)080[1475:SDNAFP]2.0.CO;2}
 
 Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,

@@ -21,7 +21,7 @@ function processMathHTML() {
 <h3>Description</h3>
 
 <p><code>k_weibull</code> computes the value, multiplied by <code class="reqn">N</code>, of the dispersal
-function from Tufto et al. (1997) based on seeds having a distance with a
+kernel from Tufto et al. (1997) based on seeds having a distance with a
 Weibull distribution from the their source.
 </p>
 
@@ -79,10 +79,11 @@ Weibull distribution with scale parameter <code class="reqn">a</code>
 and shape parameter <code class="reqn">b</code>. Equivalently, the <code class="reqn">b</code>th power of the
 distance has an exponential distribution with scale parameter <code class="reqn">a^{b}</code>.
 </p>
-<p>The distribution is fat-tailed when <code class="reqn">b&lt;1</code> and
-thin-tailed otherwise (Nathan et al. 2012).
-For <code class="reqn">b&gt;1</code>, the mode of the function is at <code class="reqn">x&gt;1</code>. In this way, the
-function approaches the normal distribution.
+<p>Consequently, if and only if <code class="reqn">b&lt;1</code>, the distance distribution has
+a heavier tail than an exponential distribution, although with tail
+probabilities still decreasing faster than any power law; it is a
+fat-tailed distribution in the sense of Kot et al. (1996). The kernel
+coincides with a Gaussian kernel in the special case <code class="reqn">b=d=2</code>.
 </p>
 
 
@@ -103,7 +104,11 @@ Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. <em>Molecular Ecology</em> <strong>13</strong>, 937–954.
 <a href="https://doi.org/10.1111/j.1365-294X.2004.02100.x">doi:10.1111/j.1365-294X.2004.02100.x</a>
 </p>
-<p>#' Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+<p>Kot, M., Lewis, M.A., van den Driessche, P. (1996). Dispersal Data and the
+Spread of Invading Organisms. <em>Ecology</em> <strong>77(7)</strong>, 2027–2042.
+<a href="https://doi.org/10.2307/2265698">doi:10.2307/2265698</a>
+</p>
+<p>Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
 Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G.,
 Bullock, J.M. (eds.), <em>Dispersal ecology and evolution</em>, 186–210.
 <a href="https://doi.org/10.1093/acprof%3Aoso/9780199608898.003.0015">doi:10.1093/acprof:oso/9780199608898.003.0015</a>

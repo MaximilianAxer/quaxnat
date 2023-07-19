@@ -21,9 +21,9 @@ function processMathHTML() {
 <h3>Description</h3>
 
 <p><code>k_exponential.power</code> computes the value, multiplied by <code class="reqn">N</code>, of a
-dispersal kernel from the exponential power family, which includes, as
-special cases, distance distributions based on normal and exponential
-distributions.
+dispersal kernel from the exponential power family that includes, as
+special cases, Gaussian kernels and kernels that follow an exponential
+function of the distance.
 </p>
 
 
@@ -78,13 +78,13 @@ Austerlitz et al. (2004), Nathan et al. (2012) for the planar case. This
 means the <code class="reqn">b</code>th power of the distance has a gamma distribution with
 shape parameter <code class="reqn">d/b</code> and scale parameter <code class="reqn">a^{b}</code>.
 </p>
-<p>This function has its maximum at zero and represents a rather flexible
-family of distributions including the classical bivariate Gaussian
-kernels, the kernels based on an exponential distribution of distances,
-and, for <code class="reqn">b&lt;1</code>, fat-tailed distributions. For <code class="reqn">b&gt;1</code>, it shows
-thin-tailed distributions. It has consequently been applied in a number of
-theoretical studies that address dispersal (Ribbens et al. 1994;
-Bullock et al. 2017).
+<p>The kernel has its maximum at zero and represents a rather flexible family
+that includes, for <code class="reqn">b=2</code> the classical Gaussian kernels and for
+<code class="reqn">b=1</code>, kernels decreasing exponentially with the distance. For
+<code class="reqn">b&lt;1</code> the distance distribution is fat-tailed in the sense of Kot et
+al. (1996). Such kernels have consequently been applied in a number of
+theoretical studies that address dispersal (Ribbens et al. 1994, Bullock
+et al. 2017).
 </p>
 
 
@@ -100,9 +100,13 @@ Bullock et al. 2017).
 isolation distance. <em>Heredity</em> <strong>1</strong>, 303–336.
 <a href="https://doi.org/10.1038/hdy.1947.20">doi:10.1038/hdy.1947.20</a>
 </p>
-<p>Ribbens, E., Silander Jr, J. A., &amp; Pacala, S. W.  (1994). Seedling
-recruitment in forests: calibrating models to predict patterns of tree
-seedling dispersion. <em>Ecology</em> <strong>75</strong>, 1794-1806.
+<p>Kot, M., Lewis, M.A., van den Driessche, P. (1996). Dispersal Data and the
+Spread of Invading Organisms. <em>Ecology</em> <strong>77(7)</strong>, 2027–2042.
+<a href="https://doi.org/10.2307/2265698">doi:10.2307/2265698</a>
+</p>
+<p>Ribbens, E., Silander Jr, J.A., Pacala, S.W. (1994). Seedling recruitment
+in forests: calibrating models to predict patterns of tree seedling
+dispersion. <em>Ecology</em> <strong>75</strong>, 1794–1806.
 <a href="https://doi.org/10.2307/1939638">doi:10.2307/1939638</a>
 </p>
 <p>Clark, J.S., Macklin, E., Wood, L. (1998). Stages and spatial scales of
@@ -120,10 +124,9 @@ Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. <em>Molecular Ecology</em> <strong>13</strong>, 937–954.
 <a href="https://doi.org/10.1111/j.1365-294X.2004.02100.x">doi:10.1111/j.1365-294X.2004.02100.x</a>
 </p>
-<p>#'Bullock, J. M., Mallada González, L., Tamme, R., Götzenberger, L., White,
-#'S. M., Pärtel, M., Hooftman, D. A.
-(2017).  A synthesis of empirical plant dispersal kernels.
-<em>Journal of Ecology</em> <strong>105</strong>, 6-19.
+<p>Bullock, J. M., Mallada González, L., Tamme, R., Götzenberger, L., White,
+S.M., Pärtel, M., Hooftman, D.A. (2017).  A synthesis of empirical plant
+dispersal kernels. <em>Journal of Ecology</em> <strong>105</strong>, 6–19.
 <a href="https://doi.org/10.1111/1365-2745.12666">doi:10.1111/1365-2745.12666</a>
 </p>
 <p>Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).

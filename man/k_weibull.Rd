@@ -23,7 +23,7 @@ Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 }
 \description{
 \code{k_weibull} computes the value, multiplied by \eqn{N}, of the dispersal
-function from Tufto et al. (1997) based on seeds having a distance with a
+kernel from Tufto et al. (1997) based on seeds having a distance with a
 Weibull distribution from the their source.
 }
 \details{
@@ -41,10 +41,11 @@ case. Thus, the distance is assumed to have the
 and shape parameter \eqn{b}. Equivalently, the \eqn{b}th power of the
 distance has an exponential distribution with scale parameter \eqn{a^{b}}.
 
-The distribution is fat-tailed when \eqn{b<1} and
-thin-tailed otherwise (Nathan et al. 2012).
-For \eqn{b>1}, the mode of the function is at \eqn{x>1}. In this way, the
-function approaches the normal distribution.
+Consequently, if and only if \eqn{b<1}, the distance distribution has
+a heavier tail than an exponential distribution, although with tail
+probabilities still decreasing faster than any power law; it is a
+fat-tailed distribution in the sense of Kot et al. (1996). The kernel
+coincides with a Gaussian kernel in the special case \eqn{b=d=2}.
 }
 \references{
 Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in
@@ -56,7 +57,11 @@ Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 pollen dispersal curve. \emph{Molecular Ecology} \strong{13}, 937–954.
 \doi{10.1111/j.1365-294X.2004.02100.x}
 
-#' Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+Kot, M., Lewis, M.A., van den Driessche, P. (1996). Dispersal Data and the
+Spread of Invading Organisms. \emph{Ecology} \strong{77(7)}, 2027–2042.
+\doi{10.2307/2265698}
+
+Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
 Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G.,
 Bullock, J.M. (eds.), \emph{Dispersal ecology and evolution}, 186–210.
 \doi{10.1093/acprof:oso/9780199608898.003.0015}

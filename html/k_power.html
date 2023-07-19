@@ -20,8 +20,8 @@ function processMathHTML() {
 
 <h3>Description</h3>
 
-<p><code>k_power</code> computes the value of the dispersal function from (WHERE?)
-multiplied by <code class="reqn">N</code>.
+<p><code>k_power</code> computes the value, multiplied by <code class="reqn">N</code>, of a dispersal kernel
+that follows a power law of a constant <code class="reqn">a</code> plus the distance.
 </p>
 
 
@@ -42,8 +42,7 @@ or vector of distances <code class="reqn">\left\|{x}\right\|</code> to the seed 
 <tr><td><code id="k_power_:_par">par</code></td>
 <td>
 <p>Numeric vector with two elements representing the
-log-transformed parameters <code class="reqn">a</code> and <code class="reqn">p</code> of the distance
-distribution.</p>
+log-transformed parameters <code class="reqn">a</code> and <code class="reqn">p</code>.</p>
 </td></tr>
 <tr><td><code id="k_power_:_N">N</code></td>
 <td>
@@ -67,22 +66,17 @@ of the location of a seed relative to its source, is here given by
 
 <p>which corresponds to a probability density of the distance given by
 </p>
-<p style="text-align: center;"><code class="reqn">p(x)={1 \over a^{d}\Beta(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},</code>
+<p style="text-align: center;"><code class="reqn">p(r)={1 \over a^{d}\Beta(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},</code>
 </p>
 
 <p>where <code class="reqn">d</code> is the spatial dimension, <code class="reqn">\left\|{\,}\right\|</code>
 denotes the Euclidean norm and the normalizing constants involve the
 beta and gamma functions; see Nathan
 et al. (2012) for the planar case (with the parameterization <code class="reqn">p=b-d</code>).
-This means the distance is <code class="reqn">da \over p</code> times a random variable
-having an F distribution with <code class="reqn">2d</code> and
-<code class="reqn">2p</code> degrees of freedom.
-Austerlitz
-et al. (2004) characterize it as follows: The geometric and 2dt families
-“will behave quite differently from the exponential and Weibull
-distributions. They show a fat tail, whatever the value of the shape
-parameter (<code class="reqn">b</code>), and the distributions become increasingly fat-tailed
-as <code class="reqn">b</code> declines toward ‘1’.”
+This means the distance is <code class="reqn">da \over p</code> times a random variable having
+an F distribution with <code class="reqn">2d</code> and <code class="reqn">2p</code> degrees
+of freedom. This is a fat-tailed distribution for all choices of the
+parameter <code class="reqn">p</code>.
 </p>
 
 
