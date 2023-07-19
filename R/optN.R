@@ -5,7 +5,9 @@
 #' @inheritParams S
 #'
 #'
-optN <- function(par, nframe, tol, ...) {
+optN <- function(par, nframe, tol, ...,
+    gr, method, lower, upper, control, hessian # (exclude optional optim arguments from ...)
+) {
   Nmax <- get("Nmax", sys.frame(nframe))
   s <- S(N=0, par=par, ...)
   while (S(N=Nmax, par=par, ...) < s) {
@@ -51,23 +53,23 @@ optN <- function(par, nframe, tol, ...) {
 quax <- function(...) UseMethod("quax")
 
 quax.default <- function(..., y, tau, fun=k_lognormal,
-    d=2, weights=1, par=c(log.a=8, log.b=1), tol=1e-50) {
+    dim=2, weights=1, par=c(log.a=8, log.b=1), tol=1e-50) {
   Nmax <- 2*sum(y)        # This number will be read and modified by the 
   nframe <- sys.nframe()  #   inner optimization (referenced via nframe).
   o <- optim(par, optN, nframe=nframe, tol=tol,
-    y=y, tau=tau, fun=fun, d=d, w=weights, ...)
+    y=y, tau=tau, fun=fun, d=dim, w=weights, ...)
   obj <- optN(par=o$par, nframe=nframe, tol=tol,
-    y=y, tau=tau, fun=fun, d=d, w=weights, ...)
+    y=y, tau=tau, fun=fun, d=dim, w=weights, ...)
   formals(fun)$par <- o$par
   formals(fun)$N <- attr(obj,"N")
-  if (!is.null(d)) formals(fun)$d <- d
+  formals(fun)$d <- dim
   attr(fun,"o") <- o
   class(fun) <- "quax"
   fun
 }
 
 quax.formula <- function(formula, data, tau, fun=lognormal,
-    d=2, subset, weights, na.action, offset, ...) {
+    subset, weights, na.action, offset, ...) {
   cl <- match.call(expand.dots=FALSE)
   cl <- cl[c(1L, match(c("formula","data","subset","weights",
     "na.action","offset"), names(cl), 0L))]
@@ -76,12 +78,10 @@ quax.formula <- function(formula, data, tau, fun=lognormal,
   mf <- eval.parent(cl)
   x <- model.matrix(attr(mf,"terms"), mf)
   y <- mf[[1L]]
-  if (ncol(x)!=1L || !is.vector(y))
-    stop("both sides of ~ must be numeric vectors")
   o <- model.offset(mf)
   w <- model.weights(mf)
-  quax.default(x=as.vector(x), y=if (is.null(o)) y else y-o,
-    d=d, tau=tau, fun=fun, weights=if (is.null(w)) 1 else w, ...)
+  quax.default(x=x, y=if (is.null(o)) y else y-o,
+    tau=tau, fun=fun, weights=if (is.null(w)) 1 else w, ...)
 }
 
 summary.quax <- function(f)
