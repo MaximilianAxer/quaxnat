@@ -10,17 +10,18 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 #' Dispersal Kernels For Log-Normal Distance Distributions
 #'
 #' `k_lognormal` computes the value, multiplied by \eqn{N}, of a dispersal
-#' function based on seeds having a distance with a log-normal distribution
+#' kernel based on seeds having a distance with a log-normal distribution
 #' from the their source.
 #'
-#' @return Numeric vector of function values multiplied by \eqn{N}.
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 #'
-#' @param par Numeric vector with three elements representing log-transformed
+#' @param x Numeric matrix of positions \eqn{x} relative to the seed source, 
+#' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
+#' @param par Numeric vector with two elements representing log-transformed
 #' scale and shape parameters, given by the mean \eqn{a} and standard
-#' deviation \eqn{\sigma} of the underlying normal distribution, and the
-#' scaling \eqn{N}.
-#' @param x represents the distance to the nearest seed source. Must be
-#' numeric.
+#' deviation \eqn{\sigma} of the underlying normal distribution.
+#' @param N The multiplier \eqn{N}.
+#' @param d The spatial dimension.
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
@@ -73,11 +74,14 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' `k_t` computes the value of the dispersal function from Clark et al.
 #' (1999) multiplied by \eqn{N}.
 #'
-#' @return Numeric vector of function values of multiplied by \eqn{N}.
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 #'
-#' @param par Numeric vector with three elements representing the
-#' log-transformed parameters \eqn{a} and \eqn{p} and the scaling \eqn{N}.
-#' @param x Numeric vector of distances to the nearest seed source.
+#' @param x Numeric matrix of positions \eqn{x} relative to the seed source, 
+#' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
+#' @param par Numeric vector with two elements representing log-transformed
+#' parameters \eqn{a} and \eqn{p}.
+#' @param N The multiplier \eqn{N}.
+#' @param d The spatial dimension.
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
@@ -129,13 +133,14 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
 #' special cases, distance distributions based on normal and exponential 
 #' distributions.
 #'
-#' @return Numeric vector of function values multiplied by \eqn{N}.
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 #'
-#' @param par Numeric vector with three elements representing the
-#' log-transformed scale and shape parameters \eqn{a} and \eqn{b} of the
-#' dispersal density, and a the scaling \eqn{N}.
-#' @param x represents the distance to the nearest seed source. Must be
-#' numeric.
+#' @param x Numeric matrix of positions \eqn{x} relative to the seed source, 
+#' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
+#' @param par Numeric vector with two elements representing the 
+#' log-transformed scale and shape parameters \eqn{a} and \eqn{b}.
+#' @param N The multiplier \eqn{N}.
+#' @param d The spatial dimension.
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
@@ -206,16 +211,21 @@ k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
 
 
 ##############################################################################
-#' Dispersal Kernels From Weibull Family
+#' Dispersal Kernels For Weibull Distance Distributions
 #'
-#' `k_weibull` computes the value of the dispersal function from Tufto et al.
-#' (1997) multiplied by \eqn{N}.
+#' `k_weibull` computes the value, multiplied by \eqn{N}, of the dispersal 
+#' function from Tufto et al. (1997) based on seeds having a distance with a 
+#' Weibull distribution from the their source.
 #'
-#' @return Numeric vector of function values multiplied by \eqn{N}.
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 #'
-#' @param par Numeric vector with three elements representing the
-#' log-transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.
-#' @param x Numeric vector of distances to the nearest seed source.
+#' @param x Numeric matrix of positions \eqn{x} relative to the seed source, 
+#' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
+#' @param par Numeric vector with two elements representing the 
+#' log-transformed scale and shape parameters \eqn{a} and \eqn{b} of the 
+#' distance distribution.
+#' @param N The multiplier \eqn{N}.
+#' @param d The spatial dimension.
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
@@ -267,26 +277,29 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 #' `k_power` computes the value of the dispersal function from (WHERE?)
 #' multiplied by \eqn{N}.
 #'
-#' @return Numeric vector of function values multiplied by \eqn{N}.
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 #'
-#' @param par Numeric vector with three elements representing the
-#' log-transformed parameters \eqn{a} and \eqn{b-d} and the scaling \eqn{N}.
-#' @param x represents the distance to the nearest seed source. Must be
-#' numeric.
+#' @param x Numeric matrix of positions \eqn{x} relative to the seed source, 
+#' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
+#' @param par Numeric vector with two elements representing the 
+#' log-transformed parameters \eqn{a} and \eqn{p} of the distance 
+#' distribution.
+#' @param N The multiplier \eqn{N}.
+#' @param d The spatial dimension.
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
-#' \deqn{k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}\Beta(d,b-d)}
-#'   (1+{\left\|{x}\right\| \over a})^{-b},}
+#' \deqn{k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}\Beta(d,p)}
+#'   (1+{\left\|{x}\right\| \over a})^{-(p+d)},}
 #' which corresponds to a probability density of the distance given by
-#' \deqn{p(x)={1 \over a^{d}\Beta(d,b-d)}r^{d-1}(1+{r \over a})^{-b},}
+#' \deqn{p(x)={1 \over a^{d}\Beta(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
 #' \link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Nathan 
-#' et al. (2012) for the planar case. This means the distance is 
-#' \eqn{da \over b-d} times a random variable having an 
-#' \link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2(b-d)} degrees 
-#' of freedom.
+#' et al. (2012) for the planar case (with the parameterization \eqn{p=b-d}). 
+#' This means the distance is \eqn{da \over p} times a random variable 
+#' having an \link[stats:FDist]{F distribution} with \eqn{2d} and 
+#' \eqn{2p} degrees of freedom.
 
 #' Austerlitz 
 #' et al. (2004) characterize it as follows: The geometric and 2dt families 
@@ -319,25 +332,6 @@ k_power <- function(x, par, N=1, d=NCOL(x)) {
 
 
 ##############################################################################
-##' Clark2DT-Function
-##'
-##' @details
-##'
-##' @return what is returned by the function?
-##'
-##' @param par parameters U, P, N estimated within the Clark2DT function
-##' @param x represents the distance to the nearest seed source. Must be
-##' numeric
-##'
-##' @details Mixture of Gaussian nuclei that produces tails that are not
-##' quite as long. Maximum at seed tree itself and cannot become 0 at x = 0.
-#Clark2dt <- function(x, par){
-#  U <- par[1]
-#  P <- par[2]
-#  N <- par[3]
-#  result <- N * ((P)/ (pi*U * ((1+((x^ 2) / U)) ^ (P + 1))))
-#  return(result)
-#}
 #
 ##'Function selection
 ##' param x represents the distance to the nearest seed source. Must be

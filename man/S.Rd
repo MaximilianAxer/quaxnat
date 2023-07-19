@@ -4,18 +4,18 @@
 \alias{S}
 \title{objective function for minimization}
 \usage{
-S(par, x, y, tau, w, fun)
+S(N, par, y, tau, w, fun, ...)
 }
 \arguments{
 \item{par}{are parameters to be estimated}
-
-\item{x}{represents the distance to the nearest seed source. Must be numeric}
 
 \item{y}{response: regeneration density in corresponding unit (per ha)}
 
 \item{tau}{determines the quantile}
 
 \item{fun}{dispersal function, which is used}
+
+\item{x}{represents the distance to the nearest seed source. Must be numeric}
 }
 \description{
 The parameters are estimated by minimizing a sum of weighted absolute errors, where y_1,...,y_n are the observed regeneration numbers and x_1,...,x_n,η_1,...,η_n are defined as above.

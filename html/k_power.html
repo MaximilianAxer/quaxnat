@@ -1,0 +1,110 @@
+<!DOCTYPE html><html><head><title>R: Power-Law Dispersal Kernels</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>k_power</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='k_power'>Power-Law Dispersal Kernels</h2>
+
+<h3>Description</h3>
+
+<p><code>k_power</code> computes the value of the dispersal function from (WHERE?)
+multiplied by <code class="reqn">N</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>k_power(x, par, N = 1, d = NCOL(x))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="k_power_:_x">x</code></td>
+<td>
+<p>Numeric matrix of positions <code class="reqn">x</code> relative to the seed source,
+or vector of distances <code class="reqn">\left\|{x}\right\|</code> to the seed source.</p>
+</td></tr>
+<tr><td><code id="k_power_:_par">par</code></td>
+<td>
+<p>Numeric vector with two elements representing the
+log-transformed parameters <code class="reqn">a</code> and <code class="reqn">p</code> of the distance
+distribution.</p>
+</td></tr>
+<tr><td><code id="k_power_:_N">N</code></td>
+<td>
+<p>The multiplier <code class="reqn">N</code>.</p>
+</td></tr>
+<tr><td><code id="k_power_:_d">d</code></td>
+<td>
+<p>The spatial dimension.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The dispersal kernel, i.e. spatial probability density
+of the location of a seed relative to its source, is here given by
+</p>
+<p style="text-align: center;"><code class="reqn">k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}\Beta(d,p)}
+  (1+{\left\|{x}\right\| \over a})^{-(p+d)},</code>
+</p>
+
+<p>which corresponds to a probability density of the distance given by
+</p>
+<p style="text-align: center;"><code class="reqn">p(x)={1 \over a^{d}\Beta(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},</code>
+</p>
+
+<p>where <code class="reqn">d</code> is the spatial dimension, <code class="reqn">\left\|{\,}\right\|</code>
+denotes the Euclidean norm and the normalizing constants involve the
+beta and gamma functions; see Nathan
+et al. (2012) for the planar case (with the parameterization <code class="reqn">p=b-d</code>).
+This means the distance is <code class="reqn">da \over p</code> times a random variable
+having an F distribution with <code class="reqn">2d</code> and
+<code class="reqn">2p</code> degrees of freedom.
+Austerlitz
+et al. (2004) characterize it as follows: The geometric and 2dt families
+“will behave quite differently from the exponential and Weibull
+distributions. They show a fat tail, whatever the value of the shape
+parameter (<code class="reqn">b</code>), and the distributions become increasingly fat-tailed
+as <code class="reqn">b</code> declines toward ‘1’.”
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric vector of function values <code class="reqn">k(x)</code> multiplied by <code class="reqn">N</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G.,
+Bullock, J.M. (eds.), <em>Dispersal ecology and evolution</em>, 186–210.
+<a href="https://doi.org/10.1093/acprof%3Aoso/9780199608898.003.0015">doi:10.1093/acprof:oso/9780199608898.003.0015</a>
+</p>
+<p>Austerlitz, F., Dick, C.W., Dutech, C., Klein, E.K., Oddou-Muratorio, S.,
+Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
+pollen dispersal curve. <em>Molecular Ecology</em> <strong>13</strong>, 937–954.
+<a href="https://doi.org/10.1111/j.1365-294X.2004.02100.x">doi:10.1111/j.1365-294X.2004.02100.x</a>
+</p>
+
+
+</div>
+</body></html>

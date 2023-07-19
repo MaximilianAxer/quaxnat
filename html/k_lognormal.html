@@ -1,0 +1,115 @@
+<!DOCTYPE html><html><head><title>R: Dispersal Kernels For Log-Normal Distance Distributions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>k_lognormal</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='k_lognormal'>Dispersal Kernels For Log-Normal Distance Distributions</h2>
+
+<h3>Description</h3>
+
+<p><code>k_lognormal</code> computes the value, multiplied by <code class="reqn">N</code>, of a dispersal
+kernel based on seeds having a distance with a log-normal distribution
+from the their source.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>k_lognormal(x, par, N = 1, d = NCOL(x))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="k_lognormal_:_x">x</code></td>
+<td>
+<p>Numeric matrix of positions <code class="reqn">x</code> relative to the seed source,
+or vector of distances <code class="reqn">\left\|{x}\right\|</code> to the seed source.</p>
+</td></tr>
+<tr><td><code id="k_lognormal_:_par">par</code></td>
+<td>
+<p>Numeric vector with two elements representing log-transformed
+scale and shape parameters, given by the mean <code class="reqn">a</code> and standard
+deviation <code class="reqn">\sigma</code> of the underlying normal distribution.</p>
+</td></tr>
+<tr><td><code id="k_lognormal_:_N">N</code></td>
+<td>
+<p>The multiplier <code class="reqn">N</code>.</p>
+</td></tr>
+<tr><td><code id="k_lognormal_:_d">d</code></td>
+<td>
+<p>The spatial dimension.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The dispersal kernel, i.e. spatial probability density
+of the location of a seed relative to its source, is here given by
+</p>
+<p style="text-align: center;"><code class="reqn">k(x)={\Gamma (d/2) \over 
+  2\pi ^{d/2}\left\|{x}\right\|^{d}\sqrt{2\pi \sigma ^{2}}}
+  e^{-{1 \over 2\sigma ^{2}}(\log (\left\|{x}\right\|/a))^{2}},</code>
+</p>
+
+<p>which corresponds to a probability density of the distance given by
+</p>
+<p style="text-align: center;"><code class="reqn">p(r)={1 \over r\sqrt{2\pi \sigma ^{2}}}
+  e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},</code>
+</p>
+
+<p>where <code class="reqn">d</code> is the spatial dimension, <code class="reqn">\left\|{\,}\right\|</code>
+denotes the Euclidean norm and the normalizing constant of the kernel
+involves the gamma function; see Greene and Johnson
+(1989), Stoyan and Wagner (2001) for the planar case. Thus, the distance
+is assumed to have the log-normal distribution
+such that the log-distance has a normal distribution with mean <code class="reqn">a</code> and
+variance <code class="reqn">\sigma^2</code>. Here <code class="reqn">\log k(x)</code> is a quadratic function of
+<code class="reqn">\left\|{x}\right\|</code> with a maximum at <code class="reqn">\log a-d\sigma^2</code>.
+</p>
+<p>Particularly suitable if the maximum regeneration density is not
+directly at the seed source (e.g. Janzen-Conell effect)(Nathan et al.
+2012)
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric vector of function values <code class="reqn">k(x)</code> multiplied by <code class="reqn">N</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or
+plumed seeds. <em>Ecology</em> <strong>70</strong>(2), 339–347.
+<a href="https://doi.org/10.2307/1937538">doi:10.2307/1937538</a>
+</p>
+<p>Stoyan, D., Wagner, S. (2001). Estimating the fruit dispersion of
+anemochorous forest trees. <em>Ecol. Modell.</em> <strong>145</strong>, 35–47.
+<a href="https://doi.org/10.1016/S0304-3800%2801%2900385-4">doi:10.1016/S0304-3800(01)00385-4</a>
+</p>
+<p>Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
+Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G.,
+Bullock, J.M. (eds.), <em>Dispersal ecology and evolution</em>, 186–210.
+<a href="https://doi.org/10.1093/acprof%3Aoso/9780199608898.003.0015">doi:10.1093/acprof:oso/9780199608898.003.0015</a>
+</p>
+
+
+</div>
+</body></html>
