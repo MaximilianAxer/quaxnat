@@ -3,8 +3,8 @@
 rownorms <- function(x,...) if (length(d<-dim(x))>1L && d[2L]>1)
   sqrt(.rowSums(x^2,d[1],d[2],...)) else abs(x)
 # `surface` returns the volume (area, length) of the surface of a ball with 
-# radius 1 in d-dimensional space:
-surface <- function(d) 2*pi^(d/2)/gamma(d/2)
+# radius r in d-dimensional space:
+surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 
 ##############################################################################
 #' Dispersal Kernels For Log-Normal Distance Distributions
@@ -62,8 +62,10 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
   log.a <- par[1]
   σ <- exp(par[2])
   N / (surface(d)*sqrt(2*pi*σ^2)) * exp(-(log(r)-log.a)^2/(2*σ^2)) / r^d
-  # N / (surface(d)*r^(d-1)) * dlnorm(r,log.a,σ)
+  # Alternative for the last line:
+  # N / surface(d,r) * dlnorm(r,log.a,σ)
 }
+
 
 ##############################################################################
 #' Dispersal Kernels From Spatial t Distribution
@@ -112,7 +114,10 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   p <- exp(par[2])
-  N * 2 / (surface(d) * a^d * beta(d/2, p)) / (1+(r/a)^2)^(p+d/2)
+  s<-2*p/(d*a^2); N * 2 * s / surface(d) * r^(2-d) * df(s*r^2, d, 2*p)
+  # Alternatives for the last line:
+  # s<-2*p/(d*a^2); N * 2 * s * r * df(s*r^2, d, 2*p) / surface(d,r)
+  # N * 2 / (surface(d) * a^d * beta(d/2, p)) / (1+(r/a)^2)^(p+d/2)
 }
 
 
@@ -178,7 +183,8 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 #'
-#' #'Bullock, J. M., Mallada González, L., Tamme, R., Götzenberger, L., White, S. M., Pärtel, M., Hooftman, D. A.
+#' #'Bullock, J. M., Mallada González, L., Tamme, R., Götzenberger, L., White, 
+#' #'S. M., Pärtel, M., Hooftman, D. A.
 #' (2017).  A synthesis of empirical plant dispersal kernels.
 #' *Journal of Ecology* **105**, 6-19.
 #' \doi{10.1111/1365-2745.12666}
@@ -194,6 +200,8 @@ k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
   a <- exp(par[1])
   b <- exp(par[2])
   N * b / (surface(d) * a^d * gamma(d/b)) * exp(-(r/a)^b)
+  # Alternative for the last line:
+  # N / surface(d) * b * r^(b-d) * dgamma(r^b,d/b,,a^b)
 }
 
 
@@ -225,7 +233,8 @@ k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
 #' 
 #' The distribution is fat-tailed when \eqn{b<1} and
 #' thin-tailed otherwise (Nathan et al. 2012).
-#' For \eqn{b>1}, the mode of the function is at \eqn{x>1}. In this way, the function approaches the normal distribution.
+#' For \eqn{b>1}, the mode of the function is at \eqn{x>1}. In this way, the 
+#' function approaches the normal distribution.
 #'
 #' @references
 #' Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in
@@ -246,7 +255,9 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
-  N * b / (surface(d) * a^-b) * r^(b-d) * exp(-(r/a)^b)
+  N * dweibull(r,b,a) / surface(d,r)
+  # Alternative for the last line:
+  # N * b / (surface(d) * a^b) * r^(b-d) * exp(-(r/a)^b)
 }
 
 
@@ -259,7 +270,7 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 #' @return Numeric vector of function values multiplied by \eqn{N}.
 #'
 #' @param par Numeric vector with three elements representing the
-#' log-transformed parameters \eqn{a} and \eqn{b} and the scaling \eqn{N}.
+#' log-transformed parameters \eqn{a} and \eqn{b-d} and the scaling \eqn{N}.
 #' @param x represents the distance to the nearest seed source. Must be
 #' numeric.
 #'
@@ -298,8 +309,12 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 k_power <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
-  b <- exp(par[2])
-  N / (surface(d) * a^d * beta(d,b-d)) * (1+r/a)^-b
+  p <- exp(par[2])
+  N / (surface(d) * a^d * beta(d,p)) * (1+r/a)^(-d-p)
+  # Alternatives for the last line:
+  # s<-p/(d*a); N * s * df(s*r, 2*d, 2*p) / surface(d,r)
+  # q<-r/(a+r); N * a / surface(d) / r^(d+1) * q^2 * dbeta(q,d,p)
+  # N * a / (a+r)^2 * dbeta(r/(a+r),d,p) / surface(d,r)
 }
 
 
