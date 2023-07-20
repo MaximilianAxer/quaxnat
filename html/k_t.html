@@ -21,8 +21,7 @@ function processMathHTML() {
 <h3>Description</h3>
 
 <p><code>k_t</code> computes the value, multiplied by <code class="reqn">N</code>, of the dispersal kernel
-from Clark et al. (1999) that represents a scaled multivariate t
-distribution.
+from Clark et al. (1999) that represents a multivariate t distribution.
 </p>
 
 
@@ -61,7 +60,7 @@ log-transformed parameters <code class="reqn">a</code> and <code class="reqn">p<
 <p>The dispersal kernel, i.e. spatial probability density
 of the location of a seed relative to its source, is here given by
 </p>
-<p style="text-align: center;"><code class="reqn">k(x)={\Gamma (d/2) \over \pi ^{d/2}a^{d}\Beta (d/2,p)}
+<p style="text-align: center;"><code class="reqn">k(x)={\Gamma (p+d/2) \over \pi ^{d/2}a^{d}\Gamma (p)}
   (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(p+d/2)},</code>
 </p>
 
@@ -76,19 +75,19 @@ denotes the Euclidean norm and the normalizing constants involve the
 beta and gamma functions; see Clark
 et al. (1999) and Austerlitz et al. (2004) for the planar case (with
 parameterizations <code class="reqn">a=\sqrt{u}</code> and <code class="reqn">p=b-d/2</code>, respectively). This
-means the position is <code class="reqn">a</code> times a random variable having a
-<code class="reqn">d</code>-variate t distribution with <code class="reqn">2p</code> degrees of freedom, and the
-squared distance is <code class="reqn">da^{2} \over 2p</code> times a random variable having
-an F distribution with <code class="reqn">d</code> and <code class="reqn">2p</code> degrees
-of freedom.
+means the position is <code class="reqn">a \over \sqrt{2p}</code> times a random vector having
+a standard <code class="reqn">d</code>-variate t distribution with <code class="reqn">2p</code> degrees of
+freedom, and the squared distance is <code class="reqn">da^{2} \over 2p</code> times a random
+variable having an F distribution with <code class="reqn">d</code> and
+<code class="reqn">2p</code> degrees of freedom.
 </p>
 <p>This results from the kernel being defined as a mixture of Gaussian
 kernels with an inverse variance (or represents the distribution of a
-standard Gaussian vector divided the square root of an independent random
-variable) having a gamma distribution with shape parameter <code class="reqn">p</code> and
-scale parameter <code class="reqn">2/a^{2}</code>, which for <code class="reqn">a=1</code> is a
-chi-squared distribution with <code class="reqn">2p</code> degrees of
-freedom.
+standard Gaussian vector divided by the square root of an independent
+random variable) having a gamma distribution with
+shape parameter <code class="reqn">p</code> and scale parameter <code class="reqn">2/a^{2}</code>, which for
+<code class="reqn">a=1</code> is a chi-squared distribution with
+<code class="reqn">2p</code> degrees of freedom.
 </p>
 <p>The dispersal kernel always has its maximum at zero, and the distance has
 a fat-tailed distribution for all choices of <code class="reqn">p</code>.

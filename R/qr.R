@@ -73,8 +73,7 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' Dispersal Kernels From Spatial t Distribution
 #'
 #' `k_t` computes the value, multiplied by \eqn{N}, of the dispersal kernel 
-#' from Clark et al. (1999) that represents a scaled multivariate t 
-#' distribution.
+#' from Clark et al. (1999) that represents a multivariate t distribution.
 #'
 #' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 #'
@@ -87,7 +86,7 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
-#' \deqn{k(x)={\Gamma (d/2) \over \pi ^{d/2}a^{d}\Beta (d/2,p)}
+#' \deqn{k(x)={\Gamma (p+d/2) \over \pi ^{d/2}a^{d}\Gamma (p)}
 #'   (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(p+d/2)},}
 #' which corresponds to a probability density of the distance given by
 #' \deqn{p(r)={2 \over a^{d}\Beta (d/2,p)}r^{d-1}
@@ -97,19 +96,19 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' \link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Clark 
 #' et al. (1999) and Austerlitz et al. (2004) for the planar case (with 
 #' parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-d/2}, respectively). This 
-#' means the position is \eqn{a} times a random variable having a 
-#' \eqn{d}-variate t distribution with \eqn{2p} degrees of freedom, and the
-#' squared distance is \eqn{da^{2} \over 2p} times a random variable having 
-#' an \link[stats:FDist]{F distribution} with \eqn{d} and \eqn{2p} degrees 
-#' of freedom.
+#' means the position is \eqn{a \over \sqrt{2p}} times a random vector having 
+#' a standard \eqn{d}-variate t distribution with \eqn{2p} degrees of 
+#' freedom, and the squared distance is \eqn{da^{2} \over 2p} times a random 
+#' variable having an \link[stats:FDist]{F distribution} with \eqn{d} and 
+#' \eqn{2p} degrees of freedom.
 #' 
 #' This results from the kernel being defined as a mixture of Gaussian 
 #' kernels with an inverse variance (or represents the distribution of a 
-#' standard Gaussian vector divided the square root of an independent random 
-#' variable) having a gamma distribution with shape parameter \eqn{p} and 
-#' scale parameter \eqn{2/a^{2}}, which for \eqn{a=1} is a 
-#' \link[stats:Chisquare]{chi-squared distribution} with \eqn{2p} degrees of 
-#' freedom.
+#' standard Gaussian vector divided by the square root of an independent 
+#' random variable) having a \link[stats:GammaDist]{gamma distribution} with 
+#' shape parameter \eqn{p} and scale parameter \eqn{2/a^{2}}, which for 
+#' \eqn{a=1} is a \link[stats:Chisquare]{chi-squared distribution} with 
+#' \eqn{2p} degrees of freedom.
 #'
 #' The dispersal kernel always has its maximum at zero, and the distance has 
 #' a fat-tailed distribution for all choices of \eqn{p}.
@@ -163,8 +162,9 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
 #' denotes the Euclidean norm and the normalizing constants involve the 
 #' \link[base:beta]{gamma} function; see Bateman (1947), Clark et al. (1998), 
 #' Austerlitz et al. (2004), Nathan et al. (2012) for the planar case. This 
-#' means the \eqn{b}th power of the distance has a gamma distribution with 
-#' shape parameter \eqn{d/b} and scale parameter \eqn{a^{b}}.
+#' means the \eqn{b}th power of the distance has a 
+#' \link[stats:GammaDist]{gamma distribution} with shape parameter 
+#' \eqn{d/b} and scale parameter \eqn{a^{b}}.
 #' 
 #' The kernel has its maximum at zero and represents a rather flexible family 
 #' that includes, for \eqn{b=2} the classical Gaussian kernels and for 
@@ -229,7 +229,7 @@ k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
 #'
 #' `k_weibull` computes the value, multiplied by \eqn{N}, of the dispersal 
 #' kernel from Tufto et al. (1997) based on seeds having a distance with a 
-#' Weibull distribution from the their source.
+#' Weibull distribution from their source.
 #'
 #' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 #'

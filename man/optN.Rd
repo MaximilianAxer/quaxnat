@@ -4,7 +4,7 @@
 \alias{optN}
 \title{optN}
 \usage{
-optN(par, nframe, tol, ...)
+optN(par, nframe, tol, ..., gr, method, lower, upper, control, hessian)
 }
 \arguments{
 \item{par}{are parameters to be estimated}

@@ -24,7 +24,7 @@ Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 \description{
 \code{k_weibull} computes the value, multiplied by \eqn{N}, of the dispersal
 kernel from Tufto et al. (1997) based on seeds having a distance with a
-Weibull distribution from the their source.
+Weibull distribution from their source.
 }
 \details{
 The dispersal kernel, i.e. spatial probability density
