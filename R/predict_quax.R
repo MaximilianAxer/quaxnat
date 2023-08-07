@@ -11,6 +11,21 @@
 #'
 #' @return  The regeneration density is given in N/ha.
 #'
+#' @examples
+#' #quax-Object
+#' f <- quax(Dgl_B0 ~ distance_dgl, VJ_pot, subset=Dgl_B0>0, weights=distance_dgl, tau=0.95, fun=lognormal)
+#'
+#' #Raster data set
+#' r1 <- terra::rast(nrows = 100, ncols = 100, res = 1)
+#' rr <- setValues(r1, c(0,1,5,4,7,9,13))
+#' plot(rr)
+#'
+#' #compute distance for prediction area
+#' distance <- Distmap(fe_raster = rr, treespecies = "13")
+#'
+#' #prediction
+#'predict_quax(distmap = distance, quax = f)
+#'
 
 predict_quax <- function(distmap, quax) {
   prediction <- quax(distmap)

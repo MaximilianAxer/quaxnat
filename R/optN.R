@@ -49,12 +49,18 @@ optN <- function(par, nframe, tol, ...,
 #' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function.
 #'
 #' @return The estimated function, including an attribute `o` containing the results of `optim`.
+#' @examples #create dataframe
+#' simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+#'
+#'# run quax function
+#'quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
+
 
 quax <- function(...) UseMethod("quax")
 
 quax.default <- function(..., y, tau, fun=k_lognormal,
     dim=2, weights=1, par=c(log.a=8, log.b=1), tol=1e-50) {
-  Nmax <- 2*sum(y)        # This number will be read and modified by the 
+  Nmax <- 2*sum(y)        # This number will be read and modified by the
   nframe <- sys.nframe()  #   inner optimization (referenced via nframe).
   o <- optim(par, optN, nframe=nframe, tol=tol,
     y=y, tau=tau, fun=fun, d=dim, w=weights, ...)
@@ -83,6 +89,23 @@ quax.formula <- function(formula, data, tau, fun=lognormal,
   quax.default(x=x, y=if (is.null(o)) y else y-o,
     tau=tau, fun=fun, weights=if (is.null(w)) 1 else w, ...)
 }
+
+
+#'summary.quax
+#'
+#'@description The function for printing the summary of the quantile regression.
+#'
+#'
+#' @return The function return a list including the estimated parameters for the quantile regression for the specific distribution function.#'
+#'         The estimated function, including an attribute `o` containing the results of `optim`.
+#' @examples #create dataframe
+#' simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+#'
+#'# run quax function
+#'f1 <- quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
+#'
+#'# run summary.quax
+#' summary.quax(f1)
 
 summary.quax <- function(f)
   list(coef=formals(f)$par, value=attr(f,"o")$value)

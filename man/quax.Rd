@@ -36,3 +36,10 @@ The dispersal function for estimating the potential regeneration density in the 
 \details{
 The function return a list including the estimated parameters for the quantile regression for the specific distribution function.
 }
+\examples{
+#create dataframe
+simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+
+# run quax function
+quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
+}
