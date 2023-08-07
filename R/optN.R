@@ -95,8 +95,8 @@ quax.formula <- function(formula, data, tau, fun=lognormal,
 #'
 #'@description The function for printing the summary of the quantile regression.
 #'
-#'
-#' @return The function return a list including the estimated parameters for the quantile regression for the specific distribution function.#'
+#' @return The quality criterion is the value that is minimised in the quantile regression. It represents the weighted sum of absolute residuals.
+#' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function.#'
 #'         The estimated function, including an attribute `o` containing the results of `optim`.
 #' @examples #create dataframe
 #' simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
@@ -108,9 +108,4 @@ quax.formula <- function(formula, data, tau, fun=lognormal,
 #' summary.quax(f1)
 
 summary.quax <- function(f)
-  list(coef=formals(f)$par, value=attr(f,"o")$value)
-
-#the function assumed for the dispersal distance distribution.
-###        Values allowed are: "exponential", "weibull", "gamma", "pearson",
-###        "lognormal", "half-normal", "half-cauchy", "half-t", or "user"
-###        (a user-defined fonction).
+  list(coef=formals(f)$par, value= attr(f,"o")$value)

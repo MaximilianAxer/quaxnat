@@ -7,11 +7,14 @@
 \method{summary}{quax}(f)
 }
 \value{
-The function return a list including the estimated parameters for the quantile regression for the specific distribution function.#'
-The estimated function, including an attribute \code{o} containing the results of \code{optim}.
+The quality criterion is the value that is minimised in the quantile regression. It represents the weighted sum of absolute residuals.
 }
 \description{
 The function for printing the summary of the quantile regression.
+}
+\details{
+The function return a list including the estimated parameters for the quantile regression for the specific distribution function.#'
+The estimated function, including an attribute \code{o} containing the results of \code{optim}.
 }
 \examples{
 #create dataframe
