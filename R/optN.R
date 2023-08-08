@@ -15,12 +15,28 @@
 #' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function. ... The global minimum in \eqn{N} for given other parameters can always be found with any desired precision, usually in a small number of steps, by successively shrinking an interval. We realize this as an inner, nested minimization in an internal function `optN`.
 #'
 #' @return The estimated function, including an attribute `o` containing the results of `optim`.
-#' @examples #create dataframe
-#' simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+#' @examples
+#' ## Create data frame (artificial):
+#' r <- rlnorm(200, meanlog = 5, sdlog = 1)
+#' simulated.data <- data.frame(distance = r, density =
+#'   rpois(length(r), k_lognormal(r, par=c(log(5),log(1)), N=2000)))
 #'
-#'# run quax function
-#'quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
-
+#' ## Run quax function:
+#' f <- quax(x = simulated.data$distance, y = simulated.data$density,
+#'   tau = 0.9, fun = k_lognormal)
+#' summary(f)
+#' 
+#' ## Do the same with the formula interface:
+#' f <- quax(density ~ distance, simulated.data,
+#'   tau = 0.9, fun = k_lognormal)
+#' plot(density ~ distance, simulated.data)
+#' curve(f(x), add=TRUE)
+#' 
+#' ## Show effect of weights:
+#' fw <- quax(density ~ distance, simulated.data,
+#'   tau = 0.9, fun = k_lognormal, weights = distance)
+#' summary(fw)
+#' curve(fw(x), add=TRUE, col="green", lty=3)
 
 #' @rdname quax
 quax <- function(...) UseMethod("quax")
