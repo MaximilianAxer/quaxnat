@@ -4,7 +4,7 @@
 \alias{quax}
 \alias{quax.default}
 \alias{quax.formula}
-\title{Estimation of Potential Regeneration Densities by Quantile Regression}
+\title{Estimating Potential Regeneration Densities by Quantile Regression}
 \usage{
 quax(...)
 

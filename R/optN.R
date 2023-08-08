@@ -1,4 +1,4 @@
-#' Estimation of Potential Regeneration Densities by Quantile Regression
+#' Estimating Potential Regeneration Densities by Quantile Regression
 #'
 #' `quax` estimates parameters of a spatial dispersal kernel that describes the potential regeneration density.
 #'
