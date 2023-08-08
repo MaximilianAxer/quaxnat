@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>R: SN</title>
+<!DOCTYPE html><html><head><title>R: Estimation of Potential Regeneration Densities by Quantile...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
@@ -16,17 +16,42 @@ function processMathHTML() {
 
 <table style="width: 100%;"><tr><td>quax</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='quax'>SN</h2>
+<h2 id='quax'>Estimation of Potential Regeneration Densities by Quantile Regression</h2>
 
 <h3>Description</h3>
 
-<p>The dispersal function for estimating the potential regeneration density in the 2-dimensional space.
+<p><code>quax</code> estimates parameters of a spatial dispersal kernel that describes the potential regeneration density.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre><code class='language-R'>quax(...)
+
+## Default S3 method:
+quax(
+  ...,
+  y,
+  tau,
+  fun = k_lognormal,
+  dim = 2,
+  weights = 1,
+  par = c(log.a = 8, log.b = 1),
+  tol = 1e-50
+)
+
+## S3 method for class 'formula'
+quax(
+  formula,
+  data,
+  tau,
+  fun = k_lognormal,
+  subset,
+  weights,
+  na.action,
+  offset,
+  ...
+)
 </code></pre>
 
 
@@ -37,21 +62,17 @@ function processMathHTML() {
 <td>
 <p>Further arguments passed to <code>optim</code>.</p>
 </td></tr>
-<tr><td><code id="quax_:_x">x</code></td>
-<td>
-<p>Numeric vector giving the distance to the nearest seed source for the inventory plot.</p>
-</td></tr>
 <tr><td><code id="quax_:_y">y</code></td>
 <td>
 <p>Observed regeneration density of the inventory plot.</p>
 </td></tr>
 <tr><td><code id="quax_:_tau">tau</code></td>
 <td>
-<p>Numeric between 0 and 1. Specifies the quantile used for the quantile regression. 0;1</p>
+<p>Numeric between 0 and 1. Specifies the quantile used for the quantile regression.</p>
 </td></tr>
 <tr><td><code id="quax_:_fun">fun</code></td>
 <td>
-<p>Function assumed for the quantile regression of the regeneration potential. Values allowed are: &quot;exponential.power.log&quot;, &quot;weibull.log&quot;, &quot;gamma&quot;, &quot;Clark2dt.log&quot;, &quot;lognormal&quot;, &quot;geometric.log&quot;. The default is to fit an lognormal model.</p>
+<p>Function assumed for the quantile regression of the regeneration potential. Values allowed are <code>k_lognormal</code>, <code>k_t</code>, <code>k_power</code>, <code>k_weibull</code>, <code>k_exponential.power</code> or a custom function. The default is to fit a lognormal model.</p>
 </td></tr>
 <tr><td><code id="quax_:_weights">weights</code></td>
 <td>
@@ -61,6 +82,10 @@ function processMathHTML() {
 <td>
 <p>Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter <code>N</code>.</p>
 </td></tr>
+<tr><td><code id="quax_:_tol">tol</code></td>
+<td>
+<p>The desired accuracy for the inner optimization, see <code>optimize</code>.</p>
+</td></tr>
 <tr><td><code id="quax_:_formula">formula</code></td>
 <td>
 <p>A formula of the form <code>y ~ x</code>.</p>
@@ -69,16 +94,16 @@ function processMathHTML() {
 <td>
 <p>For the formula interface: Further arguments passed to <code>model.frame</code> (along with <code>weights</code>).</p>
 </td></tr>
-<tr><td><code id="quax_:_tol">tol</code></td>
+<tr><td><code id="quax_:_x">x</code></td>
 <td>
-<p>The desired accuracy for the inner optimization, see <code>optimize</code>.</p>
+<p>Numeric vector giving the distance to the nearest seed source for the inventory plot.</p>
 </td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>The function return a list including the estimated parameters for the quantile regression for the specific distribution function.
+<p>The function return a list including the estimated parameters for the quantile regression for the specific distribution function. ... The global minimum in <code class="reqn">N</code> for given other parameters can always be found with any desired precision, usually in a small number of steps, by successively shrinking an interval. We realize this as an inner, nested minimization in an internal function <code>optN</code>.
 </p>
 
 

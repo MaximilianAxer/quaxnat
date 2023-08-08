@@ -11,7 +11,7 @@
 #' While common regression approaches assume that the average error in the model is zero, the errors are asymmetrically weighted for quantile regression (see Fahrmeir et al., 2013, Ch. 10).
 #' The objective function is defined and the sum of absolute weighted errors is minimized.
 #' \deqn{\sum_{i=1}^n x_i w_i |y_i - \eta_i|}
-#'@details
+#'@details ...
 
 
 

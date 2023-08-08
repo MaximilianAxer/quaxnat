@@ -2,37 +2,62 @@
 % Please edit documentation in R/optN.R
 \name{quax}
 \alias{quax}
-\title{SN}
+\alias{quax.default}
+\alias{quax.formula}
+\title{Estimation of Potential Regeneration Densities by Quantile Regression}
 \usage{
 quax(...)
+
+\method{quax}{default}(
+  ...,
+  y,
+  tau,
+  fun = k_lognormal,
+  dim = 2,
+  weights = 1,
+  par = c(log.a = 8, log.b = 1),
+  tol = 1e-50
+)
+
+\method{quax}{formula}(
+  formula,
+  data,
+  tau,
+  fun = k_lognormal,
+  subset,
+  weights,
+  na.action,
+  offset,
+  ...
+)
 }
 \arguments{
 \item{...}{Further arguments passed to \code{optim}.}
 
-\item{x}{Numeric vector giving the distance to the nearest seed source for the inventory plot.}
-
 \item{y}{Observed regeneration density of the inventory plot.}
 
-\item{tau}{Numeric between 0 and 1. Specifies the quantile used for the quantile regression. {0;1}}
+\item{tau}{Numeric between 0 and 1. Specifies the quantile used for the quantile regression.}
 
-\item{fun}{Function assumed for the quantile regression of the regeneration potential. Values allowed are: "exponential.power.log", "weibull.log", "gamma", "Clark2dt.log", "lognormal", "geometric.log". The default is to fit an lognormal model.}
+\item{fun}{Function assumed for the quantile regression of the regeneration potential. Values allowed are \code{k_lognormal}, \code{k_t}, \code{k_power}, \code{k_weibull}, \code{k_exponential.power} or a custom function. The default is to fit a lognormal model.}
 
 \item{weights}{Numeric vector of weights of the observations in the estimation procedure. Default is 0.}
 
 \item{par}{Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter \code{N}.}
 
+\item{tol}{The desired accuracy for the inner optimization, see \code{optimize}.}
+
 \item{formula}{A formula of the form \code{y ~ x}.}
 
 \item{data, subset, weights, na.action, offset}{For the formula interface: Further arguments passed to \code{model.frame} (along with \code{weights}).}
 
-\item{tol}{The desired accuracy for the inner optimization, see \code{optimize}.}
+\item{x}{Numeric vector giving the distance to the nearest seed source for the inventory plot.}
 }
 \value{
 The estimated function, including an attribute \code{o} containing the results of \code{optim}.
 }
 \description{
-The dispersal function for estimating the potential regeneration density in the 2-dimensional space.
+\code{quax} estimates parameters of a spatial dispersal kernel that describes the potential regeneration density.
 }
 \details{
-The function return a list including the estimated parameters for the quantile regression for the specific distribution function.
+The function return a list including the estimated parameters for the quantile regression for the specific distribution function. ... The global minimum in \eqn{N} for given other parameters can always be found with any desired precision, usually in a small number of steps, by successively shrinking an interval. We realize this as an inner, nested minimization in an internal function \code{optN}.
 }
