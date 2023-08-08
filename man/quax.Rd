@@ -65,14 +65,14 @@ The function return a list including the estimated parameters for the quantile r
 ## Create data frame (artificial):
 r <- rlnorm(200, meanlog = 5, sdlog = 1)
 simulated.data <- data.frame(distance = r, density =
-  rpois(length(r), k_lognormal(r, par=c(log(5),log(1)), N=2000)))
+  rpois(length(r), k_lognormal(r, par=c(log(5),log(1)), N=2000, d=2)))
 
 ## Run quax function:
 f <- quax(x = simulated.data$distance, y = simulated.data$density,
   tau = 0.9, fun = k_lognormal)
 summary(f)
 
-## Do the same with the formula interface:
+## Do the same using formula interface:
 f <- quax(density ~ distance, simulated.data,
   tau = 0.9, fun = k_lognormal)
 plot(density ~ distance, simulated.data)
@@ -83,4 +83,12 @@ fw <- quax(density ~ distance, simulated.data,
   tau = 0.9, fun = k_lognormal, weights = distance)
 summary(fw)
 curve(fw(x), add=TRUE, col="green", lty=3)
+
+## Use positions in computation:
+simulated.data$position <- r *
+  (\(a) cbind(cos(a),sin(a))) (runif(length(r),0,2*pi))
+fx <- quax(density ~ position, simulated.data,
+  tau = 0.9, fun = k_lognormal, weights = distance)
+summary(fx)
+
 }
