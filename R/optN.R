@@ -15,6 +15,12 @@
 #' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function. ... The global minimum in \eqn{N} for given other parameters can always be found with any desired precision, usually in a small number of steps, by successively shrinking an interval. We realize this as an inner, nested minimization in an internal function `optN`.
 #'
 #' @return The estimated function, including an attribute `o` containing the results of `optim`.
+#' @examples #create dataframe
+#' simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+#'
+#'# run quax function
+#'quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
+
 
 #' @rdname quax
 quax <- function(...) UseMethod("quax")
@@ -63,10 +69,22 @@ quax.formula <- function(formula, data, tau, fun=k_lognormal,
     tau=tau, fun=fun, weights=if (is.null(w)) 1 else w, ...)
 }
 
-summary.quax <- function(f)
-  list(coef=formals(f)$par, value=attr(f,"o")$value)
 
-#the function assumed for the dispersal distance distribution.
-###        Values allowed are: "exponential", "weibull", "gamma", "pearson",
-###        "lognormal", "half-normal", "half-cauchy", "half-t", or "user"
-###        (a user-defined fonction).
+#'summary.quax
+#'
+#'@description The function for printing the summary of the quantile regression.
+#'
+#' @return The quality criterion is the value that is minimised in the quantile regression. It represents the weighted sum of absolute residuals.
+#' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function.#'
+#'         The estimated function, including an attribute `o` containing the results of `optim`.
+#' @examples #create dataframe
+#' simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+#'
+#'# run quax function
+#'f1 <- quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
+#'
+#'# run summary.quax
+#' summary.quax(f1)
+
+summary.quax <- function(f)
+  list(coef=formals(f)$par, value= attr(f,"o")$value)

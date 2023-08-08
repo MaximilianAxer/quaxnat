@@ -113,5 +113,15 @@ quax(
 </p>
 
 
+<h3>Examples</h3>
+
+<pre><code class='language-R'>#create dataframe
+simulated.data &lt;- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+
+# run quax function
+quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
+</code></pre>
+
+
 </div>
 </body></html>

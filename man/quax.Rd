@@ -61,3 +61,10 @@ The estimated function, including an attribute \code{o} containing the results o
 \details{
 The function return a list including the estimated parameters for the quantile regression for the specific distribution function. ... The global minimum in \eqn{N} for given other parameters can always be found with any desired precision, usually in a small number of steps, by successively shrinking an interval. We realize this as an inner, nested minimization in an internal function \code{optN}.
 }
+\examples{
+#create dataframe
+simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+
+# run quax function
+quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
+}
