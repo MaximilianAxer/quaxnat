@@ -22,29 +22,44 @@
 #'   rpois(length(r), k_lognormal(r, par=c(log(5),log(1)), N=2000, d=2)))
 #'
 #' ## Run quax function:
-#' f <- quax(x = simulated.data$distance, y = simulated.data$density,
+#' f1 <- quax(x = simulated.data$distance, y = simulated.data$density,
 #'   tau = 0.9, fun = k_lognormal)
-#' summary(f)
+#' summary(f1)
 #' 
 #' ## Do the same using formula interface:
-#' f <- quax(density ~ distance, simulated.data,
+#' f1 <- quax(density ~ distance, simulated.data,
 #'   tau = 0.9, fun = k_lognormal)
+#' summary(f1)
 #' plot(density ~ distance, simulated.data)
-#' curve(f(x), add=TRUE)
+#' curve(f1(x), add=TRUE)
 #' 
 #' ## Show effect of weights:
-#' fw <- quax(density ~ distance, simulated.data,
+#' f2 <- quax(density ~ distance, simulated.data,
 #'   tau = 0.9, fun = k_lognormal, weights = distance)
-#' summary(fw)
-#' curve(fw(x), add=TRUE, col="green", lty=3)
+#' summary(f2)
+#' curve(f2(x), add=TRUE, col="green", lty=3)
 #' 
 #' ## Use positions in computation:
 #' simulated.data$position <- r *
 #'   (\(a) cbind(cos(a),sin(a))) (runif(length(r),0,2*pi))
-#' fx <- quax(density ~ position, simulated.data,
+#' f2 <- quax(density ~ position, simulated.data,
 #'   tau = 0.9, fun = k_lognormal, weights = distance)
-#' summary(fx)
+#' summary(f2)
 #'
+#' ## Use custom variant of lognormal model that includes a shift:
+#' plot(simulated.data$position)
+#' f3 <- quax(density ~ position, simulated.data,
+#'   tau = 0.9, par = c(8, 1, 0, 0),
+#'   fun = function(x, par, N=1, d=NCOL(x)) {
+#'     x[,1] <- x[,1] - par[3]
+#'     x[,2] <- x[,2] - par[4]
+#'     r <- rownorms(x)
+#'     log.a <- par[1]
+#'     σ <- exp(par[2])
+#'     N / surface(d,r) * dlnorm(r,log.a,σ)
+#'   }
+#' )
+#' summary(f3)
 
 #' @rdname quax
 quax <- function(...) UseMethod("quax")
