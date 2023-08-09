@@ -115,32 +115,33 @@ quax(
 
 <h3>Examples</h3>
 
-<pre><code class='language-R'>## Create data frame (artificial):
-r &lt;- rlnorm(200, meanlog = 5, sdlog = 1)
+<pre><code class='language-R'>## Prepare artificial example data:
+set.seed(0)
+r &lt;- rgamma(200, shape=2, scale=150)
 simulated.data &lt;- data.frame(distance = r, density =
-  rpois(length(r), k_lognormal(r, par=c(log(5),log(1)), N=2000, d=2)))
+  rpois(length(r), k_lognormal(r, par=c(6,0), N=1000000, d=2)))
+plot(density ~ distance, simulated.data)
 
 ## Run quax function:
 f1 &lt;- quax(x = simulated.data$distance, y = simulated.data$density,
   tau = 0.9, fun = k_lognormal)
 summary(f1)
+curve(f1(x), add=TRUE)
 
 ## Do the same using formula interface:
 f1 &lt;- quax(density ~ distance, simulated.data,
   tau = 0.9, fun = k_lognormal)
 summary(f1)
-plot(density ~ distance, simulated.data)
-curve(f1(x), add=TRUE)
 
 ## Show effect of weights:
 f2 &lt;- quax(density ~ distance, simulated.data,
   tau = 0.9, fun = k_lognormal, weights = distance)
 summary(f2)
-curve(f2(x), add=TRUE, col="green", lty=3)
+curve(f2(x), add=TRUE, lty=3)
 
 ## Use positions in computation:
 simulated.data$position &lt;- r *
-  (\(a) cbind(cos(a),sin(a))) (runif(length(r),0,2*pi))
+  (\(a) cbind(cos(a),sin(a))) (rnorm(length(r)))
 f2 &lt;- quax(density ~ position, simulated.data,
   tau = 0.9, fun = k_lognormal, weights = distance)
 summary(f2)
@@ -149,14 +150,8 @@ summary(f2)
 plot(simulated.data$position)
 f3 &lt;- quax(density ~ position, simulated.data,
   tau = 0.9, par = c(8, 1, 0, 0),
-  fun = function(x, par, N=1, d=NCOL(x)) {
-    x[,1] &lt;- x[,1] - par[3]
-    x[,2] &lt;- x[,2] - par[4]
-    r &lt;- rownorms(x)
-    log.a &lt;- par[1]
-    σ &lt;- exp(par[2])
-    N / surface(d,r) * dlnorm(r,log.a,σ)
-  }
+  fun = function(x, par, N, d)
+    k_lognormal(x - rep(par[-(1:2)],each=NROW(x)), par[1:2], N, d)
 )
 summary(f3)
 </code></pre>

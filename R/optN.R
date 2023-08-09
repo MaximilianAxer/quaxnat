@@ -15,33 +15,35 @@
 #' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function. ... The global minimum in \eqn{N} for given other parameters can always be found with any desired precision, usually in a small number of steps, by successively shrinking an interval. We realize this as an inner, nested minimization in an internal function `optN`.
 #'
 #' @return The estimated function, including an attribute `o` containing the results of `optim`.
+#'
 #' @examples
-#' ## Create data frame (artificial):
-#' r <- rlnorm(200, meanlog = 5, sdlog = 1)
+#' ## Prepare artificial example data:
+#' set.seed(0)
+#' r <- rgamma(200, shape=2, scale=150)
 #' simulated.data <- data.frame(distance = r, density =
-#'   rpois(length(r), k_lognormal(r, par=c(log(5),log(1)), N=2000, d=2)))
+#'   rpois(length(r), k_lognormal(r, par=c(6,0), N=1000000, d=2)))
+#' plot(density ~ distance, simulated.data)
 #'
 #' ## Run quax function:
 #' f1 <- quax(x = simulated.data$distance, y = simulated.data$density,
 #'   tau = 0.9, fun = k_lognormal)
 #' summary(f1)
+#' curve(f1(x), add=TRUE)
 #' 
 #' ## Do the same using formula interface:
 #' f1 <- quax(density ~ distance, simulated.data,
 #'   tau = 0.9, fun = k_lognormal)
 #' summary(f1)
-#' plot(density ~ distance, simulated.data)
-#' curve(f1(x), add=TRUE)
 #' 
 #' ## Show effect of weights:
 #' f2 <- quax(density ~ distance, simulated.data,
 #'   tau = 0.9, fun = k_lognormal, weights = distance)
 #' summary(f2)
-#' curve(f2(x), add=TRUE, col="green", lty=3)
+#' curve(f2(x), add=TRUE, lty=3)
 #' 
 #' ## Use positions in computation:
 #' simulated.data$position <- r *
-#'   (\(a) cbind(cos(a),sin(a))) (runif(length(r),0,2*pi))
+#'   (\(a) cbind(cos(a),sin(a))) (rnorm(length(r)))
 #' f2 <- quax(density ~ position, simulated.data,
 #'   tau = 0.9, fun = k_lognormal, weights = distance)
 #' summary(f2)
@@ -50,14 +52,8 @@
 #' plot(simulated.data$position)
 #' f3 <- quax(density ~ position, simulated.data,
 #'   tau = 0.9, par = c(8, 1, 0, 0),
-#'   fun = function(x, par, N=1, d=NCOL(x)) {
-#'     x[,1] <- x[,1] - par[3]
-#'     x[,2] <- x[,2] - par[4]
-#'     r <- rownorms(x)
-#'     log.a <- par[1]
-#'     σ <- exp(par[2])
-#'     N / surface(d,r) * dlnorm(r,log.a,σ)
-#'   }
+#'   fun = function(x, par, N, d)
+#'     k_lognormal(x - rep(par[-(1:2)],each=NROW(x)), par[1:2], N, d)
 #' )
 #' summary(f3)
 
