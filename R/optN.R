@@ -35,27 +35,41 @@
 #'   tau = 0.9, fun = k_lognormal)
 #' summary(f1)
 #' 
-#' ## Show effect of weights:
+#' ## Use another quantile:
 #' f2 <- quax(density ~ distance, simulated.data,
-#'   tau = 0.9, fun = k_lognormal, weights = distance)
+#'   tau = 0.99, fun = k_lognormal)
 #' summary(f2)
-#' curve(f2(x), add=TRUE, lty=3)
+#' curve(f2(x), add=TRUE, lwd=0)
+#' 
+#' ## Show effect of weights:
+#' f3 <- quax(density ~ distance, simulated.data,
+#'   tau = 0.9, fun = k_lognormal, weights = distance)
+#' summary(f3)
+#' curve(f3(x), add=TRUE, lty=3)
+#' 
+#' ## Compare various dispersal models:
+#' fun <- c("k_lognormal","k_t","k_weibull","k_power","k_exponential.power")
+#' for (i in seq_along(fun))
+#'   curve(quax(density ~ distance, simulated.data,
+#'     tau = 0.9, fun = get(fun[i]), weights = distance)(x),
+#'     add=TRUE, col=i, lty=3)
+#' legend("topright", fun, col=seq_along(fun), lty=3)
 #' 
 #' ## Use positions in computation:
 #' simulated.data$position <- r *
 #'   (\(a) cbind(cos(a),sin(a))) (rnorm(length(r)))
-#' f2 <- quax(density ~ position, simulated.data,
+#' f3 <- quax(density ~ position, simulated.data,
 #'   tau = 0.9, fun = k_lognormal, weights = distance)
-#' summary(f2)
+#' summary(f3)
 #'
 #' ## Use custom variant of lognormal model that includes a shift:
 #' plot(simulated.data$position)
-#' f3 <- quax(density ~ position, simulated.data,
+#' f4 <- quax(density ~ position, simulated.data,
 #'   tau = 0.9, par = c(8, 1, 0, 0),
 #'   fun = function(x, par, N, d)
 #'     k_lognormal(x - rep(par[-(1:2)],each=NROW(x)), par[1:2], N, d)
 #' )
-#' summary(f3)
+#' summary(f4)
 
 #' @rdname quax
 quax <- function(...) UseMethod("quax")
