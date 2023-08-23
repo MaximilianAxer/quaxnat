@@ -16,7 +16,7 @@
 
 
 S <- function(N, par, y, tau, w, fun, ...) {
-  res <- y - fun(..., par=par, N=N)
+  res <- y - if (N) fun(..., par=par, N=N) else 0  # (compute 0*Inf as 0)
   s <- tau - 0.5 + 0.5*sign(res)
   result <- sum(w * s * res)
   return(result)
