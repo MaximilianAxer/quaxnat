@@ -28,7 +28,10 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 #' of the location of a seed relative to its source, is here given by
 #' \deqn{k(x)={\Gamma (d/2) \over 
 #'   2\pi ^{d/2}\left\|{x}\right\|^{d}\sqrt{2\pi \sigma ^{2}}}
-#'   e^{-{1 \over 2\sigma ^{2}}(\log (\left\|{x}\right\|/a))^{2}},}
+#'   e^{-{1 \over 2\sigma ^{2}}(\log (\left\|{x}\right\|/a))^{2}}
+#'   = {\Gamma (d/2)e^{d^{2}\sigma ^{2}/2} \over 
+#'   2\pi ^{d/2}a^{d}\sqrt{2\pi \sigma ^{2}}} e^{-{1 \over 2\sigma ^{2}}
+#'   (\log {\left\|{x}\right\| \over a}+d\sigma ^{2})^{2}},}
 #' which corresponds to a probability density of the distance given by
 #' \deqn{p(r)={1 \over r\sqrt{2\pi \sigma ^{2}}}
 #'   e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},}
@@ -39,7 +42,7 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 #' is assumed to have the \link[stats:Lognormal]{log-normal distribution} 
 #' such that the log-distance has a normal distribution with mean \eqn{a} and 
 #' variance \eqn{\sigma^2}. Here \eqn{\log k(x)} is a quadratic function of 
-#' \eqn{\left\|{x}\right\|} with a maximum at \eqn{\log a-d\sigma^2}.
+#' \eqn{\log \left\|{x}\right\|} with a maximum at \eqn{\log a-d\sigma^2}.
 #'
 #' This kernel is particularly suitable if the maximum regeneration density 
 #' is not directly at the seed source (e.g. Janzen–Connell effect), cf. 
@@ -62,10 +65,12 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   log.a <- par[1]
-  σ <- exp(par[2])
-  N / (surface(d)*sqrt(2*pi*σ^2)) * exp(-(log(r)-log.a)^2/(2*σ^2)) / r^d
-  # Alternative for the last line:
-  # N / surface(d,r) * dlnorm(r,log.a,σ)
+  s.2 <- exp(2*par[2])
+  N / (surface(d)*sqrt(2*pi*s.2)) * 
+    exp(d^2*s.2/2 - d*log.a - (log(r)-log.a+d*s.2)^2/(2*s.2))
+  # Alternatives for the last line (for nonzero r only):
+  # N / (surface(d)*sqrt(2*pi*s.2)) * exp(-(log(r)-log.a)^2/(2*s.2)) / r^d
+  # N / surface(d,r) * dlnorm(r,log.a,exp(par[2]))
 }
 
 
@@ -129,7 +134,7 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
   a <- exp(par[1])
   p <- exp(par[2])
   s<-2*p/(d*a^2); N * 2 * s / surface(d) * r^(2-d) * df(s*r^2, d, 2*p)
-  # Alternatives for the last line:
+  # Alternatives for the last line (for nonzero r):
   # s<-2*p/(d*a^2); N * 2 * s * r * df(s*r^2, d, 2*p) / surface(d,r)
   # N * 2 / (surface(d) * a^d * beta(d/2, p)) / (1+(r/a)^2)^(p+d/2)
 }
@@ -219,7 +224,7 @@ k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
   a <- exp(par[1])
   b <- exp(par[2])
   N * b / (surface(d) * a^d * gamma(d/b)) * exp(-(r/a)^b)
-  # Alternative for the last line:
+  # Alternative for the last line (for nonzero r):
   # N / surface(d) * b * r^(b-d) * dgamma(r^b,d/b,,a^b)
 }
 
@@ -284,9 +289,9 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
-  N * dweibull(r,b,a) / surface(d,r)
-  # Alternative for the last line:
-  # N * b / (surface(d) * a^b) * r^(b-d) * exp(-(r/a)^b)
+  N * b / (surface(d) * a^b) * r^(b-d) * exp(-(r/a)^b)
+  # Alternative for the last line (for nonzero r):
+  # N * dweibull(r,b,a) / surface(d,r)
 }
 
 
@@ -336,7 +341,7 @@ k_power <- function(x, par, N=1, d=NCOL(x)) {
   a <- exp(par[1])
   p <- exp(par[2])
   N / (surface(d) * a^d * beta(d,p)) * (1+r/a)^(-d-p)
-  # Alternatives for the last line:
+  # Alternatives for the last line (for nonzero r):
   # s<-p/(d*a); N * s * df(s*r, 2*d, 2*p) / surface(d,r)
   # q<-r/(a+r); N * a / surface(d) / r^(d+1) * q^2 * dbeta(q,d,p)
   # N * a / (a+r)^2 * dbeta(r/(a+r),d,p) / surface(d,r)
