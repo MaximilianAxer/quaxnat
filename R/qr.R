@@ -289,6 +289,7 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
+  if (!N) return(numeric(length(x))) # Compute 0*Inf as 0.
   N * b / (surface(d) * a^b) * r^(b-d) * exp(-(r/a)^b)
   # Alternative for the last line (for nonzero r):
   # N * dweibull(r,b,a) / surface(d,r)
