@@ -64,7 +64,10 @@ of the location of a seed relative to its source, is here given by
 </p>
 <p style="text-align: center;"><code class="reqn">k(x)={\Gamma (d/2) \over 
   2\pi ^{d/2}\left\|{x}\right\|^{d}\sqrt{2\pi \sigma ^{2}}}
-  e^{-{1 \over 2\sigma ^{2}}(\log (\left\|{x}\right\|/a))^{2}},</code>
+  e^{-{1 \over 2\sigma ^{2}}(\log (\left\|{x}\right\|/a))^{2}}
+  = {\Gamma (d/2)e^{d^{2}\sigma ^{2}/2} \over 
+  2\pi ^{d/2}a^{d}\sqrt{2\pi \sigma ^{2}}} e^{-{1 \over 2\sigma ^{2}}
+  (\log {\left\|{x}\right\| \over a}+d\sigma ^{2})^{2}},</code>
 </p>
 
 <p>which corresponds to a probability density of the distance given by
@@ -80,7 +83,7 @@ involves the gamma function; see Greene and Johnson
 is assumed to have the log-normal distribution
 such that the log-distance has a normal distribution with mean <code class="reqn">a</code> and
 variance <code class="reqn">\sigma^2</code>. Here <code class="reqn">\log k(x)</code> is a quadratic function of
-<code class="reqn">\left\|{x}\right\|</code> with a maximum at <code class="reqn">\log a-d\sigma^2</code>.
+<code class="reqn">\log \left\|{x}\right\|</code> with a maximum at <code class="reqn">\log a-d\sigma^2</code>.
 </p>
 <p>This kernel is particularly suitable if the maximum regeneration density
 is not directly at the seed source (e.g. Janzen–Connell effect), cf.
