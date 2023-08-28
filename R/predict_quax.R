@@ -28,6 +28,7 @@
 #'
 
 predict_quax <- function(distmap, quax) {
-  prediction <- quax(distmap)
-  return(prediction)
+  prediction <- quax(values(distmap))
+  values(distmap) <- prediction
+  return(distmap)
 }
