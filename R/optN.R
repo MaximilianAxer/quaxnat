@@ -81,6 +81,10 @@ quax.default <- function(..., y, tau, fun=k_lognormal,
   optN <- function(par, nframe, tol, ...,
       gr, method, lower, upper, control, hessian # (grab optim arguments)
   ) {
+    S <- function(N, par, y, tau, w, fun, ...) {
+      res <- y - fun(..., par=par, N=N)
+      sum(w * res * (tau - 0.5 + 0.5*sign(res)))
+    }
     s <- S(N=0, par=par, ...)
     while (S(N=Nmax, par=par, ...) < s) Nmax <<- 2*Nmax
     oN <- optimize(S, c(0, Nmax), par=par, ..., tol=tol)
