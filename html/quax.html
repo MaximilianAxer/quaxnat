@@ -20,7 +20,11 @@ function processMathHTML() {
 
 <h3>Description</h3>
 
-<p><code>quax</code> estimates parameters of a spatial dispersal kernel that describes the potential regeneration density.
+<p><code>quax</code> estimates parameters of a spatial dispersal kernel that describes
+the regeneration potential as the <code class="reqn">\tau </code>th quantile of the regeneration
+density. Here <code class="reqn">\tau </code> is between 0 and 1, with typical values close to 1
+representing the situation that the full regeneration potential is realized
+only at a small fraction of all sites.
 </p>
 
 
@@ -60,56 +64,76 @@ quax(
 <table>
 <tr><td><code id="quax_:_...">...</code></td>
 <td>
-<p>Further arguments passed to <code>optim</code>.</p>
+<p>Vector of positions <code class="reqn">x_{1},...,x_{n}</code> or distances to the
+seed source as expected by the specific dispersal kernel. Optionally,
+further arguments passed to <code>optim</code> (see Details).</p>
 </td></tr>
 <tr><td><code id="quax_:_y">y</code></td>
 <td>
-<p>Observed regeneration density of the inventory plot.</p>
+<p>Observed values <code class="reqn">y_{1},...,y_{n}</code> of the regeneration density
+of the inventory plot.</p>
 </td></tr>
 <tr><td><code id="quax_:_tau">tau</code></td>
 <td>
-<p>Numeric between 0 and 1. Specifies the quantile used for the quantile regression.</p>
+<p>Numeric between 0 and 1. Specifies the quantile <code class="reqn">\tau </code>
+used for the quantile regression.</p>
 </td></tr>
 <tr><td><code id="quax_:_fun">fun</code></td>
 <td>
-<p>Function assumed for the quantile regression of the regeneration potential. Values allowed are <code>k_lognormal</code>, <code>k_t</code>, <code>k_power</code>, <code>k_weibull</code>, <code>k_exponential.power</code> or a custom function. The default is to fit a lognormal model.</p>
+<p>Dispersal kernel <code class="reqn">k_{\theta }</code> assumed for the regeneration
+potential. Values allowed are <code>k_lognormal</code>, <code>k_t</code>, <code>k_power</code>,
+<code>k_weibull</code>, <code>k_exponential.power</code> or a custom function (see Examples).
+The default, <code>k_lognormal</code>, is to fit a model with log-normal distance
+distributions.</p>
 </td></tr>
 <tr><td><code id="quax_:_weights">weights</code></td>
 <td>
-<p>Numeric vector of weights of the observations in the estimation procedure. Default is 0.</p>
+<p>Numeric vector of optional nonnegative weights <code class="reqn">w_i</code> of
+the observations in the estimation procedure. Default is 1.</p>
 </td></tr>
 <tr><td><code id="quax_:_par">par</code></td>
 <td>
-<p>Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter <code>N</code>.</p>
+<p>Numeric vector of initial values for the parameter vector
+<code class="reqn">\theta </code>.</p>
 </td></tr>
 <tr><td><code id="quax_:_tol">tol</code></td>
 <td>
-<p>The desired accuracy for the inner optimization, see <code>optimize</code>.</p>
+<p>The desired accuracy for the inner optimization (see Details).</p>
 </td></tr>
 <tr><td><code id="quax_:_formula">formula</code></td>
 <td>
 <p>A formula of the form <code>y ~ x</code>.</p>
 </td></tr>
-<tr><td><code id="quax_:_data">data</code>, <code id="quax_:_subset">subset</code>, <code id="quax_:_weights">weights</code>, <code id="quax_:_na.action">na.action</code>, <code id="quax_:_offset">offset</code></td>
+<tr><td><code id="quax_:_data">data</code>, <code id="quax_:_subset">subset</code>, <code id="quax_:_na.action">na.action</code>, <code id="quax_:_offset">offset</code></td>
 <td>
-<p>For the formula interface: Further arguments passed to <code>model.frame</code> (along with <code>weights</code>).</p>
-</td></tr>
-<tr><td><code id="quax_:_x">x</code></td>
-<td>
-<p>Numeric vector giving the distance to the nearest seed source for the inventory plot.</p>
+<p>For the formula interface:
+Further arguments passed to <code>model.frame</code> (along with <code>weights</code>).</p>
 </td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>The function return a list including the estimated parameters for the quantile regression for the specific distribution function. ... The global minimum in <code class="reqn">N</code> for given other parameters can always be found with any desired precision, usually in a small number of steps, by successively shrinking an interval. We realize this as an inner, nested minimization in an internal function <code>optN</code>.
+<p>The function estimates the parameters <code class="reqn">N</code> and <code class="reqn">\theta </code>
+of the regeneration potential <code class="reqn">Nk_{\theta }</code> by minimizing
+</p>
+<p style="text-align: center;"><code class="reqn">\displaystyle \sum _{i=1}^{n}w_{i}(y_{i}-Nk_{\theta }(x_{i}))\bigl\{
+  \begin{smallmatrix}\tau \hphantom{-1} &amp;\text{if }y_{i}&gt;Nk_{\theta }
+  (x_{i})\\ \tau -1&amp;\text{if not}\hphantom{.............}\end{smallmatrix}</code>
+</p>
+
+<p>(see e.g. ??FAHRMEIER ...). Due to convexity the minimum in <code class="reqn">N</code> for
+a given vector <code class="reqn">\theta </code> can always be found by successively shrinking
+an interval; this is implemented in an inner, nested minimization using
+<code>optimize</code>, the result which is minimized in
+<code class="reqn">\theta </code> using <code>optim</code>.
 </p>
 
 
 <h3>Value</h3>
 
-<p>The estimated function, including an attribute <code>o</code> containing the results of <code>optim</code>.
+<p>The estimated function, including an attribute <code>o</code> containing the
+results of <code>optim</code>.
 </p>
 
 

@@ -1,20 +1,46 @@
+
 #' Estimating Potential Regeneration Densities by Quantile Regression
 #'
-#' `quax` estimates parameters of a spatial dispersal kernel that describes the potential regeneration density.
+#' `quax` estimates parameters of a spatial dispersal kernel that describes 
+#' the regeneration potential as the \eqn{\tau }th quantile of the regeneration 
+#' density. Here \eqn{\tau } is between 0 and 1, with typical values close to 1 
+#' representing the situation that the full regeneration potential is realized 
+#' only at a small fraction of all sites.
 #'
-#' @param x Numeric vector giving the distance to the nearest seed source for the inventory plot.
-#' @param y Observed regeneration density of the inventory plot.
-#' @param tau Numeric between 0 and 1. Specifies the quantile used for the quantile regression.
-#' @param fun Function assumed for the quantile regression of the regeneration potential. Values allowed are `k_lognormal`, `k_t`, `k_power`, `k_weibull`, `k_exponential.power` or a custom function. The default is to fit a lognormal model.
-#' @param weights Numeric vector of weights of the observations in the estimation procedure. Default is 0.
-#' @param par Numeric vector of initial values for the parameters to be optimized over, exluding the first parameter `N`.
-#' @param ... Further arguments passed to `optim`.
+#' @param ... Vector of positions \eqn{x_{1},...,x_{n}} or distances to the 
+#' seed source as expected by the specific dispersal kernel. Optionally, 
+#' further arguments passed to `optim` (see Details).
+#' @param y Observed values \eqn{y_{1},...,y_{n}} of the regeneration density 
+#' of the inventory plot.
+#' @param tau Numeric between 0 and 1. Specifies the quantile \eqn{\tau } 
+#' used for the quantile regression.
+#' @param fun Dispersal kernel \eqn{k_{\theta }} assumed for the regeneration 
+#' potential. Values allowed are `k_lognormal`, `k_t`, `k_power`, 
+#' `k_weibull`, `k_exponential.power` or a custom function (see Examples). 
+#' The default, `k_lognormal`, is to fit a model with log-normal distance 
+#' distributions.
+#' @param weights Numeric vector of optional nonnegative weights \eqn{w_i} of 
+#' the observations in the estimation procedure. Default is 1.
+#' @param par Numeric vector of initial values for the parameter vector 
+#' \eqn{\theta }.
 #' @param formula A formula of the form `y ~ x`.
-#' @param data,subset,weights,na.action,offset For the formula interface: Further arguments passed to `model.frame` (along with `weights`).
-#' @param tol The desired accuracy for the inner optimization, see `optimize`.
-#' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function. ... The global minimum in \eqn{N} for given other parameters can always be found with any desired precision, usually in a small number of steps, by successively shrinking an interval. We realize this as an inner, nested minimization in an internal function `optN`.
+#' @param data,subset,na.action,offset For the formula interface: 
+#' Further arguments passed to `model.frame` (along with `weights`).
+#' @param tol The desired accuracy for the inner optimization (see Details).
 #'
-#' @return The estimated function, including an attribute `o` containing the results of `optim`.
+#' @details The function estimates the parameters \eqn{N} and \eqn{\theta } 
+#' of the regeneration potential \eqn{Nk_{\theta }} by minimizing
+#' \deqn{\displaystyle \sum _{i=1}^{n}w_{i}(y_{i}-Nk_{\theta }(x_{i}))\bigl\{
+#'   \begin{smallmatrix}\tau \hphantom{-1} &\text{if }y_{i}>Nk_{\theta }
+#'   (x_{i})\\ \tau -1&\text{if not}\hphantom{.............}\end{smallmatrix}}
+#' (see e.g. ??FAHRMEIER ...). Due to convexity the minimum in \eqn{N} for a 
+#' given vector \eqn{\theta } can always be found by successively shrinking 
+#' an interval; this is implemented in an inner, nested minimization using 
+#' \code{\link[stats:optimize]{optimize}}, the result which is minimized in 
+#' \eqn{\theta } using \code{\link[stats:optim]{optim}}.
+#'
+#' @return The estimated function, including an attribute `o` containing the 
+#' results of `optim`.
 #'
 #' @examples
 #' ## Prepare artificial example data:

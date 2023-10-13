@@ -58,6 +58,16 @@ function processMathHTML() {
 
 <p>The distance is given in m.
 </p>
+<p>#' @examples
+</p>
+<p>#Raster data set
+r1 &lt;- terra::rast(nrows = 100, ncols = 100, res = 1)
+rr &lt;- setValues(r1, c(0,1,5,4,7,9,13))
+plot(rr)
+</p>
+<p>#compute distance for prediction area
+distance &lt;- Distmap(fe_raster = rr, treespecies = &quot;13&quot;)
+</p>
 
 
 </div>
