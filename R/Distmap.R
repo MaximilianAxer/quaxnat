@@ -12,6 +12,15 @@
 #'
 #' @return  The distance is given in m.
 #'
+#'#' @examples
+#'
+#' #Raster data set
+#' r1 <- terra::rast(nrows = 100, ncols = 100, res = 1)
+#' rr <- setValues(r1, c(0,1,5,4,7,9,13))
+#' plot(rr)
+#'
+#' #compute distance for prediction area
+#' distance <- Distmap(fe_raster = rr, treespecies = "13")
 
 Distmap <- function(fe_raster, fe_geom, treespecies){
   window <- terra::segregate(terra::crop(fe_raster, sf::st_buffer(sf::st_union(fe_geom), dist = 1000)))[[treespecies]]
