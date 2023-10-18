@@ -78,8 +78,8 @@ of the regeneration potential \eqn{Nk_{\theta }} by minimizing
 \deqn{\displaystyle \sum _{i=1}^{n}w_{i}(y_{i}-Nk_{\theta }(x_{i}))\bigl\{
   \begin{smallmatrix}\tau \hphantom{-1} &\text{if }y_{i}>Nk_{\theta }
   (x_{i})\\ \tau -1&\text{if not}\hphantom{.............}\end{smallmatrix}}
-(see e.g. ??FAHRMEIER ...). Due to convexity the minimum in \eqn{N} for
-a given vector \eqn{\theta } can always be found by successively shrinking
+(see e.g. ??FAHRMEIER ...). Due to convexity the minimum in \eqn{N} for a
+given vector \eqn{\theta } can always be found by successively shrinking
 an interval; this is implemented in an inner, nested minimization using
 \code{\link[stats:optimize]{optimize}}, the result which is minimized in
 \eqn{\theta } using \code{\link[stats:optim]{optim}}.
@@ -138,4 +138,5 @@ f4 <- quax(density ~ position, simulated.data,
     k_lognormal(x - rep(par[-(1:2)],each=NROW(x)), par[1:2], N, d)
 )
 summary(f4)
+
 }

@@ -1,3 +1,6 @@
+#' @import stats
+NULL
+
 # Internal functions:
 # `rownorms` returns the Euclidean norms of the rows of a matrix x:
 rownorms <- function(x,...) if (length(d<-dim(x))>1L && d[2L]>1)
@@ -61,6 +64,8 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 #' Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G., 
 #' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
 #' \doi{10.1093/acprof:oso/9780199608898.003.0015}
+#'
+#' @export
 
 k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -128,6 +133,8 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
+#'
+#' @export
 
 k_t <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -218,6 +225,7 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
 #' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
 #' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 #'
+#' @export
 
 k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -284,6 +292,8 @@ k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
 #' Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G., 
 #' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
 #' \doi{10.1093/acprof:oso/9780199608898.003.0015}
+#'
+#' @export
 
 k_weibull <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -336,6 +346,8 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 #' Smouse, P.E., Sork, V.L. (2004). Using genetic markers to estimate the
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
+#'
+#' @export
 
 k_power <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -364,3 +376,5 @@ k_power <- function(x, par, N=1, d=NCOL(x)) {
 #  result <- f(x, par)
 #  return(result)
 #}
+
+#' @import stats

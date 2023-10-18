@@ -1,3 +1,5 @@
+#' @import stats
+NULL
 
 #' Estimating Potential Regeneration Densities by Quantile Regression
 #'
@@ -96,11 +98,15 @@
 #'     k_lognormal(x - rep(par[-(1:2)],each=NROW(x)), par[1:2], N, d)
 #' )
 #' summary(f4)
-
+#'
+#' @export
 #' @rdname quax
+
 quax <- function(...) UseMethod("quax")
 
+#' @export
 #' @rdname quax
+
 quax.default <- function(..., y, tau, fun=k_lognormal,
     dim=2, weights=1, par=c(log.a=8, log.b=1), tol=1e-50) {
   Nmax <- 2*sum(y)  # (will be modified by optN)
@@ -131,7 +137,9 @@ quax.default <- function(..., y, tau, fun=k_lognormal,
   fun
 }
 
+#' @export
 #' @rdname quax
+
 quax.formula <- function(formula, data, tau, fun=k_lognormal,
     subset, weights, na.action, offset, ...) {
   cl <- match.call(expand.dots=FALSE)
@@ -164,6 +172,8 @@ quax.formula <- function(formula, data, tau, fun=k_lognormal,
 #'
 #'# run summary.quax
 #' summary.quax(f1)
+#'
+#' @export
 
 summary.quax <- function(f)
   list(coef=formals(f)$par, value= attr(f,"o")$value)

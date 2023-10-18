@@ -25,4 +25,5 @@ f1 <- quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, f
 
 # run summary.quax
 summary.quax(f1)
+
 }
