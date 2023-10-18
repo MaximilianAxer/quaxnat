@@ -12,15 +12,17 @@ NULL
 #'
 #' @param ... Vector of positions \eqn{x_{1},...,x_{n}} or distances to the 
 #' seed source as required by the specific dispersal kernel. Optionally, 
-#' further arguments passed to `optim` (see Details).
+#' further arguments passed to `optim`, to the default method or to the 
+#' kernel.
 #' @param y Observed values \eqn{y_{1},...,y_{n}} of the regeneration density 
 #' of the inventory plot.
 #' @param tau Numeric between 0 and 1. Specifies the quantile \eqn{\tau } 
-#' used for the quantile regression.
+#' used in the regression.
 #' @param fun Dispersal kernel \eqn{k_{\theta }} assumed for the regeneration 
-#' potential. Values allowed are `k_lognormal`, `k_t`, `k_power`, 
-#' `k_weibull`, `k_exponential.power` or a custom function (see Examples). 
-#' The default, `k_lognormal`, is to fit a model with log-normal distance 
+#' potential. Values allowed are \code{\link{k_lognormal}}, 
+#' \code{\link{k_t}}, \code{\link{k_power}}, \code{\link{k_weibull}}, 
+#' \code{\link{k_exponential.power}} or a custom function (see Examples). The 
+#' default, `k_lognormal`, is to fit a model with log-normal distance 
 #' distributions.
 #' @param dim The spatial dimension, by default equal to 2.
 #' @param weights Numeric vector of optional nonnegative weights \eqn{w_i} of 
@@ -52,7 +54,7 @@ NULL
 #' \doi{10.2307/1913643}
 #'
 #' @examples
-#' ## Prepare artificial example data:
+#' ## Prepare artificial data:
 #' set.seed(0)
 #' r <- rgamma(200, shape=2, scale=150)
 #' simulated.data <- data.frame(distance = r, density =
@@ -124,7 +126,8 @@ quax.default <- function(..., y, tau, fun=k_lognormal,
   optN <- function(par, tol, ...,
       gr, method, lower, upper, control, hessian # optional arguments not 
   ) {                                            #   to be passed on to S
-    # Define objective function for minimization:
+
+    # Define objective function S:
     S <- function(N, par, y, tau, w, fun, ...) {
       res <- y - fun(..., par=par, N=N)
       sum(w * res * (tau - 0.5 + 0.5*sign(res)))
@@ -184,23 +187,43 @@ quax.formula <- function(formula, data, tau, fun=k_lognormal,
 
 
 ##############################################################################
-#'summary.quax
+#' Summarizing Quantile Regression Fits of Potential Regeneration Densities
 #'
-#'@description The function for printing the summary of the quantile regression.
+#' This function is the `summary` method for class `quax` objects as returned 
+#' by \code{\link{quax}}.
 #'
-#' @return The quality criterion is the value that is minimised in the quantile regression. It represents the weighted sum of absolute residuals.
-#' @details The function return a list including the estimated parameters for the quantile regression for the specific distribution function.#'
-#'         The estimated function, including an attribute `o` containing the results of `optim`.
-#' @examples #create dataframe
-#' simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+#' @param f The function returned by \code{\link{quax}}.
 #'
-#'# run quax function
-#'f1 <- quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
+#' @return A list with the following components:
+#' \describe{
+#'   \item{`coef`}{The parameters of the estimated dispersal kernel.}
+#'   \item{`value`}{The attained value of the objective function that is 
+#'     minimised in the quantile regression.}
+#' }
 #'
-#'# run summary.quax
-#' summary.quax(f1)
+#' @details The `value` component of the result can be used to compare the 
+#' quality of the fit of different dispersal kernels for the same quantile 
+#' to the same data.
+#'
+#' @examples
+#' ## Prepare artificial data:
+#' set.seed(0)
+#' r <- rgamma(200, shape=2, scale=150)
+#' simulated.data <- data.frame(distance = r, density =
+#'   rpois(length(r), k_lognormal(r, par=c(6,0), N=1000000, d=2)))
+#' plot(density ~ distance, simulated.data)
+#'
+#' ## Fit a log-normal and a power-law dispersal kernel to the data:
+#' f1 <- quax(density ~ distance, simulated.data,
+#'   tau = 0.9, fun = k_lognormal)
+#' f2 <- quax(density ~ distance, simulated.data,
+#'   tau = 0.9, fun = k_power)
+#'
+#' ## Compare both fits:
+#' summary(f1)
+#' summary(f2)
 #'
 #' @export
 
 summary.quax <- function(f)
-  list(coef=formals(f)$par, value= attr(f,"o")$value)
+  list(coef=formals(f)$par, value=attr(f,"o")$value)

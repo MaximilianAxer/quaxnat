@@ -2,28 +2,46 @@
 % Please edit documentation in R/quax.R
 \name{summary.quax}
 \alias{summary.quax}
-\title{summary.quax}
+\title{Summarizing Quantile Regression Fits of Potential Regeneration Densities}
 \usage{
 \method{summary}{quax}(f)
 }
+\arguments{
+\item{f}{The function returned by \code{\link{quax}}.}
+}
 \value{
-The quality criterion is the value that is minimised in the quantile regression. It represents the weighted sum of absolute residuals.
+A list with the following components:
+\describe{
+\item{\code{coef}}{The parameters of the estimated dispersal kernel.}
+\item{\code{value}}{The attained value of the objective function that is
+minimised in the quantile regression.}
+}
 }
 \description{
-The function for printing the summary of the quantile regression.
+This function is the \code{summary} method for class \code{quax} objects as returned
+by \code{\link{quax}}.
 }
 \details{
-The function return a list including the estimated parameters for the quantile regression for the specific distribution function.#'
-The estimated function, including an attribute \code{o} containing the results of \code{optim}.
+The \code{value} component of the result can be used to compare the
+quality of the fit of different dispersal kernels for the same quantile
+to the same data.
 }
 \examples{
-#create dataframe
-simulated.data <- data.frame(distance = rlnorm(200, meanlog = 5, sdlog = 1), density = rep(0:10,200))
+## Prepare artificial data:
+set.seed(0)
+r <- rgamma(200, shape=2, scale=150)
+simulated.data <- data.frame(distance = r, density =
+  rpois(length(r), k_lognormal(r, par=c(6,0), N=1000000, d=2)))
+plot(density ~ distance, simulated.data)
 
-# run quax function
-f1 <- quax(x = simulated.data$distance, y = simulated.data$density, tau = 0.9, fun = k_lognormal)
+## Fit a log-normal and a power-law dispersal kernel to the data:
+f1 <- quax(density ~ distance, simulated.data,
+  tau = 0.9, fun = k_lognormal)
+f2 <- quax(density ~ distance, simulated.data,
+  tau = 0.9, fun = k_power)
 
-# run summary.quax
-summary.quax(f1)
+## Compare both fits:
+summary(f1)
+summary(f2)
 
 }

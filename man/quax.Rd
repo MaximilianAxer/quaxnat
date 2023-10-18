@@ -34,19 +34,23 @@ quax(...)
 \arguments{
 \item{...}{Vector of positions \eqn{x_{1},...,x_{n}} or distances to the
 seed source as required by the specific dispersal kernel. Optionally,
-further arguments passed to \code{optim} (see Details).}
+further arguments passed to \code{optim}, to the default method or to the
+kernel.}
 
 \item{y}{Observed values \eqn{y_{1},...,y_{n}} of the regeneration density
 of the inventory plot.}
 
 \item{tau}{Numeric between 0 and 1. Specifies the quantile \eqn{\tau }
-used for the quantile regression.}
+used in the regression.}
 
 \item{fun}{Dispersal kernel \eqn{k_{\theta }} assumed for the regeneration
-potential. Values allowed are \code{k_lognormal}, \code{k_t}, \code{k_power},
-\code{k_weibull}, \code{k_exponential.power} or a custom function (see Examples).
-The default, \code{k_lognormal}, is to fit a model with log-normal distance
+potential. Values allowed are \code{\link{k_lognormal}},
+\code{\link{k_t}}, \code{\link{k_power}}, \code{\link{k_weibull}},
+\code{\link{k_exponential.power}} or a custom function (see Examples). The
+default, \code{k_lognormal}, is to fit a model with log-normal distance
 distributions.}
+
+\item{dim}{The spatial dimension, by default equal to 2.}
 
 \item{weights}{Numeric vector of optional nonnegative weights \eqn{w_i} of
 the observations in the estimation procedure. Default is 1.}
@@ -85,7 +89,7 @@ an interval; this is implemented in an inner, nested minimization using
 \eqn{\theta } using \code{\link[stats:optim]{optim}}.
 }
 \examples{
-## Prepare artificial example data:
+## Prepare artificial data:
 set.seed(0)
 r <- rgamma(200, shape=2, scale=150)
 simulated.data <- data.frame(distance = r, density =
