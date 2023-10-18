@@ -361,20 +361,4 @@ k_power <- function(x, par, N=1, d=NCOL(x)) {
 }
 
 
-##############################################################################
-#
-##'Function selection
-##' param x represents the distance to the nearest seed source. Must be
-##' numeric
-##' param par are parameters to be estimated
-#
-#S.functions <- function(x, par, fun){
-#  fun <- match.arg(fun,
-#                   c("Clark2dt",
-#                     "lognormal"))
-#  f <- get(fun)
-#  result <- f(x, par)
-#  return(result)
-#}
-
 #' @import stats
