@@ -22,6 +22,7 @@ NULL
 #' `k_weibull`, `k_exponential.power` or a custom function (see Examples). 
 #' The default, `k_lognormal`, is to fit a model with log-normal distance 
 #' distributions.
+#' @param dim The spatial dimension, by default equal to 2.
 #' @param weights Numeric vector of optional nonnegative weights \eqn{w_i} of 
 #' the observations in the estimation procedure. Default is 1.
 #' @param par Numeric vector of initial values for the parameter vector 
@@ -115,26 +116,45 @@ quax <- function(...) UseMethod("quax")
 
 quax.default <- function(..., y, tau, fun=k_lognormal,
     dim=2, weights=1, par=c(log.a=8, log.b=1), tol=1e-50) {
-  Nmax <- 2*sum(y)  # (will be modified by optN)
-  optN <- function(par, nframe, tol, ...,
-      gr, method, lower, upper, control, hessian # (grab optim arguments)
-  ) {
+
+  # Initialize hint for upper bound of N (will be modified by optN):
+  Nmax <- 2*sum(y)
+
+  # Define inner optimization function optN:
+  optN <- function(par, tol, ...,
+      gr, method, lower, upper, control, hessian # optional arguments not 
+  ) {                                            #   to be passed on to S
+    # Define objective function for minimization:
     S <- function(N, par, y, tau, w, fun, ...) {
       res <- y - fun(..., par=par, N=N)
       sum(w * res * (tau - 0.5 + 0.5*sign(res)))
     }
+
+    # Adjust upper bound of N:
     s <- S(N=0, par=par, ...)
     while (S(N=Nmax, par=par, ...) < s) Nmax <<- 2*Nmax
+
+    # Find N that minimizes S:
     oN <- optimize(S, c(0, Nmax), par=par, ..., tol=tol)
+
+    # Save updated hint for upper bound:
     Nmax <<- (Nmax+oN$minimum)/2
+
+    # Return value of S, attaching N as an attribute:
     obj <- oN$objective
     attr(obj,"N") <- oN$minimum
     obj
   }
-  o <- optim(par, optN, nframe=nframe, tol=tol,
-    y=y, tau=tau, fun=fun, d=dim, w=weights, ...)
-  obj <- optN(par=o$par, nframe=nframe, tol=tol,
-    y=y, tau=tau, fun=fun, d=dim, w=weights, ...)
+
+  # Search for parameter vector that minimizes optN:
+  o <- optim(par, optN, tol=tol, y=y,
+    tau=tau, fun=fun, d=dim, w=weights, ...)
+
+  # Compute N for that parameter vector:
+  obj <- optN(par=o$par, tol=tol, y=y,
+    tau=tau, fun=fun, d=dim, w=weights, ...)
+
+  # Set up and return result:
   formals(fun)$par <- o$par
   formals(fun)$N <- attr(obj,"N")
   formals(fun)$d <- dim
@@ -163,6 +183,7 @@ quax.formula <- function(formula, data, tau, fun=k_lognormal,
 }
 
 
+##############################################################################
 #'summary.quax
 #'
 #'@description The function for printing the summary of the quantile regression.
