@@ -23,3 +23,19 @@ S <- function(N, par, y, tau, w, fun, ...) {
 }
 
 #S(y = 1,  x = 1, par = 1:3, tau = 0.99,  fun = "l")
+
+
+#
+##'Function selection
+##' param x represents the distance to the nearest seed source. Must be
+##' numeric
+##' param par are parameters to be estimated
+#
+#S.functions <- function(x, par, fun){
+#  fun <- match.arg(fun,
+#                   c("Clark2dt",
+#                     "lognormal"))
+#  f <- get(fun)
+#  result <- f(x, par)
+#  return(result)
+#}
