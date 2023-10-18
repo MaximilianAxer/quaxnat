@@ -33,7 +33,7 @@ quax(...)
 }
 \arguments{
 \item{...}{Vector of positions \eqn{x_{1},...,x_{n}} or distances to the
-seed source as expected by the specific dispersal kernel. Optionally,
+seed source as required by the specific dispersal kernel. Optionally,
 further arguments passed to \code{optim} (see Details).}
 
 \item{y}{Observed values \eqn{y_{1},...,y_{n}} of the regeneration density
@@ -67,10 +67,10 @@ results of \code{optim}.
 }
 \description{
 \code{quax} estimates parameters of a spatial dispersal kernel that describes
-the regeneration potential as the \eqn{\tau }th quantile of the regeneration
-density. Here \eqn{\tau } is between 0 and 1, with typical values close to 1
-representing the situation that the full regeneration potential is realized
-only at a small fraction of all sites.
+the regeneration potential as the \eqn{\tau }th quantile of the
+regeneration density. Here \eqn{\tau } is between 0 and 1, with typical
+values close to 1 representing the situation that the full regeneration
+potential is realized only at a small fraction of all sites.
 }
 \details{
 The function estimates the parameters \eqn{N} and \eqn{\theta }
@@ -78,7 +78,7 @@ of the regeneration potential \eqn{Nk_{\theta }} by minimizing
 \deqn{\displaystyle \sum _{i=1}^{n}w_{i}(y_{i}-Nk_{\theta }(x_{i}))\bigl\{
   \begin{smallmatrix}\tau \hphantom{-1} &\text{if }y_{i}>Nk_{\theta }
   (x_{i})\\ \tau -1&\text{if not}\hphantom{.............}\end{smallmatrix}}
-(see e.g. ??FAHRMEIER ...). Due to convexity the minimum in \eqn{N} for a
+(Koenker and Bassett 1978). Due to convexity the minimum in \eqn{N} for a
 given vector \eqn{\theta } can always be found by successively shrinking
 an interval; this is implemented in an inner, nested minimization using
 \code{\link[stats:optimize]{optimize}}, the result which is minimized in
@@ -139,4 +139,9 @@ f4 <- quax(density ~ position, simulated.data,
 )
 summary(f4)
 
+}
+\references{
+Koenker, R., Bassett, G. (1978). Regression Quantiles. \emph{Econometrica}
+\strong{46(1)}, 33–50.
+\doi{10.2307/1913643}
 }
