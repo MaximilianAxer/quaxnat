@@ -85,8 +85,17 @@ of the regeneration potential \eqn{Nk_{\theta }} by minimizing
 (Koenker and Bassett 1978). Due to convexity the minimum in \eqn{N} for a
 given vector \eqn{\theta } can always be found by successively shrinking
 an interval; this is implemented in an inner, nested minimization using
-\code{\link[stats:optimize]{optimize}}, the result which is minimized in
-\eqn{\theta } using \code{\link[stats:optim]{optim}}.
+\code{\link[stats:optimize]{optimize}}, the result of which is minimized
+in \eqn{\theta } using \code{\link[stats:optim]{optim}}.
+
+This is a rather naive approach to quantile regression that
+appears to work reasonably well for scaled dispersal kernels
+\eqn{Nk_{\theta }} as considered here, see App. A in Axer et al. (2021).
+For general quantile regression problems the more sophisticated procedure
+\code{\link[quantreg:nlrq]{nlrq}} in the package \code{quantreg}, based on
+Koenker and Park (1996), is expected to provide better results.
+
+See Koenker (2005) for a detailed exposition of quantile regression.
 }
 \examples{
 ## Prepare artificial data:
@@ -146,6 +155,25 @@ summary(f4)
 }
 \references{
 Koenker, R., Bassett, G. (1978). Regression Quantiles. \emph{Econometrica}
-\strong{46(1)}, 33–50.
+\strong{46}(1), 33–50.
 \doi{10.2307/1913643}
+
+Axer, M., Schlicht, R., Wagner, S. (2021). Modelling potential density of
+natural regeneration of European oak species (\emph{Quercus robur} L., \emph{Quercus
+petraea} (Matt.) Liebl.) depending on the distance to the potential seed
+source: Methodological approach for modelling dispersal from inventory
+data at forest enterprise level. \emph{Forest Ecology and Management} \strong{482},
+118802.
+\doi{10.1016/j.foreco.2020.118802}
+
+Koenker, R., Park, B.J. (1996). An interior point algorithm for nonlinear
+quantile regression. \emph{Journal of Econometrics} \strong{71}(1–2), 265–283.
+\doi{10.1016/0304-4076(96)84507-6}
+
+Koenker, R. (2005). Quantile regression. Cambridge University Press.
+\doi{10.1017/CBO9780511754098}
+}
+\seealso{
+Function \code{\link[quantreg:nlrq]{nlrq}} in the package
+\code{\link[quantreg:nlrq]{quantreg}}.
 }
