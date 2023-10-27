@@ -14,6 +14,7 @@ Authors@R:
 Description: Estimation of natural regeneration potential by quantile regression.
 License: Unlimited
 Encoding: UTF-8
+Imports: stats
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 

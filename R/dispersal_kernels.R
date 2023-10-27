@@ -1,6 +1,3 @@
-#' @import stats
-NULL
-
 # Internal functions:
 # `rownorms` returns the Euclidean norms of the rows of a matrix x:
 rownorms <- function(x,...) if (length(d<-dim(x))>1L && d[2L]>1)
@@ -135,6 +132,7 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 #'
 #' @export
+#' @importFrom stats df
 
 k_t <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -359,6 +357,3 @@ k_power <- function(x, par, N=1, d=NCOL(x)) {
   # q<-r/(a+r); N * a / surface(d) / r^(d+1) * q^2 * dbeta(q,d,p)
   # N * a / (a+r)^2 * dbeta(r/(a+r),d,p) / surface(d,r)
 }
-
-
-#' @import stats

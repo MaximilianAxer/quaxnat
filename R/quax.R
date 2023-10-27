@@ -1,6 +1,3 @@
-#' @import stats
-NULL
-
 ##############################################################################
 #' Estimating Potential Regeneration Densities by Quantile Regression
 #'
@@ -143,6 +140,7 @@ quax <- function(...) UseMethod("quax")
 
 #' @export
 #' @rdname quax
+#' @importFrom stats optim optimize
 
 quax.default <- function(..., y, tau, fun=k_lognormal,
     dim=2, weights=1, par=c(log.a=8, log.b=1), tol=1e-50) {
@@ -205,10 +203,10 @@ quax.formula <- function(formula, data, tau, fun=k_lognormal,
   cl[[1L]] <- quote(stats::model.frame)
   cl$formula[[3L]] <- substitute(0+x, list(x=formula[[3L]]))
   mf <- eval.parent(cl)
-  x <- model.matrix(attr(mf,"terms"), mf)
+  x <- stats::model.matrix(attr(mf,"terms"), mf)
   y <- mf[[1L]]
-  o <- model.offset(mf)
-  w <- model.weights(mf)
+  o <- stats::model.offset(mf)
+  w <- stats::model.weights(mf)
   quax.default(x=x, y=if (is.null(o)) y else y-o,
     tau=tau, fun=fun, weights=if (is.null(w)) 1 else w, ...)
 }
