@@ -10,9 +10,17 @@ Authors@R:
     person(given = "Robert",
            family = "Schlicht",
            email = "robert.schlicht@tu-dresden.de",
-           role = c("aut")))
-Description: Estimation of natural regeneration potential by quantile regression.
-License: Unlimited
+           role = c("aut")),
+    person(given = "Robert",
+           family = "Nuske",
+           email = "robert.nuske@mailbox.org",
+           role = c("ctb"),
+           comment = c(ORCID = "0000-0001-9773-2061")))
+Description: Contains functions for estimating the potential dispersal of tree 
+            species using regeneration densities and dispersal distances to 
+            nearest seed trees. A quantile regression is implemented to determine
+            the dispersal potential.
+License: GPL (>=2)
 Encoding: UTF-8
 Imports: stats
 Roxygen: list(markdown = TRUE)
