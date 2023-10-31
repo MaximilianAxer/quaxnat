@@ -4,10 +4,12 @@
 \alias{summary.quax}
 \title{Summarizing Quantile Regression Fits of Potential Regeneration Densities}
 \usage{
-\method{summary}{quax}(f)
+\method{summary}{quax}(object, ...)
 }
 \arguments{
-\item{f}{The function returned by \code{\link{quax}}.}
+\item{object}{The function returned by \code{\link{quax}}.}
+
+\item{...}{not in use here}
 }
 \value{
 A list with the following components:

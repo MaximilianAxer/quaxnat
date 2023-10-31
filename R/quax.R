@@ -215,20 +215,21 @@ quax.formula <- function(formula, data, tau, fun=k_lognormal,
 ##############################################################################
 #' Summarizing Quantile Regression Fits of Potential Regeneration Densities
 #'
-#' This function is the `summary` method for class `quax` objects as returned 
+#' This function is the `summary` method for class `quax` objects as returned
 #' by \code{\link{quax}}.
 #'
-#' @param f The function returned by \code{\link{quax}}.
+#' @param object The function returned by \code{\link{quax}}.
+#' @param ... not in use here
 #'
 #' @return A list with the following components:
 #' \describe{
 #'   \item{`coef`}{The parameters of the estimated dispersal kernel.}
-#'   \item{`value`}{The attained value of the objective function that is 
+#'   \item{`value`}{The attained value of the objective function that is
 #'     minimised in the quantile regression.}
 #' }
 #'
-#' @details The `value` component of the result can be used to compare the 
-#' quality of the fit of different dispersal kernels for the same quantile 
+#' @details The `value` component of the result can be used to compare the
+#' quality of the fit of different dispersal kernels for the same quantile
 #' to the same data.
 #'
 #' @examples
@@ -251,5 +252,5 @@ quax.formula <- function(formula, data, tau, fun=k_lognormal,
 #'
 #' @export
 
-summary.quax <- function(f)
-  list(coef=formals(f)$par, value=attr(f,"o")$value)
+summary.quax <- function(object, ...)
+  list(coef=formals(object)$par, value=attr(object,"o")$value)
