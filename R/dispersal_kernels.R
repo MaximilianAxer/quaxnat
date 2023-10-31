@@ -96,7 +96,7 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' \deqn{k(x)={\Gamma (p+d/2) \over \pi ^{d/2}a^{d}\Gamma (p)}
 #'   (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(p+d/2)},}
 #' which corresponds to a probability density of the distance given by
-#' \deqn{p(r)={2 \over a^{d}\Beta (d/2,p)}r^{d-1}
+#' \deqn{p(r)={2 \over a^{d}B (d/2,p)}r^{d-1}
 #'   (1+{r^{2} \over a^{2}})^{-(p+d/2)},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
@@ -321,10 +321,10 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
-#' \deqn{k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}\Beta(d,p)}
+#' \deqn{k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}B(d,p)}
 #'   (1+{\left\|{x}\right\| \over a})^{-(p+d)},}
 #' which corresponds to a probability density of the distance given by
-#' \deqn{p(r)={1 \over a^{d}\Beta(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},}
+#' \deqn{p(r)={1 \over a^{d}B(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
 #' \link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Nathan 
