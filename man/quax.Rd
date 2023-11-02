@@ -154,7 +154,7 @@ summary(f4)
 
 }
 \references{
-Koenker, R., Bassett, G. (1978). Regression Quantiles. \emph{Econometrica}
+Koenker, R., Bassett, G. (1978). Regression quantiles. \emph{Econometrica}
 \strong{46}(1), 33–50.
 \doi{10.2307/1913643}
 
