@@ -55,7 +55,7 @@
 #' results of `optim`.
 #'
 #' @references
-#' Koenker, R., Bassett, G. (1978). Regression Quantiles. *Econometrica*
+#' Koenker, R., Bassett, G. (1978). Regression quantiles. *Econometrica*
 #' **46**(1), 33–50.
 #' \doi{10.2307/1913643}
 #'
