@@ -37,7 +37,7 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 #'   e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constant of the kernel 
-#' involves the \link[base:beta]{gamma} function; see Greene and Johnson 
+#' involves the \link[base:gamma]{gamma} function; see Greene and Johnson 
 #' (1989), Stoyan and Wagner (2001) for the planar case. Thus, the distance 
 #' is assumed to have the \link[stats:Lognormal]{log-normal distribution} 
 #' such that the log-distance has a normal distribution with mean \eqn{a} and 
@@ -96,11 +96,11 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' \deqn{k(x)={\Gamma (p+d/2) \over \pi ^{d/2}a^{d}\Gamma (p)}
 #'   (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(p+d/2)},}
 #' which corresponds to a probability density of the distance given by
-#' \deqn{p(r)={2 \over a^{d}B (d/2,p)}r^{d-1}
+#' \deqn{p(r)={2 \over a^{d}B(d/2,p)}r^{d-1}
 #'   (1+{r^{2} \over a^{2}})^{-(p+d/2)},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
-#' \link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Clark 
+#' \link[base:beta]{beta} and \link[base:gamma]{gamma} functions; see Clark 
 #' et al. (1999) and Austerlitz et al. (2004) for the planar case (with 
 #' parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-d/2}, respectively). This 
 #' means the position is \eqn{a \over \sqrt{2p}} times a random vector having 
@@ -170,9 +170,9 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
 #' \deqn{p(r)={b \over a^{d}\Gamma (d/b)}r^{d-1}e^{-(r/a)^{b}},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
-#' \link[base:beta]{gamma} function; see Bateman (1947), Clark et al. (1998), 
-#' Austerlitz et al. (2004), Nathan et al. (2012) for the planar case. This 
-#' means the \eqn{b}th power of the distance has a 
+#' \link[base:gamma]{gamma} function; see Bateman (1947), Clark et al. 
+#' (1998), Austerlitz et al. (2004), Nathan et al. (2012) for the planar 
+#' case. This means the \eqn{b}th power of the distance has a 
 #' \link[stats:GammaDist]{gamma distribution} with shape parameter 
 #' \eqn{d/b} and scale parameter \eqn{a^{b}}.
 #' 
@@ -260,7 +260,7 @@ k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
 #' \deqn{p(r)={b \over a^{b}}r^{b-1}e^{-(r/a)^{b}},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
-#' \link[base:beta]{gamma} function; see Tufto et al. (1997) for the planar 
+#' \link[base:gamma]{gamma} function; see Tufto et al. (1997) for the planar 
 #' case. Thus, the distance is assumed to have the 
 #' \link[stats:Weibull]{Weibull distribution} with scale parameter \eqn{a} 
 #' and shape parameter \eqn{b}. Equivalently, the \eqn{b}th power of the 
@@ -327,7 +327,7 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 #' \deqn{p(r)={1 \over a^{d}B(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
-#' \link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Nathan 
+#' \link[base:beta]{beta} and \link[base:gamma]{gamma} functions; see Nathan 
 #' et al. (2012) for the planar case (with the parameterization \eqn{p=b-d}). 
 #' This means the distance is \eqn{da \over p} times a random variable having 
 #' an \link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2p} degrees 

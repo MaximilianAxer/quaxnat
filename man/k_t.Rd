@@ -30,11 +30,11 @@ of the location of a seed relative to its source, is here given by
 \deqn{k(x)={\Gamma (p+d/2) \over \pi ^{d/2}a^{d}\Gamma (p)}
   (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(p+d/2)},}
 which corresponds to a probability density of the distance given by
-\deqn{p(r)={2 \over a^{d}B (d/2,p)}r^{d-1}
+\deqn{p(r)={2 \over a^{d}B(d/2,p)}r^{d-1}
   (1+{r^{2} \over a^{2}})^{-(p+d/2)},}
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constants involve the
-\link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Clark
+\link[base:beta]{beta} and \link[base:gamma]{gamma} functions; see Clark
 et al. (1999) and Austerlitz et al. (2004) for the planar case (with
 parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-d/2}, respectively). This
 means the position is \eqn{a \over \sqrt{2p}} times a random vector having

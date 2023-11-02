@@ -35,9 +35,9 @@ which corresponds to a probability density of the distance given by
 \deqn{p(r)={b \over a^{d}\Gamma (d/b)}r^{d-1}e^{-(r/a)^{b}},}
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constants involve the
-\link[base:beta]{gamma} function; see Bateman (1947), Clark et al. (1998),
-Austerlitz et al. (2004), Nathan et al. (2012) for the planar case. This
-means the \eqn{b}th power of the distance has a
+\link[base:gamma]{gamma} function; see Bateman (1947), Clark et al.
+(1998), Austerlitz et al. (2004), Nathan et al. (2012) for the planar
+case. This means the \eqn{b}th power of the distance has a
 \link[stats:GammaDist]{gamma distribution} with shape parameter
 \eqn{d/b} and scale parameter \eqn{a^{b}}.
 

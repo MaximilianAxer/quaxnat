@@ -33,7 +33,7 @@ which corresponds to a probability density of the distance given by
 \deqn{p(r)={1 \over a^{d}B(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},}
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constants involve the
-\link[base:beta]{beta} and \link[base:beta]{gamma} functions; see Nathan
+\link[base:beta]{beta} and \link[base:gamma]{gamma} functions; see Nathan
 et al. (2012) for the planar case (with the parameterization \eqn{p=b-d}).
 This means the distance is \eqn{da \over p} times a random variable having
 an \link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2p} degrees

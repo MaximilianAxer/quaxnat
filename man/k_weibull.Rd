@@ -35,7 +35,7 @@ which corresponds to a probability density of the distance given by
 \deqn{p(r)={b \over a^{b}}r^{b-1}e^{-(r/a)^{b}},}
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constants involve the
-\link[base:beta]{gamma} function; see Tufto et al. (1997) for the planar
+\link[base:gamma]{gamma} function; see Tufto et al. (1997) for the planar
 case. Thus, the distance is assumed to have the
 \link[stats:Weibull]{Weibull distribution} with scale parameter \eqn{a}
 and shape parameter \eqn{b}. Equivalently, the \eqn{b}th power of the

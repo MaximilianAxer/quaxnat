@@ -40,7 +40,7 @@ which corresponds to a probability density of the distance given by
   e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},}
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constant of the kernel
-involves the \link[base:beta]{gamma} function; see Greene and Johnson
+involves the \link[base:gamma]{gamma} function; see Greene and Johnson
 (1989), Stoyan and Wagner (2001) for the planar case. Thus, the distance
 is assumed to have the \link[stats:Lognormal]{log-normal distribution}
 such that the log-distance has a normal distribution with mean \eqn{a} and
