@@ -22,7 +22,8 @@ A SpatRaster is created with the same resolution as the input raster, defined by
 }
 \examples{
 #quax-Object
-f <- quax(Dgl_B0 ~ distance_dgl, VJ_pot, subset=Dgl_B0>0, weights=distance_dgl, tau=0.95, fun=lognormal)
+f <- quax(Dgl_B0 ~ distance_dgl, VJ_pot, subset=Dgl_B0>0, 
+          weights=distance_dgl, tau=0.95, fun=lognormal)
 
 #Raster data set
 r1 <- terra::rast(nrows = 100, ncols = 100, res = 1)
