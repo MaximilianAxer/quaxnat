@@ -9,11 +9,9 @@ Authors@R:
            comment = c(ORCID = "0000-0003-1482-9613")),
     person(given = "Robert",
            family = "Schlicht",
-           email = "robert.schlicht@tu-dresden.de",
            role = c("aut")),
     person(given = "Robert",
            family = "Nuske",
-           email = "robert.nuske@mailbox.org",
            role = c("ctb"),
            comment = c(ORCID = "0000-0001-9773-2061")))
 Description: Contains functions for estimating the potential dispersal of tree 
