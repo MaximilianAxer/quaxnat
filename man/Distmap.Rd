@@ -4,12 +4,10 @@
 \alias{Distmap}
 \title{Distmap}
 \usage{
-Distmap(fe_raster, fe_geom, treespecies)
+Distmap(fe_raster, treespecies)
 }
 \arguments{
 \item{fe_raster}{Remote sensing raster dataset with tree species classification of specific tree species and tree species groups.}
-
-\item{fe_geom}{Geodata set representing the study area. This can be a polygon or point dataset. It describes the outer boundary of the study area. A buffer of 1000 m is placed around the Bbox to possibly take into account seed trees outside the study area}
 
 \item{treespecies}{Represents the numerical value by which the tree species of interest was encoded in the raster dataset.}
 }
@@ -19,12 +17,14 @@ The distance is given in m.
 #' @examples
 
 #Raster data set
-r1 <- terra::rast(nrows = 100, ncols = 100, res = 1)
-rr <- setValues(r1, c(0,1,5,4,7,9,13))
+rr <- rast(
+matrix(sample(0:10, 20 * 20, replace = TRUE),
+nrow = 20, ncol = 20))
 plot(rr)
 
 #compute distance for prediction area
-distance <- Distmap(fe_raster = rr, treespecies = "13")
+distance <- Distmap(fe_raster = rr, treespecies = "10")
+plot(distance)
 }
 \description{
 Creation of a distance map for the study area.

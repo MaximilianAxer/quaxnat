@@ -14,7 +14,7 @@
 #'#' @examples
 #'
 #' #Raster data set
-#'rr <- rast(
+#'rr <- terra::rast(
 #'  matrix(sample(0:10, 20 * 20, replace = TRUE),
 #'         nrow = 20, ncol = 20))
 #' plot(rr)
