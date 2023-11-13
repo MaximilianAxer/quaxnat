@@ -1,6 +1,9 @@
-#' Distmap
+##############################################################################
+#' Distance map to nearest seed source
 #'
-#' @description Creation of a distance map for the study area.
+#' @description Creation of a distance map for the study area. The distance to
+#' the nearest seed source is calculated for every raster cell.
+#'
 #'
 #'
 #'

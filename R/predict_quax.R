@@ -1,4 +1,5 @@
-#' predict_quax
+##############################################################################
+#' Prediction of Potential Regeneration Densites
 #'
 #' @description Prediction of the potential regeneration density as a function of the distance to the nearest seed tree.
 #'

@@ -1,4 +1,5 @@
-#' extract_dist
+##############################################################################
+#' Extracting distances to nearest seed source for point data
 #'
 #' @description Extracts a distance for the inventory plots. The distance to the nearest seed source is used for the analysis of the regeneration potential.
 #'
