@@ -30,7 +30,7 @@ f1 <- quax(x = simulated.data$distance, y = simulated.data$density,
           tau = 0.9, fun = k_lognormal)
 
 #Raster data set
-rr <- rast(
+rr <- terra::rast(
  matrix(sample(0:10, 20 * 20, replace = TRUE),
         nrow = 20, ncol = 20))
 plot(rr)
