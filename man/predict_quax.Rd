@@ -24,7 +24,9 @@ A SpatRaster is created with the same resolution as the input raster, defined by
 ## Prepare artificial data:
 set.seed(0)
 r <- rgamma(200, shape=2, scale=150)
-simulated.data <- data.frame(distance = r, density = rpois(length(r), k_lognormal(r, par=c(6,0), N=1000000, d=2)))
+simulated.data <- data.frame(distance = r, density = rpois(length(r),
+k_lognormal(r, par=c(6,0), N=1000000, d=2)))
+
 ## Run quax function:
 f1 <- quax(x = simulated.data$distance, y = simulated.data$density,
           tau = 0.9, fun = k_lognormal)
@@ -33,7 +35,6 @@ f1 <- quax(x = simulated.data$distance, y = simulated.data$density,
 rr <- terra::rast(
  matrix(sample(0:10, 20 * 20, replace = TRUE),
         nrow = 20, ncol = 20))
-plot(rr)
 
 #compute distance for prediction area
 distance <- Distmap(fe_raster = rr, treespecies = "10")

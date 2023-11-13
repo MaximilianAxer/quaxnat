@@ -13,22 +13,20 @@ Distmap(fe_raster, treespecies)
 }
 \value{
 The distance is given in m.
-
-#' @examples
-
-#Raster data set
-rr <- terra::rast(
-matrix(sample(0:10, 20 * 20, replace = TRUE),
-nrow = 20, ncol = 20))
-plot(rr)
-
-#compute distance for prediction area
-distance <- Distmap(fe_raster = rr, treespecies = "10")
-plot(distance)
 }
 \description{
 Creation of a distance map for the study area.
 }
 \details{
 A SpatRaster is created with the same resolution as the input raster, defined by the study area.
+}
+\examples{
+## Raster data set
+rr <- terra::rast(
+ matrix(sample(0:10, 20 * 20, replace = TRUE),
+        nrow = 20, ncol = 20))
+
+## compute distance for prediction area
+distance <- Distmap(fe_raster = rr, treespecies = "10")
+plot(distance)
 }

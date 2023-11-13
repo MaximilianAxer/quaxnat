@@ -11,15 +11,13 @@
 #'
 #' @return  The distance is given in m.
 #'
-#'#' @examples
-#'
-#' #Raster data set
-#'rr <- terra::rast(
+#'@examples
+#' ## Raster data set
+#' rr <- terra::rast(
 #'  matrix(sample(0:10, 20 * 20, replace = TRUE),
 #'         nrow = 20, ncol = 20))
-#' plot(rr)
 #'
-#' #compute distance for prediction area
+#' ## compute distance for prediction area
 #' distance <- Distmap(fe_raster = rr, treespecies = "10")
 #' plot(distance)
 
