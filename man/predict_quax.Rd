@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict_quax.R
 \name{predict_quax}
 \alias{predict_quax}
-\title{predict_quax}
+\title{Prediction of Potential Regeneration Densites}
 \usage{
 predict_quax(distmap, quax)
 }

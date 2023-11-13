@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_dist.R
 \name{extract_dist}
 \alias{extract_dist}
-\title{extract_dist}
+\title{Extracting distances to nearest seed source for point data}
 \usage{
 extract_dist(fe_raster, fe_geom, treespecies)
 }

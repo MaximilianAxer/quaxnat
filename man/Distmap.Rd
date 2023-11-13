@@ -2,7 +2,7 @@
 % Please edit documentation in R/Distmap.R
 \name{Distmap}
 \alias{Distmap}
-\title{Distmap}
+\title{Distance map to nearest seed source}
 \usage{
 Distmap(fe_raster, treespecies)
 }
@@ -15,7 +15,8 @@ Distmap(fe_raster, treespecies)
 The distance is given in m.
 }
 \description{
-Creation of a distance map for the study area.
+Creation of a distance map for the study area. The distance to
+the nearest seed source is calculated for every raster cell.
 }
 \details{
 A SpatRaster is created with the same resolution as the input raster, defined by the study area.
