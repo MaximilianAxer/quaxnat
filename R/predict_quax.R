@@ -12,20 +12,25 @@
 #' @return  The regeneration density is given in N/ha.
 #'
 #' @examples
-#' #quax-Object
-#' f <- quax(Dgl_B0 ~ distance_dgl, VJ_pot, subset=Dgl_B0>0, 
-#'           weights=distance_dgl, tau=0.95, fun=lognormal)
+#' ## Prepare artificial data:
+#'set.seed(0)
+#'r <- rgamma(200, shape=2, scale=150)
+#'simulated.data <- data.frame(distance = r, density = rpois(length(r), k_lognormal(r, par=c(6,0), N=1000000, d=2)))
+#'## Run quax function:
+#'f1 <- quax(x = simulated.data$distance, y = simulated.data$density,
+#'           tau = 0.9, fun = k_lognormal)
 #'
 #' #Raster data set
-#' r1 <- terra::rast(nrows = 100, ncols = 100, res = 1)
-#' rr <- setValues(r1, c(0,1,5,4,7,9,13))
+#' rr <- rast(
+#'  matrix(sample(0:10, 20 * 20, replace = TRUE),
+#'         nrow = 20, ncol = 20))
 #' plot(rr)
 #'
 #' #compute distance for prediction area
-#' distance <- Distmap(fe_raster = rr, treespecies = "13")
+#' distance <- Distmap(fe_raster = rr, treespecies = "10")
 #'
 #' #prediction
-#'predict_quax(distmap = distance, quax = f)
+#'predict_quax(distmap = distance, quax = f1)
 #'
 
 predict_quax <- function(distmap, quax) {
@@ -33,3 +38,4 @@ predict_quax <- function(distmap, quax) {
   terra::values(distmap) <- prediction
   return(distmap)
 }
+
