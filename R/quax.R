@@ -52,7 +52,10 @@
 #' See Koenker (2005) for a detailed exposition of quantile regression. 
 #'
 #' @return The estimated function, including an attribute `o` containing the 
-#' results of `optim`.
+#' results of `optim`. The returned function has the class attribute 
+#' \code{quax} set, so generic functions with methods defined for \code{quax} 
+#' objects invoke these methods; see \code{\link{summary.quax}} for an 
+#' example.
 #'
 #' @references
 #' Koenker, R., Bassett, G. (1978). Regression quantiles. *Econometrica*

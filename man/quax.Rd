@@ -67,7 +67,10 @@ Further arguments passed to \code{model.frame} (along with \code{weights}).}
 }
 \value{
 The estimated function, including an attribute \code{o} containing the
-results of \code{optim}.
+results of \code{optim}. The returned function has the class attribute
+\code{quax} set, so generic functions with methods defined for \code{quax}
+objects invoke these methods; see \code{\link{summary.quax}} for an
+example.
 }
 \description{
 \code{quax} estimates parameters of a spatial dispersal kernel that describes
