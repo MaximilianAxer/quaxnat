@@ -87,38 +87,40 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' @param x Numeric matrix of positions \eqn{x} relative to the seed source, 
 #' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
 #' @param par Numeric vector with two elements representing the 
-#' log-transformed parameters \eqn{a} and \eqn{p}.
+#' log-transformed parameters \eqn{a} and \eqn{b}.
 #' @param N The multiplier \eqn{N}.
 #' @param d The spatial dimension.
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
-#' \deqn{k(x)={\Gamma (p+d/2) \over \pi ^{d/2}a^{d}\Gamma (p)}
-#'   (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(p+d/2)},}
+#' \deqn{k(x)={\Gamma ((b+d)/2) \over \pi ^{d/2}a^{d}\Gamma (b/2)}
+#'   (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(b+d)/2},}
 #' which corresponds to a probability density of the distance given by
-#' \deqn{p(r)={2 \over a^{d}B(d/2,p)}r^{d-1}
-#'   (1+{r^{2} \over a^{2}})^{-(p+d/2)},}
+#' \deqn{p(r)={2 \over a^{d}B(d/2,b/2)}r^{d-1}
+#'   (1+{r^{2} \over a^{2}})^{-(b+d)/2},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
 #' \link[base:beta]{beta} and \link[base:gamma]{gamma} functions; see Clark 
 #' et al. (1999) and Austerlitz et al. (2004) for the planar case (with 
-#' parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-d/2}, respectively). This 
-#' means the position is \eqn{a \over \sqrt{2p}} times a random vector having 
-#' a standard \eqn{d}-variate t distribution with \eqn{2p} degrees of 
-#' freedom, and the squared distance is \eqn{da^{2} \over 2p} times a random 
-#' variable having an \link[stats:FDist]{F distribution} with \eqn{d} and 
-#' \eqn{2p} degrees of freedom.
+#' parameterization \eqn{a=\sqrt{u}} and \eqn{b} replaced by \eqn{2p} and 
+#' \eqn{2b-d}, respectively). This means the position is 
+#' \eqn{a \over \sqrt{b}} times a random vector having a standard 
+#' \eqn{d}-variate t distribution with \eqn{b} degrees of freedom (a standard 
+#' Gaussian vector divided by \eqn{\sqrt{z/b}}, where \eqn{z} is independent 
+#' and chi-squared distributed with \eqn{b} degrees of freedom), and the 
+#' squared distance is \eqn{da^{2} \over b} times a random variable having an 
+#' \link[stats:FDist]{F distribution} with \eqn{d} and \eqn{b} degrees of 
+#' freedom.
 #' 
 #' This results from the kernel being defined as a mixture of Gaussian 
-#' kernels with an inverse variance (or represents the distribution of a 
-#' standard Gaussian vector divided by the square root of an independent 
-#' random variable) having a \link[stats:GammaDist]{gamma distribution} with 
-#' shape parameter \eqn{p} and scale parameter \eqn{2/a^{2}}, which for 
+#' kernels with an inverse variance having a 
+#' \link[stats:GammaDist]{gamma distribution} with shape parameter 
+#' \eqn{b\over 2} and inverse scale parameter \eqn{a^{2}\over 2}, which for 
 #' \eqn{a=1} is a \link[stats:Chisquare]{chi-squared distribution} with 
-#' \eqn{2p} degrees of freedom.
+#' \eqn{b} degrees of freedom.
 #'
 #' The dispersal kernel always has its maximum at zero, and the distance has 
-#' a fat-tailed distribution for all choices of \eqn{p}.
+#' a fat-tailed distribution for all choices of \eqn{b}.
 #'
 #' @references
 #' Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.
@@ -137,18 +139,18 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 k_t <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
-  p <- exp(par[2])
-  s<-2*p/(d*a^2); N * 2 * s / surface(d) * r^(2-d) * df(s*r^2, d, 2*p)
+  b <- exp(par[2])
+  s<-b/(d*a^2); N * 2 * s / surface(d) * r^(2-d) * df(s*r^2, d, b)
   # Alternatives for the last line (for nonzero r):
-  # s<-2*p/(d*a^2); N * 2 * s * r * df(s*r^2, d, 2*p) / surface(d,r)
-  # N * 2 / (surface(d) * a^d * beta(d/2, p)) / (1+(r/a)^2)^(p+d/2)
+  # s<-b/(d*a^2); N * 2 * s * r * df(s*r^2, d, b) / surface(d,r)
+  # N * 2 / (surface(d) * a^d * beta(d/2, b/2)) / (1+(r/a)^2)^((b+d)/2)
 }
 
 
 ##############################################################################
 #' Dispersal Kernels From Exponential Power Family
 #'
-#' `k_exponential.power` computes the value, multiplied by \eqn{N}, of a 
+#' `k_exponential_power` computes the value, multiplied by \eqn{N}, of a 
 #' dispersal kernel from the exponential power family that includes, as 
 #' special cases, Gaussian kernels and kernels that follow an exponential 
 #' function of the distance.
@@ -225,7 +227,7 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
 #'
 #' @export
 
-k_exponential.power <- function(x, par, N=1, d=NCOL(x)) {
+k_exponential_power <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
@@ -315,24 +317,24 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 #' @param x Numeric matrix of positions \eqn{x} relative to the seed source, 
 #' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
 #' @param par Numeric vector with two elements representing the 
-#' log-transformed parameters \eqn{a} and \eqn{p}.
+#' log-transformed parameters \eqn{a} and \eqn{b}.
 #' @param N The multiplier \eqn{N}.
 #' @param d The spatial dimension.
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
-#' \deqn{k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}B(d,p)}
-#'   (1+{\left\|{x}\right\| \over a})^{-(p+d)},}
+#' \deqn{k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}B(d,b)}
+#'   (1+{\left\|{x}\right\| \over a})^{-(b+d)},}
 #' which corresponds to a probability density of the distance given by
-#' \deqn{p(r)={1 \over a^{d}B(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},}
+#' \deqn{p(r)={1 \over a^{d}B(d,b)}r^{d-1}(1+{r \over a})^{-(b+d)},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constants involve the 
 #' \link[base:beta]{beta} and \link[base:gamma]{gamma} functions; see Nathan 
-#' et al. (2012) for the planar case (with the parameterization \eqn{p=b-d}). 
-#' This means the distance is \eqn{da \over p} times a random variable having 
-#' an \link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2p} degrees 
+#' et al. (2012) for the planar case (with \eqn{b} replaced by \eqn{b-d}). 
+#' This means the distance is \eqn{da \over b} times a random variable having 
+#' an \link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2b} degrees 
 #' of freedom. This is a fat-tailed distribution for all choices of the 
-#' parameter \eqn{p}.
+#' parameter \eqn{b}.
 #'
 #' @references
 #' Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
@@ -350,10 +352,10 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 k_power <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
-  p <- exp(par[2])
-  N / (surface(d) * a^d * beta(d,p)) * (1+r/a)^(-d-p)
+  b <- exp(par[2])
+  N / (surface(d) * a^d * beta(d,b)) * (1+r/a)^(-d-b)
   # Alternatives for the last line (for nonzero r):
-  # s<-p/(d*a); N * s * df(s*r, 2*d, 2*p) / surface(d,r)
-  # q<-r/(a+r); N * a / surface(d) / r^(d+1) * q^2 * dbeta(q,d,p)
-  # N * a / (a+r)^2 * dbeta(r/(a+r),d,p) / surface(d,r)
+  # s<-b/(d*a); N * s * df(s*r, 2*d, 2*b) / surface(d,r)
+  # q<-r/(a+r); N * a / surface(d) / r^(d+1) * q^2 * dbeta(q,d,b)
+  # N * a / (a+r)^2 * dbeta(r/(a+r),d,b) / surface(d,r)
 }

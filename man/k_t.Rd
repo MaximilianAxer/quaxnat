@@ -11,7 +11,7 @@ k_t(x, par, N = 1, d = NCOL(x))
 or vector of distances \eqn{\left\|{x}\right\|} to the seed source.}
 
 \item{par}{Numeric vector with two elements representing the
-log-transformed parameters \eqn{a} and \eqn{p}.}
+log-transformed parameters \eqn{a} and \eqn{b}.}
 
 \item{N}{The multiplier \eqn{N}.}
 
@@ -27,32 +27,34 @@ from Clark et al. (1999) that represents a multivariate t distribution.
 \details{
 The dispersal kernel, i.e. spatial probability density
 of the location of a seed relative to its source, is here given by
-\deqn{k(x)={\Gamma (p+d/2) \over \pi ^{d/2}a^{d}\Gamma (p)}
-  (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(p+d/2)},}
+\deqn{k(x)={\Gamma ((b+d)/2) \over \pi ^{d/2}a^{d}\Gamma (b/2)}
+  (1+{\left\|{x}\right\|^{2} \over a^{2}})^{-(b+d)/2},}
 which corresponds to a probability density of the distance given by
-\deqn{p(r)={2 \over a^{d}B(d/2,p)}r^{d-1}
-  (1+{r^{2} \over a^{2}})^{-(p+d/2)},}
+\deqn{p(r)={2 \over a^{d}B(d/2,b/2)}r^{d-1}
+  (1+{r^{2} \over a^{2}})^{-(b+d)/2},}
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constants involve the
 \link[base:beta]{beta} and \link[base:gamma]{gamma} functions; see Clark
 et al. (1999) and Austerlitz et al. (2004) for the planar case (with
-parameterizations \eqn{a=\sqrt{u}} and \eqn{p=b-d/2}, respectively). This
-means the position is \eqn{a \over \sqrt{2p}} times a random vector having
-a standard \eqn{d}-variate t distribution with \eqn{2p} degrees of
-freedom, and the squared distance is \eqn{da^{2} \over 2p} times a random
-variable having an \link[stats:FDist]{F distribution} with \eqn{d} and
-\eqn{2p} degrees of freedom.
+parameterization \eqn{a=\sqrt{u}} and \eqn{b} replaced by \eqn{2p} and
+\eqn{2b-d}, respectively). This means the position is
+\eqn{a \over \sqrt{b}} times a random vector having a standard
+\eqn{d}-variate t distribution with \eqn{b} degrees of freedom (a standard
+Gaussian vector divided by \eqn{\sqrt{z/b}}, where \eqn{z} is independent
+and chi-squared distributed with \eqn{b} degrees of freedom), and the
+squared distance is \eqn{da^{2} \over b} times a random variable having an
+\link[stats:FDist]{F distribution} with \eqn{d} and \eqn{b} degrees of
+freedom.
 
 This results from the kernel being defined as a mixture of Gaussian
-kernels with an inverse variance (or represents the distribution of a
-standard Gaussian vector divided by the square root of an independent
-random variable) having a \link[stats:GammaDist]{gamma distribution} with
-shape parameter \eqn{p} and scale parameter \eqn{2/a^{2}}, which for
+kernels with an inverse variance having a
+\link[stats:GammaDist]{gamma distribution} with shape parameter
+\eqn{b\over 2} and inverse scale parameter \eqn{a^{2}\over 2}, which for
 \eqn{a=1} is a \link[stats:Chisquare]{chi-squared distribution} with
-\eqn{2p} degrees of freedom.
+\eqn{b} degrees of freedom.
 
 The dispersal kernel always has its maximum at zero, and the distance has
-a fat-tailed distribution for all choices of \eqn{p}.
+a fat-tailed distribution for all choices of \eqn{b}.
 }
 \references{
 Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.

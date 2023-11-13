@@ -11,7 +11,7 @@ k_power(x, par, N = 1, d = NCOL(x))
 or vector of distances \eqn{\left\|{x}\right\|} to the seed source.}
 
 \item{par}{Numeric vector with two elements representing the
-log-transformed parameters \eqn{a} and \eqn{p}.}
+log-transformed parameters \eqn{a} and \eqn{b}.}
 
 \item{N}{The multiplier \eqn{N}.}
 
@@ -27,18 +27,18 @@ that follows a power law of a constant \eqn{a} plus the distance.
 \details{
 The dispersal kernel, i.e. spatial probability density
 of the location of a seed relative to its source, is here given by
-\deqn{k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}B(d,p)}
-  (1+{\left\|{x}\right\| \over a})^{-(p+d)},}
+\deqn{k(x)={\Gamma (d/2) \over 2\pi ^{d/2}a^{d}B(d,b)}
+  (1+{\left\|{x}\right\| \over a})^{-(b+d)},}
 which corresponds to a probability density of the distance given by
-\deqn{p(r)={1 \over a^{d}B(d,p)}r^{d-1}(1+{r \over a})^{-(p+d)},}
+\deqn{p(r)={1 \over a^{d}B(d,b)}r^{d-1}(1+{r \over a})^{-(b+d)},}
 where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constants involve the
 \link[base:beta]{beta} and \link[base:gamma]{gamma} functions; see Nathan
-et al. (2012) for the planar case (with the parameterization \eqn{p=b-d}).
-This means the distance is \eqn{da \over p} times a random variable having
-an \link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2p} degrees
+et al. (2012) for the planar case (with \eqn{b} replaced by \eqn{b-d}).
+This means the distance is \eqn{da \over b} times a random variable having
+an \link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2b} degrees
 of freedom. This is a fat-tailed distribution for all choices of the
-parameter \eqn{p}.
+parameter \eqn{b}.
 }
 \references{
 Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).

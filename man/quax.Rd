@@ -46,7 +46,7 @@ used in the regression.}
 \item{fun}{Dispersal kernel \eqn{k_{\theta }} assumed for the regeneration
 potential. Values allowed are \code{\link{k_lognormal}},
 \code{\link{k_t}}, \code{\link{k_power}}, \code{\link{k_weibull}},
-\code{\link{k_exponential.power}} or a custom function (see Examples). The
+\code{\link{k_exponential_power}} or a custom function (see Examples). The
 default, \code{k_lognormal}, is to fit a model with log-normal distance
 distributions.}
 
@@ -129,7 +129,7 @@ summary(f3)
 curve(f3(x), add=TRUE, lty=3)
 
 ## Compare various dispersal models:
-fun <- c("k_lognormal","k_t","k_weibull","k_power","k_exponential.power")
+fun <- c("k_lognormal","k_t","k_weibull","k_power","k_exponential_power")
 for (i in seq_along(fun))
   curve(quax(density ~ distance, simulated.data,
     tau = 0.9, fun = get(fun[i]), weights = distance)(x),
