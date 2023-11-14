@@ -53,7 +53,7 @@
 #'
 #' @return The estimated function, including an attribute `o` containing the 
 #' results of `optim`. The returned function has the class attribute 
-#' \code{quax} set, so generic functions with methods defined for \code{quax} 
+#' \code{quax}, so generic functions with methods defined for \code{quax} 
 #' objects invoke these methods; see \code{\link{summary.quax}} for an 
 #' example.
 #'
@@ -226,7 +226,7 @@ quax.formula <- function(formula, data, tau, fun=k_lognormal,
 #'
 #' @return A list with the following components:
 #' \describe{
-#'   \item{`coef`}{The parameters of the estimated dispersal kernel.}
+#'   \item{`coefficients`}{The parameters of the estimated dispersal kernel.}
 #'   \item{`value`}{The attained value of the objective function that is
 #'     minimised in the quantile regression.}
 #' }
@@ -256,4 +256,4 @@ quax.formula <- function(formula, data, tau, fun=k_lognormal,
 #' @export
 
 summary.quax <- function(object, ...)
-  list(coef=formals(object)$par, value=attr(object,"o")$value)
+  list(coefficients=formals(object)$par, value=attr(object,"o")$value)

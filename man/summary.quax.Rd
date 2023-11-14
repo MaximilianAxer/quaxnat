@@ -14,7 +14,7 @@
 \value{
 A list with the following components:
 \describe{
-\item{\code{coef}}{The parameters of the estimated dispersal kernel.}
+\item{\code{coefficients}}{The parameters of the estimated dispersal kernel.}
 \item{\code{value}}{The attained value of the objective function that is
 minimised in the quantile regression.}
 }
