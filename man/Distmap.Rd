@@ -29,5 +29,6 @@ rr <- terra::rast(
 
 ## compute distance for prediction area
 distance <- Distmap(fe_raster = rr, treespecies = "10")
-plot(distance)
+terra::plot(distance)
+
 }

@@ -22,8 +22,9 @@
 #'
 #' ## compute distance for prediction area
 #' distance <- Distmap(fe_raster = rr, treespecies = "10")
-#' plot(distance)
-
+#' terra::plot(distance)
+#'
+#' @export
 
 #Distmap <- function(fe_raster, fe_geom, treespecies){
 #  window <- terra::segregate(terra::crop(fe_raster, sf::st_buffer(sf::st_union(fe_geom), dist = 1000)))[[treespecies]]
@@ -31,6 +32,7 @@
 #  return(distmap)
 #}
 #fe_geom Geodata set representing the study area. This can be a polygon or point dataset. It describes the outer boundary of the study area. A buffer of 1000 m is placed around the Bbox to possibly take into account seed trees outside the study area
+
 
 Distmap <- function(fe_raster, treespecies){
   window <- terra::segregate(fe_raster)[[treespecies]]

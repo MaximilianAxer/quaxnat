@@ -3,6 +3,7 @@
 S3method(quax,default)
 S3method(quax,formula)
 S3method(summary,quax)
+export(Distmap)
 export(k_exponential_power)
 export(k_lognormal)
 export(k_power)
