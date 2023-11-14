@@ -22,3 +22,16 @@ Extracts a distance for the inventory plots. The distance to the nearest seed so
 \details{
 For each inventory plot a distance to the nearest seed source is given.
 }
+\examples{
+## create raster data set
+set.seed(2023)
+rr <- terra::rast(
+ matrix(sample(0:10, 20 * 20, replace = TRUE),
+        nrow = 20, ncol = 20))
+
+## create vector data set
+vec <- terra::vect(rbind(c(5,10), c(5,15)))
+
+extract_dist(fe_raster=rr, fe_geom=vec, treespecies=10)
+
+}
