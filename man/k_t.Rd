@@ -36,8 +36,8 @@ where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|}
 denotes the Euclidean norm and the normalizing constants involve the
 \link[base:beta]{beta} and \link[base:gamma]{gamma} functions; see Clark
 et al. (1999) and Austerlitz et al. (2004) for the planar case (with
-parameterization \eqn{a=\sqrt{u}} and \eqn{b} replaced by \eqn{2p} and
-\eqn{2b-d}, respectively). This means the position is
+\eqn{a,b} replaced by \eqn{\sqrt{u},2p} and
+\eqn{a,2b-d}, respectively). This means the position is
 \eqn{a \over \sqrt{b}} times a random vector having a standard
 \eqn{d}-variate t distribution with \eqn{b} degrees of freedom (a standard
 Gaussian vector divided by \eqn{\sqrt{z/b}}, where \eqn{z} is independent
