@@ -33,7 +33,9 @@
 #'
 #' #prediction
 #' predict_quax(distmap = distance, quax = f1)
-#'
+#' 
+#' @export
+
 
 predict_quax <- function(distmap, quax) {
   prediction <- quax(terra::values(distmap))
