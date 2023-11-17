@@ -19,30 +19,32 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 #' @param x Numeric matrix of positions \eqn{x} relative to the seed source, 
 #' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
 #' @param par Numeric vector with two elements representing log-transformed
-#' scale and shape parameters, given by the mean \eqn{a} and standard
-#' deviation \eqn{\sigma} of the underlying normal distribution.
+#' scale and shape parameters, given by the median distance \eqn{a} and by 
+#' the variance \eqn{b} of the underlying normal distribution.
 #' @param N The multiplier \eqn{N}.
 #' @param d The spatial dimension.
 #'
 #' @details The dispersal kernel, i.e. spatial probability density 
 #' of the location of a seed relative to its source, is here given by
 #' \deqn{k(x)={\Gamma (d/2) \over 
-#'   2\pi ^{d/2}\left\|{x}\right\|^{d}\sqrt{2\pi \sigma ^{2}}}
-#'   e^{-{1 \over 2\sigma ^{2}}(\log (\left\|{x}\right\|/a))^{2}}
-#'   = {\Gamma (d/2)e^{d^{2}\sigma ^{2}/2} \over 
-#'   2\pi ^{d/2}a^{d}\sqrt{2\pi \sigma ^{2}}} e^{-{1 \over 2\sigma ^{2}}
-#'   (\log {\left\|{x}\right\| \over a}+d\sigma ^{2})^{2}},}
+#'   2\pi ^{d/2}\left\|{x}\right\|^{d}\sqrt{2\pi b}}
+#'   e^{-{1 \over 2b}(\log (\left\|{x}\right\|/a))^{2}}
+#'   ={\Gamma (d/2)e^{d^{2}b/2} \over 2\pi ^{d/2}a^{d}\sqrt{2\pi b}} 
+#'   e^{-{1 \over 2b}(\log {\left\|{x}\right\| \over a}+db)^{2}},}
 #' which corresponds to a probability density of the distance given by
-#' \deqn{p(r)={1 \over r\sqrt{2\pi \sigma ^{2}}}
-#'   e^{-{1 \over 2\sigma ^{2}}(\log (r/a))^{2}},}
+#' \deqn{p(r)={1 \over r\sqrt{2\pi b}}e^{-{1 \over 2b}(\log (r/a))^{2}}
+#'   ={e^{b/2} \over a\sqrt{2\pi b}}
+#'   e^{-{1 \over 2b}(\log {r \over a}+b)^{2}},}
 #' where \eqn{d} is the spatial dimension, \eqn{\left\|{\,}\right\|} 
 #' denotes the Euclidean norm and the normalizing constant of the kernel 
 #' involves the \link[base:gamma]{gamma} function; see Greene and Johnson 
 #' (1989), Stoyan and Wagner (2001) for the planar case. Thus, the distance 
 #' is assumed to have the \link[stats:Lognormal]{log-normal distribution} 
-#' such that the log-distance has a normal distribution with mean \eqn{a} and 
-#' variance \eqn{\sigma^2}. Here \eqn{\log k(x)} is a quadratic function of 
-#' \eqn{\log \left\|{x}\right\|} with a maximum at \eqn{\log a-d\sigma^2}.
+#' such that the log-distance has a normal distribution with mean 
+#' \eqn{\log a} and variance \eqn{b}. Here \eqn{\log k(x)} is a quadratic 
+#' function of \eqn{\log \left\|{x}\right\|} with a maximum at 
+#' \eqn{\log a-db}, while \eqn{\log p(r)} is a quadratic function of 
+#' \eqn{\log r} with a maximum at \eqn{\log a-b}.
 #'
 #' This kernel is particularly suitable if the maximum regeneration density 
 #' is not directly at the seed source (e.g. Janzen–Connell effect), cf. 
@@ -67,12 +69,12 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   log.a <- par[1]
-  s.2 <- exp(2*par[2])
-  N / (surface(d)*sqrt(2*pi*s.2)) * 
-    exp(d^2*s.2/2 - d*log.a - (log(r)-log.a+d*s.2)^2/(2*s.2))
+  b <- exp(par[2])
+  N / (surface(d)*sqrt(2*pi*b)) * 
+    exp(d^2*b/2 - d*log.a - (log(r)-log.a+d*b)^2/(2*b))
   # Alternatives for the last line (for nonzero r only):
-  # N / (surface(d)*sqrt(2*pi*s.2)) * exp(-(log(r)-log.a)^2/(2*s.2)) / r^d
-  # N / surface(d,r) * dlnorm(r,log.a,exp(par[2]))
+  # N / (surface(d)*sqrt(2*pi*b)) * exp(-(log(r)-log.a)^2/(2*b)) / r^d
+  # N / surface(d,r) * dlnorm(r,log.a,exp(par[2]/2))
 }
 
 
