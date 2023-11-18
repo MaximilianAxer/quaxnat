@@ -136,16 +136,15 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 #'
 #' @export
-#' @importFrom stats df
 
 k_t <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
   a <- exp(par[1])
   b <- exp(par[2])
-  s<-b/(d*a^2); N * 2 * s / surface(d) * r^(2-d) * df(s*r^2, d, b)
+  N * 2 / (surface(d) * a^d * beta(d/2, b/2)) / (1+(r/a)^2)^((b+d)/2)
   # Alternatives for the last line (for nonzero r):
+  # s<-b/(d*a^2); N * 2 * s / surface(d) * r^(2-d) * df(s*r^2, d, b)
   # s<-b/(d*a^2); N * 2 * s * r * df(s*r^2, d, b) / surface(d,r)
-  # N * 2 / (surface(d) * a^d * beta(d/2, b/2)) / (1+(r/a)^2)^((b+d)/2)
 }
 
 
