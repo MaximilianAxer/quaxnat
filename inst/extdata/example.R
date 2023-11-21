@@ -1,7 +1,6 @@
 
 # Load and check data
-data <- read.csv2("inst/data/data.csv")
-
+data <- read.csv2(system.file("extdata/data.csv", package="quaxnat"))
 # Load quaxnat package:
 library(quaxnat)
 
