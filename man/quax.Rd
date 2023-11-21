@@ -93,8 +93,8 @@ in \eqn{\theta } using \code{\link[stats:optim]{optim}}.
 
 This is a rather naive approach to quantile regression that appears to
 work reasonably well for scaled dispersal kernels \eqn{Nk_{\theta }} as
-considered here, see App. A in Axer et al. (2021). For general quantile
-regression problems the more sophisticated procedure
+considered here, see Appendix A in Axer et al. (2021). For general
+quantile regression problems the more sophisticated procedure
 \code{\link[quantreg:nlrq]{nlrq}} in the package \code{quantreg}, based on
 Koenker and Park (1996), is expected to provide better results.
 
