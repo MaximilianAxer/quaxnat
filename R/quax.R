@@ -49,6 +49,17 @@
 #' \code{\link[quantreg:nlrq]{nlrq}} in the package `quantreg`, based on 
 #' Koenker and Park (1996), is expected to provide better results.
 #'
+#' In particular, `quax` is subject to the usual numerical issues inherent in 
+#' optimization: It can get stuck in a local minimum or altogether miss a 
+#' minimum if the initial values (as specified by the argument `par`) are too 
+#' far off or if the objective function exhibits bad behavior. Problems can 
+#' further arise in the dispersal kernels if the parameter values, which are 
+#' passed on a log scale, become too large. It is therefore recommended to 
+#' visually check the results (see Examples). Also, the `optim` arguments 
+#' `method` and `control` can be added in `...` to select and tune the 
+#' optimization algorithm, but note that the objective function is usually 
+#' not differentiable.
+#'
 #' See Koenker (2005) for a detailed exposition of quantile regression. 
 #'
 #' @return The estimated function, including an attribute `o` containing the 
