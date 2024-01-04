@@ -7,21 +7,26 @@
 #'
 #'
 #'
-#' @param fe_raster Remote sensing raster dataset with tree species classification of specific tree species and tree species groups.
-#' @param treespecies Represents the numerical value by which the tree species of interest was encoded in the raster dataset.
+#' @param fe_raster Remote sensing raster data set with tree species
+#' classification of specific tree species and tree species groups.
+#' @param treespecies Represents the numerical value by which the tree species
+#'  of interest is encoded in the raster data set.
 #'
-#' @details A SpatRaster is created with the same resolution as the input raster, defined by the study area.
+#' @details A SpatRaster is created with the same resolution as the input raster,
+#'  defined by the study area.
 #'
 #' @return  The distance is given in m.
 #'
 #'@examples
-#' ## Raster data set
-#' rr <- terra::rast(
+#' ## Create raster data set
+#'  rr <- terra::rast(
 #'  matrix(sample(0:10, 20 * 20, replace = TRUE),
 #'         nrow = 20, ncol = 20))
 #'
-#' ## compute distance for prediction area
+#' ## Compute distance for study area
 #' distance <- Distmap(fe_raster = rr, treespecies = "10")
+#'
+#' ## Plot the Distmap
 #' terra::plot(distance)
 #'
 #' @export

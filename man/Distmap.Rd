@@ -7,9 +7,11 @@
 Distmap(fe_raster, treespecies)
 }
 \arguments{
-\item{fe_raster}{Remote sensing raster dataset with tree species classification of specific tree species and tree species groups.}
+\item{fe_raster}{Remote sensing raster data set with tree species
+classification of specific tree species and tree species groups.}
 
-\item{treespecies}{Represents the numerical value by which the tree species of interest was encoded in the raster dataset.}
+\item{treespecies}{Represents the numerical value by which the tree species
+of interest is encoded in the raster data set.}
 }
 \value{
 The distance is given in m.
@@ -19,16 +21,19 @@ Creation of a distance map for the study area. The distance to
 the nearest seed source is calculated for every raster cell.
 }
 \details{
-A SpatRaster is created with the same resolution as the input raster, defined by the study area.
+A SpatRaster is created with the same resolution as the input raster,
+defined by the study area.
 }
 \examples{
-## Raster data set
-rr <- terra::rast(
+## Create raster data set
+ rr <- terra::rast(
  matrix(sample(0:10, 20 * 20, replace = TRUE),
         nrow = 20, ncol = 20))
 
-## compute distance for prediction area
+## Compute distance for study area
 distance <- Distmap(fe_raster = rr, treespecies = "10")
+
+## Plot the Distmap
 terra::plot(distance)
 
 }

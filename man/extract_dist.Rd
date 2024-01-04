@@ -7,31 +7,39 @@
 extract_dist(fe_raster, fe_geom, treespecies)
 }
 \arguments{
-\item{fe_raster}{Remote sensing raster dataset with tree species classification of specific tree species and tree species groups.}
+\item{fe_raster}{Remote sensing raster dataset with tree species
+classification of specific tree species and tree species groups.}
 
-\item{fe_geom}{Geodata set representing the study area. This can be a polygon or point dataset. This describes the outer boundary of the study area. A buffer of 1000 m is placed around the Bbox to possibly take into account seed trees outside the study area}
+\item{fe_geom}{Geodata set representing the study area. This can be a polygon
+or point dataset. This describes the outer boundary of the study area.
+A buffer of 1000 m is placed around the Bbox to possibly take into account
+seed trees outside the study area}
 
-\item{treespecies}{Represents the numerical value by which the tree species of interest was encoded in the raster dataset.}
+\item{treespecies}{Represents the numerical value by which the tree species
+of interest was encoded in the raster dataset.}
 }
 \value{
 The distance is given in m.
 }
 \description{
-Extracts a distance for the inventory plots. The distance to the nearest seed source is used for the analysis of the regeneration potential.
+Extracts a distance for the inventory plots. The distance to the
+nearest seed source is used for the analysis of the regeneration potential.
 }
 \details{
-For each inventory plot a distance to the nearest seed source is given.
+For each inventory plot a distance to the nearest seed source of a
+specific tree species is given.
 }
 \examples{
-## create raster data set
+## Create raster data set
 set.seed(2023)
 rr <- terra::rast(
- matrix(sample(0:10, 20 * 20, replace = TRUE),
+matrix(sample(0:10, 20 * 20, replace = TRUE),
         nrow = 20, ncol = 20))
 
-## create vector data set
+## Create vector data set
 vec <- terra::vect(rbind(c(5,10), c(5,15)))
 
+## Extract distance for the inventory plot
 extract_dist(fe_raster=rr, fe_geom=vec, treespecies=10)
 
 }

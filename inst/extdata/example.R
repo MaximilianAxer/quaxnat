@@ -4,7 +4,7 @@ library(quaxNat)
 
 # Load and check data
 load("/data/quax_data.RData")
-#After loading the quaxnat package, we are now ready to apply the quax function,
+#After loading the quaxNat package, we are now ready to apply the quax function,
 #which we do for the .999th quantile and five dispersal kernels implemented in
 #quaxnat.
 
@@ -36,8 +36,5 @@ legend("topright", title=paste0(tau," quantile"),
 
 # Compare quality of fits:
 sapply(f, summary)
-
-
-df <- load("data/quax_data.RData")
 
 

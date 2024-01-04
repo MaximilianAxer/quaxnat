@@ -1,16 +1,24 @@
 ##############################################################################
 #' Prediction of Potential Regeneration Densites
 #'
-#' @description Prediction of the potential regeneration density as a function of the distance to the nearest seed tree.
+#' @description Prediction of the potential regeneration density as a function
+#' of the distance to the nearest seed tree.
 #'
 #'
 #'
-#' @param distmap An object of the Distmap-Function. A SpatRaster with distances to the nearest seed tree is used for the prediction of the potential regeneration densities.
-#' @param quax An quax object is used for the prediction. This is a parameterised dispersal function using quantile regression.
+#' @param distmap An object of the Distmap function. A SpatRaster with distances
+#'  to the nearest seed tree is used for the prediction of the potential
+#'  regeneration densities.
 #'
-#' @details A SpatRaster is created with the same resolution as the input raster, defined by the study area. The potential regeneration density is calculated and given for each raster cell.
+#' @param quax A quax object is used for the prediction. This is a parameterised
+#'  dispersal function using quantile regression.
 #'
-#' @return  The regeneration density is given in N/ha.
+#' @details A SpatRaster is created with the same resolution as the input
+#' raster, defined by the study area. The potential regeneration density is
+#' calculated and given for each raster cell.
+#'
+#' @return  The regeneration density is given on the same scale
+#' (e.g. numbers per hectare) as in the input data.
 #'
 #' @examples
 #' ## Prepare artificial data:
@@ -23,17 +31,17 @@
 #' f1 <- quax(x = simulated.data$distance, y = simulated.data$density,
 #'           tau = 0.9, fun = k_lognormal)
 #'
-#' #Raster data set
-#' rr <- terra::rast(
+#' ## Create raster data set
+#'  rr <- terra::rast(
 #'  matrix(sample(0:10, 20 * 20, replace = TRUE),
 #'         nrow = 20, ncol = 20))
 #'
-#' #compute distance for prediction area
+#' ## Compute distance for prediction area
 #' distance <- Distmap(fe_raster = rr, treespecies = "10")
 #'
-#' #prediction
-#' predict_quax(distmap = distance, quax = f1)
-#' 
+#' ## Prediction
+#' p <- predict_quax(distmap = distance, quax = f1)
+#' terra::plot(p)
 #' @export
 
 
