@@ -34,7 +34,7 @@ This section illustrates the use of the quax function with step-by-step explanat
 library(quaxNat)
 
 # Load and check data
-load("/data/quax_data.RData")
+data("quax_data")
 
 ```
 After loading the quaxNat package, we are now ready to apply the quax function, which we do for the .999th quantile and five dispersal kernels implemented in quaxNat.
