@@ -1,21 +1,22 @@
 # quaxNat
 
-Estimating the regeneration potential using large scale inventory information.
+A R package for estimating the regeneration potential using large scale inventory information.
 
 ## Description
-Regeneration datasets, especially those pertaining to rare tree species, often exhibit a substantial number of zero values. Due to the unquantifiable nature of the various factors influencing or hindering natural regeneration, a quantile regression approach, following the methodology of Axer et al. (2021), was implemented within the R package quaxNat.This quantile regression method quantifies the impact of the distance to the nearest seed source on natural regeneration densities not considering other influencing variables.
-The function quax we provide in that R package is a simple implementation of the quantile estimation. It presents a rather naive approach to quantile regression and, while likely outperformed by more sophisticated procedures such as those in the R package quantreg (Koenker et al., 2023) in general quantile regression problems, appears to work reasonably well for scaled dispersal kernels. 
+Regeneration datasets, especially those pertaining to rare tree species, often exhibit values that are below the real regeneration potential due to various factors influencing or hindering natural regeneration. The R package *quaxNat* implements a quantile regression approach for estimating the regeneration potential, following the methodology of [Axer et al. (2021)](https://doi.org/10.1016/j.foreco.2020.118802). This quantile regression method quantifies the impact of the distance to the nearest seed source on natural regeneration densities not considering other influencing variables.
+The function `quax` we provide is a simple implementation of the quantile estimation. It presents a rather naive approach to quantile regression and, while likely outperformed by more sophisticated procedures such as those in the R package quantreg (Koenker et al., 2023) in general quantile regression problems, appears to work reasonably well in the situation considered here. 
 
 ## Dispersal kernels
-Various dispersal kernels were implemented in the package as function arguments for quax, which have proven to be suitable for modeling seed dispersal. The following functions were provided:
+The package provides various dispersal kernels that have proven useful in modeling seed dispersal:
 - *Spatial t distribution:*
 - *Weibull distribution:*
 - *Lognormal distribution:*
 - *Power distribution:*
 - *Exponential power distribution:*
+Additional kernels can be provided as user-defined functions.
 
 ## Installation
-The quaxNat package is available on 
+The *quaxNat* package is available on 
 [github](https://github.com/). To install the development version, run the following code:
 ``` {r installDev, eval = FALSE}
 install.packages(c('remotes', 'git2r', 'getPass'))
@@ -37,7 +38,7 @@ library(quaxNat)
 data("quax_data")
 
 ```
-After loading the quaxNat package, we are now ready to apply the quax function, which we do for the .999th quantile and five dispersal kernels implemented in quaxNat.
+After loading the *quaxNat* package, we are now ready to apply the `quax` function, which we do for example for the *.999th* quantile and five dispersal kernels implemented in *quaxNat*.
 
 ```
 # Estimate regeneration potential based on various dispersal kernels:
@@ -70,7 +71,7 @@ legend("topright", title=paste0(tau," quantile"),
        legend=names(f), lty=1, lwd=2, col=col)
 
 ```
-For the quax objects returned by the quax function, summary outputs the estimated coefficients and the attained value of the objective function. The latter can be used to compare fits of different dispersal kernels for the same quantile to the same data.
+For the `quax` objects returned by the `quax` function, `summary` outputs the estimated coefficients and the attained value of the objective function. The latter can be used to compare fits of different dispersal kernels for the same quantile to the same data.
 
 ```
 # Compare quality of fits:
@@ -79,7 +80,7 @@ sapply(f, summary)
 ```
 
 
-.
+
 
 ## Authors and contributors
 * [Maximilian Axer](mailto:maximilian.axer@nw.fva.de) _(main author of the package)_
