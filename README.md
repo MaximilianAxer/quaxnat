@@ -4,7 +4,7 @@ A R package for estimating the regeneration potential using large scale inventor
 
 ## Description
 Regeneration datasets, especially those pertaining to rare tree species, often exhibit values that are below the real regeneration potential due to various factors influencing or hindering natural regeneration. The R package *quaxNat* implements a quantile regression approach for estimating the regeneration potential, following the methodology of [Axer et al. (2021)](https://doi.org/10.1016/j.foreco.2020.118802). This quantile regression method quantifies the impact of the distance to the nearest seed source on natural regeneration densities not considering other influencing variables.
-The function `quax` we provide is a simple implementation of the quantile estimation. It presents a rather naive approach to quantile regression and, while likely outperformed by more sophisticated procedures such as those in the R package *quantreg* [(Koenker et al., 2023)](https://doi.org/10.1017%2FCBO9780511754098) in general quantile regression problems, appears to work reasonably well in the situation considered here. 
+The function `quax` we provide is a simple implementation of the quantile estimation. It presents a rather naive approach to quantile regression and, while likely outperformed by more sophisticated procedures such as those in the R package *quantreg* [(Koenker et al., 2023)](https://CRAN.R-project.org/package=quantreg) in general quantile regression problems, appears to work reasonably well in the situation considered here. 
 
 ## Dispersal kernels
 The package provides various dispersal kernels that have proven useful in modeling seed dispersal:
