@@ -106,7 +106,7 @@ GPL (>=2)
 
 ## Project status
 
-##Literature
-*Axer, Maximilian, Robert Schlicht, and Sven Wagner. "Modelling potential density of natural regeneration of European oak species (Quercus robur L., Quercus petraea (Matt.) Liebl.) depending on the distance to the potential seed source: Methodological approach for modelling dispersal from inventory data at forest enterprise level." Forest Ecology and Management 482 (2021): 118802.*
-*Koenker, Roger, et al. "Package ‘quantreg’." Reference manual available at R-CRAN: https://cran. rproject. org/web/packages/quantreg/quantreg. pdf (2023).*
+## Literature
+*Axer et al. "Modelling potential density of natural regeneration of European oak species (Quercus robur L., Quercus petraea (Matt.) Liebl.) depending on the distance to the potential seed source: Methodological approach for modelling dispersal from inventory data at forest enterprise level." Forest Ecology and Management 482 (2021): 118802.*
+*Koenker et al. "Package ‘quantreg’." Reference manual available at R-CRAN: https://cran. rproject. org/web/packages/quantreg/quantreg. pdf (2023).*
 
