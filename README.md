@@ -13,7 +13,8 @@ The package provides various dispersal kernels that have proven useful in modeli
 - *Lognormal distribution:*
 - *Power distribution:*
 - *Exponential power distribution:*
-Additional kernels can be provided as user-defined functions.
+
+Within the `quax` function the dispersal kernel is defined by *fun*. Additional kernels can be provided as user-defined functions.
 
 ## Installation
 The *quaxNat* package is available on 
@@ -79,8 +80,20 @@ sapply(f, summary)
 
 ```
 
+A prediction for the entire study area is made with the `predict_quax` function. A `distmap` with distances to the nearest seed tree is used for the prediction of the potential regeneration densities. Furthemore, the parameterized `quax` object is used for the prediction.
+```
+# Create raster data set
+ rr <- terra::rast(
+ matrix(sample(0:10, 20 * 20, replace = TRUE),
+        nrow = 20, ncol = 20))
 
+# Compute distance for prediction area
+distance <- Distmap(fe_raster = rr, treespecies = "10")
 
+# Predict the potential regeneration density:
+predict_quax(f5, distance)
+
+```
 
 ## Authors and contributors
 * [Maximilian Axer](mailto:maximilian.axer@nw.fva.de) _(main author of the package)_
@@ -92,4 +105,8 @@ sapply(f, summary)
 GPL (>=2)
 
 ## Project status
+
+##Literature
+*Axer, Maximilian, Robert Schlicht, and Sven Wagner. "Modelling potential density of natural regeneration of European oak species (Quercus robur L., Quercus petraea (Matt.) Liebl.) depending on the distance to the potential seed source: Methodological approach for modelling dispersal from inventory data at forest enterprise level." Forest Ecology and Management 482 (2021): 118802.*
+*Koenker, Roger, et al. "Package ‘quantreg’." Reference manual available at R-CRAN: https://cran. rproject. org/web/packages/quantreg/quantreg. pdf (2023).*
 
