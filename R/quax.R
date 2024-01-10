@@ -29,7 +29,6 @@
 #' @param formula A formula of the form `y ~ x`.
 #' @param data,subset,na.action,offset For the formula interface: 
 #' Further arguments passed to `model.frame` (along with `weights`).
-#' @param tol The desired accuracy for the inner optimization (see Details).
 #'
 #' @details The function estimates the parameters \eqn{N} and \eqn{\theta } 
 #' of the regeneration potential \eqn{Nk_{\theta }} by minimizing
@@ -154,48 +153,35 @@ quax <- function(...) UseMethod("quax")
 
 #' @export
 #' @rdname quax
-#' @importFrom stats optim optimize
+#' @importFrom stats optim
 
 quax.default <- function(..., y, tau, fun=k_lognormal,
-    dim=2, weights=1, par=c(log.a=8, log.b=1), tol=1e-50) {
-
-  # Initialize hint for upper bound of N (will be modified by optN):
-  Nmax <- 2*sum(y)
+    weights=1, dim=2, par=c(log.a=8, log.b=1)) {
 
   # Define inner optimization function optN:
-  optN <- function(par, tol, ...,
+  optN <- function(par, y, tau, fun, w, ...,
       gr, method, lower, upper, control, hessian # optional arguments not 
-  ) {                                            #   to be passed on to S
+  ) {                                            #   to be passed on to fun
 
-    # Define objective function S:
-    S <- function(N, par, y, tau, w, fun, ...) {
-      res <- y - fun(..., par=par, N=N)
-      sum(w * res * (tau - 0.5 + 0.5*sign(res)))
-    }
+    # Compute N that minimizes objective function:
+    k <- fun(..., par=par, N=1)
+    z <- y / k
+    o <- order(z, na.last=NA)
+    s <- cumsum((w*k)[o])
+    N <- z[o[1 + sum(s < tau * s[length(s)])]]
 
-    # Adjust upper bound of N:
-    s <- S(N=0, par=par, ...)
-    while (S(N=Nmax, par=par, ...) < s) Nmax <<- 2*Nmax
-
-    # Find N that minimizes S:
-    oN <- optimize(S, c(0, Nmax), par=par, ..., tol=tol)
-
-    # Save updated hint for upper bound:
-    Nmax <<- (Nmax+oN$minimum)/2
-
-    # Return value of S, attaching N as an attribute:
-    obj <- oN$objective
-    attr(obj,"N") <- oN$minimum
+    # Return value of objective function, attaching N as an attribute:
+    res <- y - N*k
+    obj <- sum(w * res * (tau - 0.5 + 0.5*sign(res)))
+    attr(obj,"N") <- N
     obj
   }
 
   # Search for parameter vector that minimizes optN:
-  o <- optim(par, optN, tol=tol, y=y,
-    tau=tau, fun=fun, d=dim, w=weights, ...)
+  o <- optim(par, optN, y=y, tau=tau, fun=fun, w=weights, d=dim, ...)
 
   # Compute N for that parameter vector:
-  obj <- optN(par=o$par, tol=tol, y=y,
-    tau=tau, fun=fun, d=dim, w=weights, ...)
+  obj <- optN(par=o$par, y=y, tau=tau, fun=fun, w=weights, d=dim, ...)
 
   # Set up and return result:
   formals(fun)$par <- o$par
