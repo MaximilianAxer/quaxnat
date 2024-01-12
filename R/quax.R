@@ -15,12 +15,15 @@
 #' of the inventory plot.
 #' @param tau Numeric between 0 and 1. Specifies the quantile \eqn{\tau } 
 #' used in the regression.
-#' @param fun Dispersal kernel \eqn{k_{\theta }} assumed for the regeneration 
-#' potential. Values allowed are \code{\link{k_lognormal}}, 
-#' \code{\link{k_t}}, \code{\link{k_power}}, \code{\link{k_weibull}}, 
-#' \code{\link{k_exponential_power}} or a custom function (see Examples). The 
-#' default, `k_lognormal`, is to fit a model with log-normal distance 
-#' distributions.
+#' @param fun Function representing the dispersal kernel \eqn{k_{\theta }}, 
+#' multiplied by \eqn{N}, that is assumed for the regeneration potential. 
+#' Values allowed are \code{\link{k_lognormal}}, \code{\link{k_t}}, 
+#' \code{\link{k_power}}, \code{\link{k_weibull}}, 
+#' \code{\link{k_exponential_power}} or a custom function with nonnegative 
+#' values whose parameters include, in addition to the arguments in `...` not 
+#' consumed by `optim` or the default method, the scaling factor `N` and the 
+#' spatial dimension `d` (see Examples). The default, `k_lognormal`, is to 
+#' fit a model with log-normal distance distributions.
 #' @param dim The spatial dimension, by default equal to 2.
 #' @param weights Numeric vector of optional nonnegative weights \eqn{w_i} of 
 #' the observations in the estimation procedure. Default is 1.
@@ -32,14 +35,26 @@
 #'
 #' @details The function estimates the parameters \eqn{N} and \eqn{\theta } 
 #' of the regeneration potential \eqn{Nk_{\theta }} by minimizing
-#' \deqn{\displaystyle \sum _{i=1}^{n}w_{i}(y_{i}-Nk_{\theta }(x_{i}))\bigl\{
-#'   \begin{smallmatrix}\tau \hphantom{-1} &\text{if }y_{i}>Nk_{\theta }
-#'   (x_{i})\\ \tau -1&\text{if not}\hphantom{.............}\end{smallmatrix}}
-#' (Koenker and Bassett 1978). Due to convexity the minimum in \eqn{N} for a 
-#' given vector \eqn{\theta } can always be found by successively shrinking 
-#' an interval; this is implemented in an inner, nested minimization using 
-#' \code{\link[stats:optimize]{optimize}}, the result of which is minimized 
-#' in \eqn{\theta } using \code{\link[stats:optim]{optim}}.
+#' \deqn{\displaystyle \sum _{i=1}^{n}w_{i}\rho _{\tau }(y_{i}-Nk_{\theta }
+#'   (x_{i})),}
+#' where \eqn{\rho _{\tau }(u)=\int _{0}^{u}\tau -\mathbf{1}_{s<0}\;ds
+#'   =\bigl\{\begin{smallmatrix}u\tau &
+#'   \text{if }u\geq 0\\ u(\tau -1)&\text{if }u<0\end{smallmatrix}
+#' }
+#' (Koenker and Bassett 1978, Chapter 6.6 in Koenker 2005). After subtracting 
+#' from the last line the same expression for \eqn{N=0} and substituting
+#' \eqn{s=y_{i}-tk_{\theta }(x_{i})} in the integral, this becomes 
+#' \eqn{\int _{0}^{N}\sum _{i=1}^{n}w_{i}k_{\theta }(x_{i})(
+#'   \mathbf{1}_{y_{i}<tk_{\theta }(x_{i})}-\tau )\;dt},
+#' and any \eqn{N} such that the last integrand is \eqn{\leq 0} for \eqn{t<N} 
+#' and \eqn{\geq 0} for \eqn{t>N}, which can always be found as the integrand 
+#' is increasing in \eqn{t}, minimizes this integral. The integrand being the 
+#' difference of the sum of \eqn{w_{i}k_{\theta }(x_{i})} over the \eqn{i} 
+#' with \eqn{y_{i}<tk_{\theta }(x_{i})} and \eqn{\tau } times the sum over 
+#' all \eqn{i}, this means \eqn{N}, for a given vector \eqn{\theta }, can be 
+#' computed as a form of \eqn{\tau }th quantile. This is implemented as an 
+#' inner, nested minimization, the result of which is minimized in 
+#' \eqn{\theta } using \code{\link[stats:optim]{optim}}.
 #'
 #' This is a rather naive approach to quantile regression that appears to 
 #' work reasonably well for scaled dispersal kernels \eqn{Nk_{\theta }} as 
