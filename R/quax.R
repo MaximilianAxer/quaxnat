@@ -52,7 +52,7 @@
 #' difference of the sum of \eqn{w_{i}k_{\theta }(x_{i})} over the \eqn{i} 
 #' with \eqn{y_{i}<tk_{\theta }(x_{i})} and \eqn{\tau } times the sum over 
 #' all \eqn{i}, this means \eqn{N}, for a given vector \eqn{\theta }, can be 
-#' computed as a form of \eqn{\tau }th quantile. This is implemented as an 
+#' computed as a kind of \eqn{\tau }th quantile. This is implemented as an 
 #' inner, nested minimization, the result of which is minimized in 
 #' \eqn{\theta } using \code{\link[stats:optim]{optim}}.
 #'
@@ -179,11 +179,11 @@ quax.default <- function(..., y, tau, fun=k_lognormal,
   ) {                                            #   to be passed on to fun
 
     # Compute N that minimizes objective function:
-    k <- fun(..., par=par, N=1)
+    k <- fun(..., par=par, N=1); stopifnot(length(k)==length(y))
     z <- y / k
-    o <- order(z, na.last=NA)
+    o <- order(z, na.last=NA)                    # order dropping 0/0 terms
     s <- cumsum((w*k)[o])
-    N <- z[o[1 + sum(s < tau * s[length(s)])]]
+    N <- z[o[s >= tau*s[length(s)]][1L]]
 
     # Return value of objective function, attaching N as an attribute:
     res <- y - N*k
