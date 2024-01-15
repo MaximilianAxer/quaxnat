@@ -41,9 +41,9 @@
 #'   =\bigl\{\begin{smallmatrix}u\tau &
 #'   \text{if }u\geq 0\\ u(\tau -1)&\text{if }u<0\end{smallmatrix}
 #' }
-#' (Koenker and Bassett 1978, Chapter 6.6 in Koenker 2005). After subtracting 
-#' from the last line the same expression for \eqn{N=0} and substituting
-#' \eqn{s=y_{i}-tk_{\theta }(x_{i})} in the integral, this becomes 
+#' (Koenker and Bassett 1978, Chapter 6.6 in Koenker 2005). The preceding 
+#' line, after subtracting the same expression for \eqn{N=0} and substituting
+#' \eqn{s=y_{i}-tk_{\theta }(x_{i})} in the integral, becomes 
 #' \eqn{\int _{0}^{N}\sum _{i=1}^{n}w_{i}k_{\theta }(x_{i})(
 #'   \mathbf{1}_{y_{i}<tk_{\theta }(x_{i})}-\tau )\;dt},
 #' and any \eqn{N} such that the last integrand is \eqn{\leq 0} for \eqn{t<N} 
@@ -51,10 +51,10 @@
 #' is increasing in \eqn{t}, minimizes this integral. The integrand being the 
 #' difference of the sum of \eqn{w_{i}k_{\theta }(x_{i})} over the \eqn{i} 
 #' with \eqn{y_{i}<tk_{\theta }(x_{i})} and \eqn{\tau } times the sum over 
-#' all \eqn{i}, this means \eqn{N}, for a given vector \eqn{\theta }, can be 
-#' computed as a kind of \eqn{\tau }th quantile. This is implemented as an 
-#' inner, nested minimization, the result of which is minimized in 
-#' \eqn{\theta } using \code{\link[stats:optim]{optim}}.
+#' all \eqn{i}, this means that the estimate of \eqn{N} for a given vector 
+#' \eqn{\theta } can be computed as a form of \eqn{\tau }th quantile. This is 
+#' implemented as an inner, nested minimization, the result of which is 
+#' minimized in \eqn{\theta } using \code{\link[stats:optim]{optim}}.
 #'
 #' This is a rather naive approach to quantile regression that appears to 
 #' work reasonably well for scaled dispersal kernels \eqn{Nk_{\theta }} as 
