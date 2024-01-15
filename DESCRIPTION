@@ -26,6 +26,7 @@ Description: Contains functions for estimating the potential dispersal of tree
             the dispersal potential.
 License: GPL (>=2)
 Encoding: UTF-8
+Depends: R (>= 3.5.0)
 Imports: stats, terra
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
