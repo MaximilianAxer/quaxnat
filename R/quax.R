@@ -37,10 +37,9 @@
 #' of the regeneration potential \eqn{Nk_{\theta }} by minimizing
 #' \deqn{\displaystyle \sum _{i=1}^{n}w_{i}\rho _{\tau }(y_{i}-Nk_{\theta }
 #'   (x_{i})),}
-#' where \eqn{\rho _{\tau }(u)=\int _{0}^{u}\tau -\mathbf{1}_{s<0}\;ds
-#'   =\bigl\{\begin{smallmatrix}u\tau &
-#'   \text{if }u\geq 0\\ u(\tau -1)&\text{if }u<0\end{smallmatrix}
-#' }
+#' where \eqn{\rho _{\tau }(u)=\int _{0}^{u}\tau -\mathbf{1}_{s<0}\;ds=\bigl\{
+#'   \begin{smallmatrix}u\tau & \text{if }u\geq 0\\u(\tau -1)&\text{if }u<0
+#'   \end{smallmatrix}}
 #' (Koenker and Bassett 1978, Chapter 6.6 in Koenker 2005). The preceding 
 #' line, after subtracting the same expression for \eqn{N=0} and substituting
 #' \eqn{s=y_{i}-tk_{\theta }(x_{i})} in the integral, becomes 
@@ -51,10 +50,11 @@
 #' is increasing in \eqn{t}, minimizes this integral. The integrand being the 
 #' difference of the sum of \eqn{w_{i}k_{\theta }(x_{i})} over the \eqn{i} 
 #' with \eqn{y_{i}<tk_{\theta }(x_{i})} and \eqn{\tau } times the sum over 
-#' all \eqn{i}, this means that the estimate of \eqn{N} for a given vector 
-#' \eqn{\theta } can be computed as a form of \eqn{\tau }th quantile. This is 
-#' implemented as an inner, nested minimization, the result of which is 
-#' minimized in \eqn{\theta } using \code{\link[stats:optim]{optim}}.
+#' all \eqn{i}, with nonzero \eqn{k_{\theta }(x_{i})} terms being relevant, 
+#' this means that the estimate of \eqn{N} for a given vector \eqn{\theta } 
+#' can be computed as a \eqn{\tau }th quantile. This is implemented as an 
+#' inner, nested minimization, the result of which is minimized in 
+#' \eqn{\theta } using \code{\link[stats:optim]{optim}}.
 #'
 #' This is a rather naive approach to quantile regression that appears to 
 #' work reasonably well for scaled dispersal kernels \eqn{Nk_{\theta }} as 
@@ -180,9 +180,9 @@ quax.default <- function(..., y, tau, fun=k_lognormal,
 
     # Compute N that minimizes objective function:
     k <- fun(..., par=par, N=1); stopifnot(length(k)==length(y))
-    z <- y / k
-    o <- order(z, na.last=NA)                    # order dropping 0/0 terms
-    s <- cumsum((w*k)[o])
+    z <- c(0, y / k)                             # extra 0 (with mass 0) to 
+    o <- order(z, na.last=NA)                    #   avoid empty o
+    s <- cumsum(c(0,w*k)[o])
     N <- z[o[s >= tau*s[length(s)]][1L]]
 
     # Return value of objective function, attaching N as an attribute:
