@@ -18,7 +18,7 @@
 #'
 #' @docType data
 #' @keywords datasets
-#' @name quax_data
-#' @usage data(quax_data)
+#' @name regeneration
+#' @usage data(regeneration)
 #' @format A data frame with 484 rows and 7 variables
-NULL
+"regeneration"
