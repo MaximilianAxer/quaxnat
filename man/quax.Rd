@@ -170,7 +170,7 @@ f3 <- quax(density ~ position, simulated.data,
   tau = 0.9, fun = k_lognormal, weights = distance)
 summary(f3)
 
-# Show problems with bad initial values and try another parameterization:
+## Show problems with bad initial values and try another parameterization:
 curve(quax(density ~ distance, simulated.data, par = c(log.a=0,log.b=0),
   tau = 0.99, fun = k_lognormal)(x), add=TRUE, lty=2)
 curve(quax(density ~ distance, simulated.data, par = c(a=1,b=1),
