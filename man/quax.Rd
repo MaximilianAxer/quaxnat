@@ -97,7 +97,7 @@ and \eqn{\geq 0} for \eqn{t>N}, which can always be found as the integrand
 is increasing in \eqn{t}, minimizes this integral. The integrand being the
 difference of the sum of \eqn{w_{i}k_{\theta }(x_{i})} over the \eqn{i}
 with \eqn{y_{i}<tk_{\theta }(x_{i})} and \eqn{\tau } times the sum over
-all \eqn{i}, with nonzero \eqn{k_{\theta }(x_{i})} terms being relevant,
+all \eqn{i}, with relevant terms for nonzero \eqn{k_{\theta }(x_{i})},
 this means that the estimate of \eqn{N} for a given vector \eqn{\theta }
 can be computed as a \eqn{\tau }th quantile. This is implemented as an
 inner, nested minimization, the result of which is minimized in
@@ -114,12 +114,11 @@ In particular, \code{quax} is subject to the usual numerical issues inherent in
 optimization: It can get stuck in a local minimum or altogether miss a
 minimum if the initial values (as specified by the argument \code{par}) are too
 far off or if the objective function exhibits bad behavior. Problems can
-further arise in the dispersal kernels if the parameter values, which are
-passed on a log scale, become too large. It is therefore recommended to
-visually check the results (see Examples). Also, the \code{optim} arguments
-\code{method} and \code{control} can be added in \code{...} to select and tune the
-optimization algorithm, but note that the objective function is usually
-not differentiable.
+further arise in the dispersal kernels if parameter values passed on a log
+scale become too large. It is therefore recommended to visually check the
+results (see Examples). Also, the \code{optim} arguments \code{method} and \code{control}
+can be added in \code{...} to select and tune the optimization algorithm, but
+note that the objective function is usually not differentiable.
 
 See Koenker (2005) for a detailed exposition of quantile regression.
 }
@@ -141,6 +140,8 @@ curve(f1(x), add=TRUE)
 f1 <- quax(density ~ distance, simulated.data,
   tau = 0.9, fun = k_lognormal)
 summary(f1)
+#quantreg::nlrq(density ~ k_lognormal(distance,c(log.a,log.b),N=N,d=2),
+#  simulated.data, start = c(log.a=6,log.b=0,N=1e6), tau = 0.9)  # similar
 
 ## Use another quantile:
 f2 <- quax(density ~ distance, simulated.data,
@@ -168,6 +169,13 @@ simulated.data$position <- r *
 f3 <- quax(density ~ position, simulated.data,
   tau = 0.9, fun = k_lognormal, weights = distance)
 summary(f3)
+
+# Show problems with bad initial values and try another parameterization:
+curve(quax(density ~ distance, simulated.data, par = c(log.a=0,log.b=0),
+  tau = 0.99, fun = k_lognormal)(x), add=TRUE, lty=2)
+curve(quax(density ~ distance, simulated.data, par = c(a=1,b=1),
+  tau = 0.99, fun = function(x,par,N,d) if (any(par<=0)) rep(NA,NROW(x))
+    else k_lognormal(x,log(par),N,d))(x), add=TRUE, lty=2)
 
 ## Use custom variant of lognormal model that includes a shift:
 plot(simulated.data$position)
