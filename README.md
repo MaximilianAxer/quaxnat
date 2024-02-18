@@ -17,16 +17,10 @@ The package provides various dispersal kernels that have proven useful in modeli
 Within the `quax` function the dispersal kernel is defined by *fun*. Additional kernels can be provided as user-defined functions.
 
 ## Installation
-The *quaxNat* package is available on 
-[github](https://github.com/). To install the development version, run the following code:
+The *quaxNat* package is available on [Github](https://github.com/MaximilianAxer/quaxNat). 
+To install the development version, run the following code:
 ``` {r installDev, eval = FALSE}
-install.packages(c('remotes', 'git2r', 'getPass'))
-
-remotes::install_git("https://github.com/XYZ",
-                     credentials = git2r::cred_user_pass(
-					   username = getPass::getPass("Git Username"), 
-                       password = getPass::getPass("Git Password")), 
-                     build_vignettes = TRUE)
+remotes::install_github("MaximilianAxer/quaxNat")
 ```
 
 ## Usage
