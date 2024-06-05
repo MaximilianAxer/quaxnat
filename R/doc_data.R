@@ -4,8 +4,8 @@
 #' A dataset containing the regeneration densities of beech, oak and Douglas fir
 #' of the inventory plots and the distance to the nearest conspecific nearest
 #' seed tree.
-#' The variables are as follows:
-#'
+
+#' @format A data frame with 484 rows and 7 variables
 #' \itemize{
 #'   \item id. An identifier for each inventory plot as an integer
 #'   \item distance_beech. Distance in m from the plot to the nearest beech (0--3206.57)
@@ -20,5 +20,4 @@
 #' @keywords datasets
 #' @name regeneration
 #' @usage data(regeneration)
-#' @format A data frame with 484 rows and 7 variables
 "regeneration"

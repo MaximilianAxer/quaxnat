@@ -7,27 +7,24 @@
 extract_dist(raster, geom, species)
 }
 \arguments{
-\item{raster}{Remote sensing raster dataset with tree species
-classification of specific tree species and tree species groups.}
+\item{raster}{Raster dataset with tree species classification of specific
+tree species and tree species groups.}
 
-\item{geom}{Geodata set representing the study area. This can be a polygon
+\item{geom}{Geodata representing the study area. This can be a polygon
 or point dataset. This describes the outer boundary of the study area.
-A buffer of 1000 m is placed around the Bbox to possibly take into account
-seed trees outside the study area}
+A buffer of 1000 m is placed around the Bounding box to possibly take into
+account seed trees outside the study area.}
 
 \item{species}{Represents the numerical value by which the tree species
 of interest was encoded in the raster dataset.}
 }
 \value{
-The distance is given in m.
+Numeric vector with distances of every inventory plot to the
+nearest seed source of a specific tree species.
 }
 \description{
 Extracts a distance for the inventory plots. The distance to the
 nearest seed source is used for the analysis of the regeneration potential.
-}
-\details{
-For each inventory plot a distance to the nearest seed source of a
-specific tree species is given.
 }
 \examples{
 ## Create raster data set
@@ -41,5 +38,4 @@ vec <- terra::vect(rbind(c(5,10), c(5,15)))
 
 ## Extract distance for the inventory plot
 extract_dist(raster=rr, geom=vec, species=10)
-
 }

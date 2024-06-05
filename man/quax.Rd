@@ -4,7 +4,7 @@
 \alias{quax}
 \alias{quax.default}
 \alias{quax.formula}
-\title{Estimating Potential Regeneration Densities by Quantile Regression}
+\title{Estimating potential regeneration densities by quantile regression}
 \usage{
 quax(...)
 
@@ -33,13 +33,12 @@ quax(...)
 \arguments{
 \item{...}{Vector of positions \eqn{x_{1},...,x_{n}} or distances to the
 seed source as required by the specific dispersal kernel. Optionally,
-further arguments passed to \code{optim}, to the default method or to the
-kernel.}
+further arguments passed to \code{optim}, to the default method or to the kernel.}
 
-\item{y}{Observed values \eqn{y_{1},...,y_{n}} of the regeneration density
-of the inventory plot.}
+\item{y}{Vector of observed values \eqn{y_{1},...,y_{n}} of the regeneration
+density of the inventory plot.}
 
-\item{tau}{Numeric between 0 and 1. Specifies the quantile \eqn{\tau }
+\item{tau}{Numeric value between 0 and 1. Specifies the quantile \eqn{\tau }
 used in the regression.}
 
 \item{fun}{Function representing the dispersal kernel \eqn{k_{\theta }},
@@ -52,7 +51,7 @@ consumed by \code{optim} or the default method, the scaling factor \code{N} and 
 spatial dimension \code{d} (see Examples). The default, \code{k_lognormal}, is to
 fit a model with log-normal distance distributions.}
 
-\item{weights}{Numeric vector of optional nonnegative weights \eqn{w_i} of
+\item{weights}{Numeric vector of optional non-negative weights \eqn{w_i} of
 the observations in the estimation procedure. Default is 1.}
 
 \item{dim}{The spatial dimension, by default equal to 2.}
@@ -66,11 +65,10 @@ the observations in the estimation procedure. Default is 1.}
 Further arguments passed to \code{model.frame} (along with \code{weights}).}
 }
 \value{
-The estimated function, including an attribute \code{o} containing the
-results of \code{optim}. The returned function has the class attribute
-\code{quax}, so generic functions with methods defined for \code{quax}
-objects invoke these methods; see \code{\link{summary.quax}} for an
-example.
+An objcet of class \code{quax} containing the estimated function,
+including an attribute \code{o} containing the results of \code{optim}.
+Generic functions with methods defined for \code{quax} objects invoke these
+methods; see \code{\link{summary.quax}} for an example.
 }
 \description{
 \code{quax} estimates parameters of a spatial dispersal kernel that describes
@@ -185,7 +183,6 @@ f4 <- quax(density ~ position, simulated.data,
     k_lognormal(x - rep(par[-(1:2)],each=NROW(x)), par[1:2], N, d)
 )
 summary(f4)
-
 }
 \references{
 Koenker, R., Bassett, G. (1978). Regression quantiles. \emph{Econometrica}

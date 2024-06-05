@@ -2,7 +2,7 @@
 % Please edit documentation in R/dispersal_kernels.R
 \name{k_power}
 \alias{k_power}
-\title{Power-Law Dispersal Kernels}
+\title{Power-law dispersal kernels}
 \usage{
 k_power(x, par, N = 1, d = NCOL(x))
 }
@@ -42,7 +42,6 @@ parameter \eqn{b}.
 }
 \examples{
 k_power(2:5, par=c(0,0), d=2)
-
 }
 \references{
 Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).

@@ -2,7 +2,7 @@
 % Please edit documentation in R/dispersal_kernels.R
 \name{k_weibull}
 \alias{k_weibull}
-\title{Dispersal Kernels For Weibull Distance Distributions}
+\title{Dispersal kernels for Weibull distance distributions}
 \usage{
 k_weibull(x, par, N = 1, d = NCOL(x))
 }
@@ -49,7 +49,6 @@ coincides with a Gaussian kernel in the special case \eqn{b=d=2}.
 }
 \examples{
 k_weibull(2:5, par=c(0,0), d=2)
-
 }
 \references{
 Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in

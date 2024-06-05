@@ -2,29 +2,29 @@
 % Please edit documentation in R/predict_quax.R
 \name{predict_quax}
 \alias{predict_quax}
-\title{Prediction of Potential Regeneration Densites}
+\title{Prediction of potential regeneration densities}
 \usage{
 predict_quax(distmap, quax)
 }
 \arguments{
-\item{distmap}{An object of the Distmap function. A SpatRaster with distances
-to the nearest seed tree is used for the prediction of the potential
-regeneration densities.}
+\item{distmap}{A SpatRaster with distances to the nearest seed tree is used
+for the prediction of the potential regeneration densities. Usually a
+result of the Distmap function}
 
 \item{quax}{A quax object is used for the prediction. This is a parameterised
 dispersal function using quantile regression.}
 }
 \value{
-The regeneration density is given on the same scale
-(e.g. numbers per hectare) as in the input data.
+A SpatRaster with the same resolution as the input raster containing
+the regeneration density on the same scale (e.g. numbers per hectare) as in
+the input data.
 }
 \description{
 Prediction of the potential regeneration density as a function
 of the distance to the nearest seed tree.
 }
 \details{
-A SpatRaster is created with the same resolution as the input
-raster, defined by the study area. The potential regeneration density is
+, defined by the study area. The potential regeneration density is
 calculated and given for each raster cell.
 }
 \examples{

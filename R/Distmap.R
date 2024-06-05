@@ -2,22 +2,19 @@
 #' Distance map to nearest seed source
 #'
 #' @description Creation of a distance map for the study area. The distance to
-#' the nearest seed source is calculated for every raster cell.
+#'  the nearest seed source is calculated for every raster cell.
 #'
+#' @param raster Raster data set with tree species classification of specific
+#'  tree species and tree species groups.
+#' @param species Represents the numerical value by which the tree species of
+#'  interest is encoded in the raster data set.
 #'
+#' @return A SpatRaster object containing the distances to seed source.
+#'  The object has the same resolution and extent as the input raster.
 #'
+#' @export
 #'
-#' @param raster Remote sensing raster data set with tree species
-#' classification of specific tree species and tree species groups.
-#' @param species Represents the numerical value by which the tree species
-#'  of interest is encoded in the raster data set.
-#'
-#' @details A SpatRaster is created with the same resolution as the input raster,
-#'  defined by the study area.
-#'
-#' @return  The distance is given in m.
-#'
-#'@examples
+#' @examples
 #' ## Create raster data set
 #'  rr <- terra::rast(
 #'  matrix(sample(0:10, 20 * 20, replace = TRUE),
@@ -29,7 +26,6 @@
 #' ## Plot the Distmap
 #' terra::plot(distance)
 #'
-#' @export
 
 #Distmap <- function(raster, geom, species){
 #  window <- terra::segregate(terra::crop(raster, sf::st_buffer(sf::st_union(geom), dist = 1000)))[[species]]

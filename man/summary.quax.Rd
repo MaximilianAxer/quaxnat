@@ -2,7 +2,7 @@
 % Please edit documentation in R/quax.R
 \name{summary.quax}
 \alias{summary.quax}
-\title{Summarizing Quantile Regression Fits of Potential Regeneration Densities}
+\title{Summarizing quantile regression fits of potential regeneration densities}
 \usage{
 \method{summary}{quax}(object, ...)
 }
@@ -45,5 +45,4 @@ f2 <- quax(density ~ distance, simulated.data,
 ## Compare both fits:
 summary(f1)
 summary(f2)
-
 }

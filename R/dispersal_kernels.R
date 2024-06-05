@@ -8,19 +8,17 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 
 
 ##############################################################################
-#' Dispersal Kernels For Log-Normal Distance Distributions
+#' Dispersal kernels for log-normal distance distributions
 #'
 #' `k_lognormal` computes the value, multiplied by \eqn{N}, of a dispersal
 #' kernel based on seeds having a distance with a log-normal distribution
 #' from the their source.
 #'
-#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
-#'
 #' @param x Numeric matrix of positions \eqn{x} relative to the seed source,
-#' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
+#'  or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
 #' @param par Numeric vector with two elements representing log-transformed
-#' scale and shape parameters, given by the median distance \eqn{a} and by
-#' the variance \eqn{b} of the underlying normal distribution.
+#'  scale and shape parameters, given by the median distance \eqn{a} and by
+#'  the variance \eqn{b} of the underlying normal distribution.
 #' @param N The multiplier \eqn{N}.
 #' @param d The spatial dimension.
 #'
@@ -50,6 +48,8 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 #' is not directly at the seed source (e.g. Janzen–Connell effect), cf.
 #' Nathan et al. (2012).
 #'
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
+#'
 #' @references
 #' Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or
 #' plumed seeds. *Ecology* **70**(2), 339–347.
@@ -64,10 +64,10 @@ surface <- function(d,r=1) 2*pi^(d/2)/gamma(d/2) * r^(d-1)
 #' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
 #' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 #'
+#' @export
+#'
 #' @examples
 #' k_lognormal(2:5, par=c(0,0), d=2)
-#'
-#' @export
 
 k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -82,17 +82,15 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 
 
 ##############################################################################
-#' Dispersal Kernels From Spatial t Distribution
+#' Dispersal kernels from spatial t distribution
 #'
 #' `k_t` computes the value, multiplied by \eqn{N}, of the dispersal kernel
 #' from Clark et al. (1999) that represents a multivariate t distribution.
 #'
-#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
-#'
 #' @param x Numeric matrix of positions \eqn{x} relative to the seed source,
-#' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
+#'  or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
 #' @param par Numeric vector with two elements representing the
-#' log-transformed parameters \eqn{a} and \eqn{b}.
+#'  log-transformed parameters \eqn{a} and \eqn{b}.
 #' @param N The multiplier \eqn{N}.
 #' @param d The spatial dimension.
 #'
@@ -127,6 +125,8 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' The dispersal kernel always has its maximum at zero, and the distance has
 #' a fat-tailed distribution for all choices of \eqn{b}.
 #'
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
+#'
 #' @references
 #' Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.
 #' (1999). Seed dispersal near and far: patterns across temperate and
@@ -138,10 +138,10 @@ k_lognormal <- function(x, par, N=1, d=NCOL(x)) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 #'
+#' @export
+#'
 #' @examples
 #' k_t(2:5, par=c(0,0), d=2)
-#'
-#' @export
 
 k_t <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -155,19 +155,17 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
 
 
 ##############################################################################
-#' Dispersal Kernels From Exponential Power Family
+#' Dispersal kernels from exponential power family
 #'
 #' `k_exponential_power` computes the value, multiplied by \eqn{N}, of a
 #' dispersal kernel from the exponential power family that includes, as
 #' special cases, Gaussian kernels and kernels that follow an exponential
 #' function of the distance.
 #'
-#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
-#'
 #' @param x Numeric matrix of positions \eqn{x} relative to the seed source,
-#' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
+#'  or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
 #' @param par Numeric vector with two elements representing the
-#' log-transformed scale and shape parameters \eqn{a} and \eqn{b}.
+#'  log-transformed scale and shape parameters \eqn{a} and \eqn{b}.
 #' @param N The multiplier \eqn{N}.
 #' @param d The spatial dimension.
 #'
@@ -192,6 +190,8 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
 #' al. (1996). Such kernels have consequently been applied in a number of
 #' theoretical studies that address dispersal (Ribbens et al. 1994, Bullock
 #' et al. 2017).
+#'
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 #'
 #' @references
 #' Bateman, A. (1947). Contamination in seed crops: III. relation with
@@ -232,10 +232,10 @@ k_t <- function(x, par, N=1, d=NCOL(x)) {
 #' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
 #' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 #'
+#' @export
+#'
 #' @examples
 #' k_exponential_power(2:5, par=c(0,0), d=2)
-#'
-#' @export
 
 k_exponential_power <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -248,19 +248,17 @@ k_exponential_power <- function(x, par, N=1, d=NCOL(x)) {
 
 
 ##############################################################################
-#' Dispersal Kernels For Weibull Distance Distributions
+#' Dispersal kernels for Weibull distance distributions
 #'
 #' `k_weibull` computes the value, multiplied by \eqn{N}, of the dispersal
 #' kernel from Tufto et al. (1997) based on seeds having a distance with a
 #' Weibull distribution from their source.
 #'
-#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
-#'
 #' @param x Numeric matrix of positions \eqn{x} relative to the seed source,
-#' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
+#'  or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
 #' @param par Numeric vector with two elements representing the
-#' log-transformed scale and shape parameters \eqn{a} and \eqn{b} of the
-#' distance distribution.
+#'  log-transformed scale and shape parameters \eqn{a} and \eqn{b} of the
+#'  distance distribution.
 #' @param N The multiplier \eqn{N}.
 #' @param d The spatial dimension.
 #'
@@ -284,6 +282,8 @@ k_exponential_power <- function(x, par, N=1, d=NCOL(x)) {
 #' fat-tailed distribution in the sense of Kot et al. (1996). The kernel
 #' coincides with a Gaussian kernel in the special case \eqn{b=d=2}.
 #'
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
+#'
 #' @references
 #' Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in
 #' plant populations, *Theoretical Population Biology* **52**(1), 16–26.
@@ -303,10 +303,10 @@ k_exponential_power <- function(x, par, N=1, d=NCOL(x)) {
 #' Bullock, J.M. (eds.), *Dispersal ecology and evolution*, 186–210.
 #' \doi{10.1093/acprof:oso/9780199608898.003.0015}
 #'
+#' @export
+#'
 #' @examples
 #' k_weibull(2:5, par=c(0,0), d=2)
-#'
-#' @export
 
 k_weibull <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)
@@ -320,12 +320,10 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 
 
 ##############################################################################
-#' Power-Law Dispersal Kernels
+#' Power-law dispersal kernels
 #'
 #' `k_power` computes the value, multiplied by \eqn{N}, of a dispersal kernel
 #' that follows a power law of a constant \eqn{a} plus the distance.
-#'
-#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
 #'
 #' @param x Numeric matrix of positions \eqn{x} relative to the seed source,
 #' or vector of distances \eqn{\left\|{x}\right\|} to the seed source.
@@ -349,6 +347,8 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 #' of freedom. This is a fat-tailed distribution for all choices of the
 #' parameter \eqn{b}.
 #'
+#' @return Numeric vector of function values \eqn{k(x)} multiplied by \eqn{N}.
+#'
 #' @references
 #' Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
 #' Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G.,
@@ -360,10 +360,10 @@ k_weibull <- function(x, par, N=1, d=NCOL(x)) {
 #' pollen dispersal curve. *Molecular Ecology* **13**, 937–954.
 #' \doi{10.1111/j.1365-294X.2004.02100.x}
 #'
+#' @export
+#'
 #' @examples
 #' k_power(2:5, par=c(0,0), d=2)
-#'
-#' @export
 
 k_power <- function(x, par, N=1, d=NCOL(x)) {
   r <- rownorms(x)

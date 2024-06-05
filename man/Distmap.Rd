@@ -7,22 +7,19 @@
 Distmap(raster, species)
 }
 \arguments{
-\item{raster}{Remote sensing raster data set with tree species
-classification of specific tree species and tree species groups.}
+\item{raster}{Raster data set with tree species classification of specific
+tree species and tree species groups.}
 
-\item{species}{Represents the numerical value by which the tree species
-of interest is encoded in the raster data set.}
+\item{species}{Represents the numerical value by which the tree species of
+interest is encoded in the raster data set.}
 }
 \value{
-The distance is given in m.
+A SpatRaster object containing the distances to seed source.
+The object has the same resolution and extent as the input raster.
 }
 \description{
 Creation of a distance map for the study area. The distance to
 the nearest seed source is calculated for every raster cell.
-}
-\details{
-A SpatRaster is created with the same resolution as the input raster,
-defined by the study area.
 }
 \examples{
 ## Create raster data set

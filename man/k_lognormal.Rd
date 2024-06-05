@@ -2,7 +2,7 @@
 % Please edit documentation in R/dispersal_kernels.R
 \name{k_lognormal}
 \alias{k_lognormal}
-\title{Dispersal Kernels For Log-Normal Distance Distributions}
+\title{Dispersal kernels for log-normal distance distributions}
 \usage{
 k_lognormal(x, par, N = 1, d = NCOL(x))
 }
@@ -55,7 +55,6 @@ Nathan et al. (2012).
 }
 \examples{
 k_lognormal(2:5, par=c(0,0), d=2)
-
 }
 \references{
 Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or

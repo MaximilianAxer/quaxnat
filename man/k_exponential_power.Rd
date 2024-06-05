@@ -2,7 +2,7 @@
 % Please edit documentation in R/dispersal_kernels.R
 \name{k_exponential_power}
 \alias{k_exponential_power}
-\title{Dispersal Kernels From Exponential Power Family}
+\title{Dispersal kernels from exponential power family}
 \usage{
 k_exponential_power(x, par, N = 1, d = NCOL(x))
 }
@@ -51,7 +51,6 @@ et al. 2017).
 }
 \examples{
 k_exponential_power(2:5, par=c(0,0), d=2)
-
 }
 \references{
 Bateman, A. (1947). Contamination in seed crops: III. relation with

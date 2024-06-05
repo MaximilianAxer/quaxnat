@@ -1,24 +1,23 @@
 ##############################################################################
-#' Prediction of Potential Regeneration Densites
+#' Prediction of potential regeneration densities
 #'
 #' @description Prediction of the potential regeneration density as a function
 #' of the distance to the nearest seed tree.
 #'
-#'
-#'
-#' @param distmap An object of the Distmap function. A SpatRaster with distances
-#'  to the nearest seed tree is used for the prediction of the potential
-#'  regeneration densities.
-#'
+#' @param distmap A SpatRaster with distances to the nearest seed tree is used
+#'  for the prediction of the potential regeneration densities. Usually a
+#'  result of the Distmap function
 #' @param quax A quax object is used for the prediction. This is a parameterised
 #'  dispersal function using quantile regression.
 #'
-#' @details A SpatRaster is created with the same resolution as the input
-#' raster, defined by the study area. The potential regeneration density is
+#' @details , defined by the study area. The potential regeneration density is
 #' calculated and given for each raster cell.
 #'
-#' @return  The regeneration density is given on the same scale
-#' (e.g. numbers per hectare) as in the input data.
+#' @return A SpatRaster with the same resolution as the input raster containing
+#'  the regeneration density on the same scale (e.g. numbers per hectare) as in
+#'  the input data.
+#'
+#' @export
 #'
 #' @examples
 #' ## Prepare artificial data:
@@ -42,12 +41,9 @@
 #' ## Prediction
 #' p <- predict_quax(distmap = distance, quax = f1)
 #' terra::plot(p)
-#' @export
-
 
 predict_quax <- function(distmap, quax) {
   prediction <- quax(terra::values(distmap))
   terra::values(distmap) <- prediction
   return(distmap)
 }
-

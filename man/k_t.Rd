@@ -2,7 +2,7 @@
 % Please edit documentation in R/dispersal_kernels.R
 \name{k_t}
 \alias{k_t}
-\title{Dispersal Kernels From Spatial t Distribution}
+\title{Dispersal kernels from spatial t distribution}
 \usage{
 k_t(x, par, N = 1, d = NCOL(x))
 }
@@ -58,7 +58,6 @@ a fat-tailed distribution for all choices of \eqn{b}.
 }
 \examples{
 k_t(2:5, par=c(0,0), d=2)
-
 }
 \references{
 Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.
