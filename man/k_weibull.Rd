@@ -47,6 +47,10 @@ probabilities still decreasing faster than any power law; it is a
 fat-tailed distribution in the sense of Kot et al. (1996). The kernel
 coincides with a Gaussian kernel in the special case \eqn{b=d=2}.
 }
+\examples{
+k_weibull(2:5, par=c(0,0), d=2)
+
+}
 \references{
 Tufto, J., Engen, S., Hindar, K. (1997). Stochastic dispersal processes in
 plant populations, \emph{Theoretical Population Biology} \strong{52}(1), 16–26.

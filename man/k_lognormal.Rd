@@ -29,10 +29,10 @@ from the their source.
 \details{
 The dispersal kernel, i.e. spatial probability density
 of the location of a seed relative to its source, is here given by
-\deqn{k(x)={\Gamma (d/2) \over 
+\deqn{k(x)={\Gamma (d/2) \over
   2\pi ^{d/2}\left\|{x}\right\|^{d}\sqrt{2\pi b}}
   e^{-{1 \over 2b}(\log (\left\|{x}\right\|/a))^{2}}
-  ={\Gamma (d/2)e^{d^{2}b/2} \over 2\pi ^{d/2}a^{d}\sqrt{2\pi b}} 
+  ={\Gamma (d/2)e^{d^{2}b/2} \over 2\pi ^{d/2}a^{d}\sqrt{2\pi b}}
   e^{-{1 \over 2b}(\log {\left\|{x}\right\| \over a}+db)^{2}},}
 which corresponds to a probability density of the distance given by
 \deqn{p(r)={1 \over r\sqrt{2\pi b}}e^{-{1 \over 2b}(\log (r/a))^{2}}
@@ -52,6 +52,10 @@ function of \eqn{\log \left\|{x}\right\|} with a maximum at
 This kernel is particularly suitable if the maximum regeneration density
 is not directly at the seed source (e.g. Janzen–Connell effect), cf.
 Nathan et al. (2012).
+}
+\examples{
+k_lognormal(2:5, par=c(0,0), d=2)
+
 }
 \references{
 Greene, D.F., Johnson, E.A. (1989). A model of wind dispersal of winged or

@@ -49,6 +49,10 @@ al. (1996). Such kernels have consequently been applied in a number of
 theoretical studies that address dispersal (Ribbens et al. 1994, Bullock
 et al. 2017).
 }
+\examples{
+k_exponential_power(2:5, par=c(0,0), d=2)
+
+}
 \references{
 Bateman, A. (1947). Contamination in seed crops: III. relation with
 isolation distance. \emph{Heredity} \strong{1}, 303–336.

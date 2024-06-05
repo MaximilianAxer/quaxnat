@@ -40,6 +40,10 @@ an \link[stats:FDist]{F distribution} with \eqn{2d} and \eqn{2b} degrees
 of freedom. This is a fat-tailed distribution for all choices of the
 parameter \eqn{b}.
 }
+\examples{
+k_power(2:5, par=c(0,0), d=2)
+
+}
 \references{
 Nathan, R., Klein, E., Robledo‐Arnuncio, J.J., Revilla, E. (2012).
 Dispersal kernels: review, in Clobert, J., Baguette, M., Benton, T.G.,

@@ -56,6 +56,10 @@ kernels with an inverse variance having a
 The dispersal kernel always has its maximum at zero, and the distance has
 a fat-tailed distribution for all choices of \eqn{b}.
 }
+\examples{
+k_t(2:5, par=c(0,0), d=2)
+
+}
 \references{
 Clark, J.S., Silman, M., Kern, R., Macklin, E., HilleRisLambers, J.
 (1999). Seed dispersal near and far: patterns across temperate and
