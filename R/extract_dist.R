@@ -12,7 +12,7 @@
 #'  A buffer of 1000 m is placed around the Bbox to possibly take into account
 #'  seed trees outside the study area
 #'
-#' @param treespecies Represents the numerical value by which the tree species
+#' @param species Represents the numerical value by which the tree species
 #' of interest was encoded in the raster dataset.
 #'
 #' @details For each inventory plot a distance to the nearest seed source of a
@@ -31,20 +31,20 @@
 #' vec <- terra::vect(rbind(c(5,10), c(5,15)))
 #'
 #' ## Extract distance for the inventory plot
-#' extract_dist(raster=rr, geom=vec, treespecies=10)
+#' extract_dist(raster=rr, geom=vec, species=10)
 #'
 #' @export
 
 
 
-extract_dist <- function(raster, geom, treespecies){
-  extract <- terra::extract(Distmap(raster, treespecies), geom)[,2]
+extract_dist <- function(raster, geom, species){
+  extract <- terra::extract(Distmap(raster, species), geom)[,2]
   return(extract)
 }
 
 # Old Implementation
-#extract_dist <- function(raster, geom, treespecies){
-#  extract <- terra::extract(Distmap(raster, geom, treespecies), geom)[,2]
+#extract_dist <- function(raster, geom, species){
+#  extract <- terra::extract(Distmap(raster, geom, species), geom)[,2]
 #  return(extract)
 #}
 #
