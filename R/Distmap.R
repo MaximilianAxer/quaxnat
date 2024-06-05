@@ -7,7 +7,7 @@
 #'
 #'
 #'
-#' @param fe_raster Remote sensing raster data set with tree species
+#' @param raster Remote sensing raster data set with tree species
 #' classification of specific tree species and tree species groups.
 #' @param treespecies Represents the numerical value by which the tree species
 #'  of interest is encoded in the raster data set.
@@ -24,23 +24,23 @@
 #'         nrow = 20, ncol = 20))
 #'
 #' ## Compute distance for study area
-#' distance <- Distmap(fe_raster = rr, treespecies = "10")
+#' distance <- Distmap(raster = rr, treespecies = "10")
 #'
 #' ## Plot the Distmap
 #' terra::plot(distance)
 #'
 #' @export
 
-#Distmap <- function(fe_raster, fe_geom, treespecies){
-#  window <- terra::segregate(terra::crop(fe_raster, sf::st_buffer(sf::st_union(fe_geom), dist = 1000)))[[treespecies]]
+#Distmap <- function(raster, geom, treespecies){
+#  window <- terra::segregate(terra::crop(raster, sf::st_buffer(sf::st_union(geom), dist = 1000)))[[treespecies]]
 #  distmap <- terra::distance(window, target = 0)
 #  return(distmap)
 #}
-#fe_geom Geodata set representing the study area. This can be a polygon or point dataset. It describes the outer boundary of the study area. A buffer of 1000 m is placed around the Bbox to possibly take into account seed trees outside the study area
+#geom Geodata set representing the study area. This can be a polygon or point dataset. It describes the outer boundary of the study area. A buffer of 1000 m is placed around the Bbox to possibly take into account seed trees outside the study area
 
 
-Distmap <- function(fe_raster, treespecies){
-  window <- terra::segregate(fe_raster)[[treespecies]]
+Distmap <- function(raster, treespecies){
+  window <- terra::segregate(raster)[[treespecies]]
   distmap <- terra::distance(window, target = 0)
   return(distmap)
 }

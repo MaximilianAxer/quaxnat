@@ -4,10 +4,10 @@
 \alias{Distmap}
 \title{Distance map to nearest seed source}
 \usage{
-Distmap(fe_raster, treespecies)
+Distmap(raster, treespecies)
 }
 \arguments{
-\item{fe_raster}{Remote sensing raster data set with tree species
+\item{raster}{Remote sensing raster data set with tree species
 classification of specific tree species and tree species groups.}
 
 \item{treespecies}{Represents the numerical value by which the tree species
@@ -31,7 +31,7 @@ defined by the study area.
         nrow = 20, ncol = 20))
 
 ## Compute distance for study area
-distance <- Distmap(fe_raster = rr, treespecies = "10")
+distance <- Distmap(raster = rr, treespecies = "10")
 
 ## Plot the Distmap
 terra::plot(distance)

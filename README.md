@@ -85,7 +85,7 @@ A prediction for the entire study area is made with the `predict_quax` function.
 rr <- terra::rast(matrix(sample(0:10, 20 * 20, replace = TRUE), nrow = 20, ncol = 20))
 
 # Compute distance for prediction area
-distance <- Distmap(fe_raster = rr, treespecies = "10")
+distance <- Distmap(raster = rr, treespecies = "10")
 
 # Predict the potential regeneration density
 reg_dens <- predict_quax(distance, f5)

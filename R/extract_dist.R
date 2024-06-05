@@ -4,10 +4,10 @@
 #' @description Extracts a distance for the inventory plots. The distance to the
 #'  nearest seed source is used for the analysis of the regeneration potential.
 #'
-#' @param fe_raster Remote sensing raster dataset with tree species
+#' @param raster Remote sensing raster dataset with tree species
 #' classification of specific tree species and tree species groups.
 #'
-#' @param fe_geom Geodata set representing the study area. This can be a polygon
+#' @param geom Geodata set representing the study area. This can be a polygon
 #'  or point dataset. This describes the outer boundary of the study area.
 #'  A buffer of 1000 m is placed around the Bbox to possibly take into account
 #'  seed trees outside the study area
@@ -31,20 +31,20 @@
 #' vec <- terra::vect(rbind(c(5,10), c(5,15)))
 #'
 #' ## Extract distance for the inventory plot
-#' extract_dist(fe_raster=rr, fe_geom=vec, treespecies=10)
+#' extract_dist(raster=rr, geom=vec, treespecies=10)
 #'
 #' @export
 
 
 
-extract_dist <- function(fe_raster, fe_geom, treespecies){
-  extract <- terra::extract(Distmap(fe_raster, treespecies), fe_geom)[,2]
+extract_dist <- function(raster, geom, treespecies){
+  extract <- terra::extract(Distmap(raster, treespecies), geom)[,2]
   return(extract)
 }
 
 # Old Implementation
-#extract_dist <- function(fe_raster, fe_geom, treespecies){
-#  extract <- terra::extract(Distmap(fe_raster, fe_geom, treespecies), fe_geom)[,2]
+#extract_dist <- function(raster, geom, treespecies){
+#  extract <- terra::extract(Distmap(raster, geom, treespecies), geom)[,2]
 #  return(extract)
 #}
 #

@@ -44,7 +44,7 @@ f1 <- quax(x = simulated.data$distance, y = simulated.data$density,
         nrow = 20, ncol = 20))
 
 ## Compute distance for prediction area
-distance <- Distmap(fe_raster = rr, treespecies = "10")
+distance <- Distmap(raster = rr, treespecies = "10")
 
 ## Prediction
 p <- predict_quax(distmap = distance, quax = f1)

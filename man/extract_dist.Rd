@@ -4,13 +4,13 @@
 \alias{extract_dist}
 \title{Extracting distances to nearest seed source for point data}
 \usage{
-extract_dist(fe_raster, fe_geom, treespecies)
+extract_dist(raster, geom, treespecies)
 }
 \arguments{
-\item{fe_raster}{Remote sensing raster dataset with tree species
+\item{raster}{Remote sensing raster dataset with tree species
 classification of specific tree species and tree species groups.}
 
-\item{fe_geom}{Geodata set representing the study area. This can be a polygon
+\item{geom}{Geodata set representing the study area. This can be a polygon
 or point dataset. This describes the outer boundary of the study area.
 A buffer of 1000 m is placed around the Bbox to possibly take into account
 seed trees outside the study area}
@@ -40,6 +40,6 @@ matrix(sample(0:10, 20 * 20, replace = TRUE),
 vec <- terra::vect(rbind(c(5,10), c(5,15)))
 
 ## Extract distance for the inventory plot
-extract_dist(fe_raster=rr, fe_geom=vec, treespecies=10)
+extract_dist(raster=rr, geom=vec, treespecies=10)
 
 }
