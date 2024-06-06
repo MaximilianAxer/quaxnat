@@ -1,4 +1,4 @@
-﻿Package: quaxnat
+Package: quaxnat
 Title: Estimation of Natural Regeneration Potential
 Version: 0.0.0.9000
 Authors@R: 
@@ -23,7 +23,9 @@ Authors@R:
 Description: Functions for estimating the potential dispersal of tree species 
   using regeneration densities and dispersal distances to nearest seed trees. 
   A quantile regression is implemented to determine the dispersal potential.
-  Spatial prediction can be used to identify natural regeneration potential for forest restoration as described in Axer et al (2021) <https://doi.org/10.1016/j.foreco.2020.118802>.
+  Spatial prediction can be used to identify natural regeneration potential for
+  forest restoration as described in Axer et al. (2021)
+  <doi:10.1016/j.foreco.2020.118802>.
 License: GPL (>=2)
 URL: https://github.com/MaximilianAxer/quaxnat
 BugReports: https://github.com/MaximilianAxer/quaxnat/issues 
