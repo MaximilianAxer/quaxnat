@@ -21,13 +21,13 @@
 #'         nrow = 20, ncol = 20))
 #'
 #' ## Compute distance for study area
-#' distance <- Distmap(raster = rr, species = "10")
+#' distance <- seed_tree_distmap(raster = rr, species = "10")
 #'
-#' ## Plot the Distmap
+#' ## Plot the seed_tree_distmap
 #' terra::plot(distance)
 #'
 
-#Distmap <- function(raster, geom, species){
+#seed_tree_distmap <- function(raster, geom, species){
 #  window <- terra::segregate(terra::crop(raster, sf::st_buffer(sf::st_union(geom), dist = 1000)))[[species]]
 #  distmap <- terra::distance(window, target = 0)
 #  return(distmap)
@@ -35,7 +35,7 @@
 #geom Geodata set representing the study area. This can be a polygon or point dataset. It describes the outer boundary of the study area. A buffer of 1000 m is placed around the Bbox to possibly take into account seed trees outside the study area
 
 
-Distmap <- function(raster, species){
+seed_tree_distmap <- function(raster, species){
   window <- terra::segregate(raster)[[species]]
   distmap <- terra::distance(window, target = 0)
   return(distmap)
