@@ -32,12 +32,12 @@
 #' extract_dist(raster=rr, geom=vec, species=10)
 
 extract_dist <- function(raster, geom, species){
-  extract <- terra::extract(Distmap(raster, species), geom)[,2]
+  extract <- terra::extract(seed_tree_distmap(raster, species), geom)[,2]
   return(extract)
 }
 
 # Old Implementation
 #extract_dist <- function(raster, geom, species){
-#  extract <- terra::extract(Distmap(raster, geom, species), geom)[,2]
+#  extract <- terra::extract(seed_tree_distmap(raster, geom, species), geom)[,2]
 #  return(extract)
 #}
