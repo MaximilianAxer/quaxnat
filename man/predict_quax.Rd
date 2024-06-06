@@ -9,7 +9,7 @@ predict_quax(distmap, quax)
 \arguments{
 \item{distmap}{A SpatRaster with distances to the nearest seed tree is used
 for the prediction of the potential regeneration densities. Usually a
-result of the Distmap function}
+result of the \code{seed_tree_distmap()} function}
 
 \item{quax}{A quax object is used for the prediction. This is a parameterised
 dispersal function using quantile regression.}
@@ -44,7 +44,7 @@ f1 <- quax(x = simulated.data$distance, y = simulated.data$density,
         nrow = 20, ncol = 20))
 
 ## Compute distance for prediction area
-distance <- Distmap(raster = rr, species = "10")
+distance <- seed_tree_distmap(raster = rr, species = "10")
 
 ## Prediction
 p <- predict_quax(distmap = distance, quax = f1)
