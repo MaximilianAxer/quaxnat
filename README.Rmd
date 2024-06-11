@@ -37,11 +37,15 @@ Within the `quax` function the dispersal kernel is defined by *fun*. Additional 
 
 
 ## Installation
+The stable version can be installed from [CRAN](https://CRAN.R-project.org/package=quaxnat)
 
-The *quaxnat* package is available on [Github](https://github.com/MaximilianAxer/quaxnat). 
-To install the development version, run the following code:
+``` r
+install.packages("quaxnat")
+```
 
-```r
+and the development version is available from [Github](https://github.com/MaximilianAxer/quaxnat)
+
+``` r
 remotes::install_github("MaximilianAxer/quaxnat")
 ```
 
@@ -98,6 +102,7 @@ A prediction for the entire study area is made with the `predict_quax` function.
 
 ```{r figure_raster}
 # Create raster data set as prediction area
+set.seed(20240606)
 rr <- terra::rast(matrix(sample(0:10, 20 * 20, replace = TRUE), nrow = 20, ncol = 20))
 
 # Compute distances to seed trees for prediction area
