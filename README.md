@@ -1,4 +1,5 @@
 # quaxnat
+# pkgdown <img src="man/figures/logo.png" align="right" />
 
 An R package for estimating the regeneration potential using large scale inventory information.
 
