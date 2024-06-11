@@ -74,7 +74,7 @@
 #'
 #' See Koenker (2005) for a detailed exposition of quantile regression.
 #'
-#' @return An objcet of class \code{quax} containing the estimated function,
+#' @return An object of class \code{quax} containing the estimated function,
 #'  including an attribute `o` containing the results of `optim`.
 #'  Generic functions with methods defined for \code{quax} objects invoke these
 #'  methods; see \code{\link{summary.quax}} for an example.
