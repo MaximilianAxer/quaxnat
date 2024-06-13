@@ -1,8 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# quaxnat
-# pkgdown <img src="man/figures/logo.png" align="right" />
+# quaxnat  <a href="https://github.com/MaximilianAxer/quaxnat/"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 <!-- badges: start -->
 <!-- badges: end -->
