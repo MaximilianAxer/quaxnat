@@ -29,7 +29,7 @@
 #' vec <- terra::vect(rbind(c(5,10), c(5,15)))
 #'
 #' ## Extract distance for the inventory plot
-#' extract_dist(raster=rr, geom=vec, species=10)
+#' extract_dist(raster=rr, geom=vec, species="10")
 
 extract_dist <- function(raster, geom, species){
   extract <- terra::extract(seed_tree_distmap(raster, species), geom)[,2]
