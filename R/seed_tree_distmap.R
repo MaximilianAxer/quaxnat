@@ -37,6 +37,6 @@
 
 seed_tree_distmap <- function(raster, species){
   window <- terra::segregate(raster)[[species]]
-  distmap <- terra::distance(window, target = 0)
+  distmap <- terra::distance(window, target = 0, exclude = NA)
   return(distmap)
 }
