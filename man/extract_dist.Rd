@@ -37,5 +37,5 @@ matrix(sample(0:10, 20 * 20, replace = TRUE),
 vec <- terra::vect(rbind(c(5,10), c(5,15)))
 
 ## Extract distance for the inventory plot
-extract_dist(raster=rr, geom=vec, species=10)
+extract_dist(raster=rr, geom=vec, species="10")
 }

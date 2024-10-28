@@ -65,7 +65,7 @@ the observations in the estimation procedure. Default is 1.}
 Further arguments passed to \code{model.frame} (along with \code{weights}).}
 }
 \value{
-An objcet of class \code{quax} containing the estimated function,
+An object of class \code{quax} containing the estimated function,
 including an attribute \code{o} containing the results of \code{optim}.
 Generic functions with methods defined for \code{quax} objects invoke these
 methods; see \code{\link{summary.quax}} for an example.
